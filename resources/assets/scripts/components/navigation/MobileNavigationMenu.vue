@@ -1,14 +1,16 @@
 <template>
     <ul>
-        <li v-for="(navitem, index) in mobileNavData" v-bind:key="index" class="nav-item" :class="{'dropdown': navitem.children.length > 0 }" @click="toggleSubMenu(index)">
+        <li v-for="(navitem, index) in mobileNavData" v-bind:key="index" class="nav-item" :class="{'dropdown': navitem.children.length > 0 }">
             <a v-if="navitem.children.length == 0" :href="navitem.url" :class="'nav-link'" :target="navitem.target" >{{ navitem.title }}</a>
-            <span v-else :href="navitem.url" :class="'nav-link'" :target="navitem.target" >{{ navitem.title }}</span>
-            <span class="nav-icon" v-if="navitem.children.length > 0" >
-                <i class="fa" :class="{
-                    'fa-plus-circle': !navitem.subMenuOpen,
-                    'fa-minus-circle': navitem.subMenuOpen
-                    }" ></i>
-            </span>
+            <button v-else class="nav-link btn text-left btn-block bg-white border-0" @click="toggleSubMenu(index)" >
+                {{ navitem.title }}
+                <span class="nav-icon" v-if="navitem.children.length > 0" >
+                    <i class="fa" :class="{
+                        'fa-plus-circle': !navitem.subMenuOpen,
+                        'fa-minus-circle': navitem.subMenuOpen
+                        }" ></i>
+                </span>
+            </button>
             <div class="dropdown-menu" v-if="navitem.subMenuOpen" >
                 <li v-for="(child, i) in navitem.children" v-bind:key="i">
                     <a :href="child.url" :class="'nav-link'" :target="child.target" >{{ child.title }}</a>
@@ -23,7 +25,7 @@
 
         props: {
             mobileNav: {
-                type: Object,
+                type: Object/Array,
                 default: () => []
             }
         },
@@ -54,7 +56,7 @@
 </script>
 <style lang="scss" >
 .mobile-menu {
-    transition: all ease-in 1s;
+    transition: display ease-in .5s;
     display: none;
     background-color: #FFF;
 
@@ -69,6 +71,7 @@
         position: fixed;
         overflow-y: scroll;
 
+        ul.navbar-nav li button,
         ul.navbar-nav li a {
             font-size: 18px;
             color: #4184a0;
@@ -80,8 +83,9 @@
         padding: .25rem .5rem;
         position: absolute;
         right: 0;
-        margin-top:-2.5rem;
+        margin-top: -.4rem;
         cursor: pointer;
+        color: #4184a0;
     }
 
     .dropdown-menu {

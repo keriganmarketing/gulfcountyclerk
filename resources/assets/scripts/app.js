@@ -36,15 +36,27 @@ const app = new Vue({
             this.isScrolling = this.scrollPosition > 40;
         },
         toggleMenu() {
+            if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
+            if(this.howDoIOpen) this.howDoIOpen = false;
+            if(this.searchBoxOpen) this.searchBoxOpen = false;
             this.mobileMenuOpen = ! this.mobileMenuOpen;
         },
         toggleHowDoI() {
+            if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
+            if(this.searchBoxOpen) this.searchBoxOpen = false;
+            if(this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.howDoIOpen = ! this.howDoIOpen;
         },
         toggleMobileHowDoI() {
+            if(this.searchBoxOpen) this.searchBoxOpen = false;
+            if(this.howDoIOpen) this.howDoIOpen = false;
+            if(this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.mobileHowDoIOpen = ! this.mobileHowDoIOpen;
         },
         toggleSearchBox() {
+            if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
+            if(this.howDoIOpen) this.howDoIOpen = false;
+            if(this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.searchBoxOpen = ! this.searchBoxOpen;
         }
     },

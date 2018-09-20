@@ -5877,6 +5877,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -6024,12 +6029,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
     props: {
         mobileNav: {
-            type: Object,
+            type: Object / Array,
             default: function _default() {
                 return [];
             }
@@ -15341,7 +15348,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.mobile-menu {\n  transition: all ease-in 1s;\n  display: none;\n  background-color: #FFF;\n}\n.mobile-menu.open {\n    display: block;\n    width: 100%;\n    height: calc(100vh - 150px);\n    z-index: 5;\n    padding: 1.5rem;\n    color: #4184a0;\n    position: fixed;\n    overflow-y: scroll;\n}\n.mobile-menu.open ul.navbar-nav li a {\n      font-size: 18px;\n      color: #4184a0;\n}\n.mobile-menu .nav-icon {\n    font-size: 1.2em;\n    padding: .25rem .5rem;\n    position: absolute;\n    right: 0;\n    margin-top: -2.5rem;\n    cursor: pointer;\n}\n.mobile-menu .dropdown-menu {\n    border: 0;\n    display: block;\n    padding: .5rem 1rem;\n    border-top: 1px solid #999;\n    border-bottom: 1px solid #999;\n}\n", ""]);
+exports.push([module.i, "\n.mobile-menu {\n  transition: display ease-in .5s;\n  display: none;\n  background-color: #FFF;\n}\n.mobile-menu.open {\n    display: block;\n    width: 100%;\n    height: calc(100vh - 150px);\n    z-index: 5;\n    padding: 1.5rem;\n    color: #4184a0;\n    position: fixed;\n    overflow-y: scroll;\n}\n.mobile-menu.open ul.navbar-nav li button,\n    .mobile-menu.open ul.navbar-nav li a {\n      font-size: 18px;\n      color: #4184a0;\n}\n.mobile-menu .nav-icon {\n    font-size: 1.2em;\n    padding: .25rem .5rem;\n    position: absolute;\n    right: 0;\n    margin-top: -.4rem;\n    cursor: pointer;\n    color: #4184a0;\n}\n.mobile-menu .dropdown-menu {\n    border: 0;\n    display: block;\n    padding: .5rem 1rem;\n    border-top: 1px solid #999;\n    border-bottom: 1px solid #999;\n}\n", ""]);
 
 // exports
 
@@ -20406,12 +20413,7 @@ var render = function() {
         {
           key: index,
           staticClass: "nav-item",
-          class: { dropdown: navitem.children.length > 0 },
-          on: {
-            click: function($event) {
-              _vm.toggleSubMenu(index)
-            }
-          }
+          class: { dropdown: navitem.children.length > 0 }
         },
         [
           navitem.children.length == 0
@@ -20424,25 +20426,33 @@ var render = function() {
                 [_vm._v(_vm._s(navitem.title))]
               )
             : _c(
-                "span",
+                "button",
                 {
-                  class: "nav-link",
-                  attrs: { href: navitem.url, target: navitem.target }
-                },
-                [_vm._v(_vm._s(navitem.title))]
-              ),
-          _vm._v(" "),
-          navitem.children.length > 0
-            ? _c("span", { staticClass: "nav-icon" }, [
-                _c("i", {
-                  staticClass: "fa",
-                  class: {
-                    "fa-plus-circle": !navitem.subMenuOpen,
-                    "fa-minus-circle": navitem.subMenuOpen
+                  staticClass:
+                    "nav-link btn text-left btn-block bg-white border-0",
+                  on: {
+                    click: function($event) {
+                      _vm.toggleSubMenu(index)
+                    }
                   }
-                })
-              ])
-            : _vm._e(),
+                },
+                [
+                  _vm._v(
+                    "\n            " + _vm._s(navitem.title) + "\n            "
+                  ),
+                  navitem.children.length > 0
+                    ? _c("span", { staticClass: "nav-icon" }, [
+                        _c("i", {
+                          staticClass: "fa",
+                          class: {
+                            "fa-plus-circle": !navitem.subMenuOpen,
+                            "fa-minus-circle": navitem.subMenuOpen
+                          }
+                        })
+                      ])
+                    : _vm._e()
+                ]
+              ),
           _vm._v(" "),
           navitem.subMenuOpen
             ? _c(
@@ -20885,29 +20895,47 @@ var staticRenderFns = [
         attrs: { role: "search", method: "get", action: "/search/" }
       },
       [
-        _c("div", { staticClass: "input-group mr-sm-2" }, [
-          _c(
-            "label",
-            { staticClass: "sr-only", attrs: { for: "search-field" } },
-            [_vm._v("Search for:")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "search-field",
-              type: "search",
-              placeholder: "Search...",
-              value: "",
-              name: "search"
-            }
-          })
-        ]),
-        _vm._v(" "),
         _c(
-          "button",
-          { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-          [_vm._v("Search")]
+          "div",
+          {
+            staticClass: "input-group p-2 bg-white border-bottom border-primary"
+          },
+          [
+            _c(
+              "label",
+              { staticClass: "sr-only", attrs: { for: "search-field" } },
+              [_vm._v("Search for:")]
+            ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control border-0",
+              attrs: {
+                id: "search-field",
+                type: "search",
+                placeholder: "",
+                value: "",
+                name: "search"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-btn" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn bg-white border-0",
+                  attrs: { type: "submit" }
+                },
+                [
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Search")]),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fa fa-search text-primary",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ])
+          ]
         )
       ]
     )
@@ -33065,15 +33093,27 @@ var app = new Vue({
             this.isScrolling = this.scrollPosition > 40;
         },
         toggleMenu: function toggleMenu() {
+            if (this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
+            if (this.howDoIOpen) this.howDoIOpen = false;
+            if (this.searchBoxOpen) this.searchBoxOpen = false;
             this.mobileMenuOpen = !this.mobileMenuOpen;
         },
         toggleHowDoI: function toggleHowDoI() {
+            if (this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
+            if (this.searchBoxOpen) this.searchBoxOpen = false;
+            if (this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.howDoIOpen = !this.howDoIOpen;
         },
         toggleMobileHowDoI: function toggleMobileHowDoI() {
+            if (this.searchBoxOpen) this.searchBoxOpen = false;
+            if (this.howDoIOpen) this.howDoIOpen = false;
+            if (this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.mobileHowDoIOpen = !this.mobileHowDoIOpen;
         },
         toggleSearchBox: function toggleSearchBox() {
+            if (this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
+            if (this.howDoIOpen) this.howDoIOpen = false;
+            if (this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.searchBoxOpen = !this.searchBoxOpen;
         }
     },
