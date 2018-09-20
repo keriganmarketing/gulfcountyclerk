@@ -14,8 +14,19 @@
         <div class="container d-flex align-items-center">
             <span class="todays-date d-block mr-lg-auto text-center text-md-left text-white">{{ date('F j, Y') }}</span>
             <button @click="toggleSearchBox" 
-                class="d-lg-none btn btn-primary btn-sm" >
-                SEARCH <i class="fa fa-search" aria-hidden="true"></i>
+                class="d-lg-none btn btn-sm"
+                :class="{
+                    'btn-primary': !searchBoxOpen,
+                    'btn-white': searchBoxOpen
+                }" >
+                SEARCH <i 
+                        class="fa" 
+                        :class="{ 
+                            'fa-search': !searchBoxOpen, 
+                            'fa-times': searchBoxOpen 
+                        }" 
+                        aria-hidden="true"
+                        ></i>
             </button>
             <button @click="toggleMenu" 
                 class="d-lg-none btn btn-sm" 
@@ -62,7 +73,7 @@
         </div>
     </div>
     <div v-if="mobileHowDoIOpen" class="mobile-menu" ref="howdoiMenuContainer" :class="{ 'open': mobileHowDoIOpen }" >
-        <mobile-menu :mobile-nav="{{ website_menu(5) }}" ></mobile-menu>
+        <mobile-menu :mobile-nav="{{ website_menu(5) }}" class="navbar-nav" ></mobile-menu>
     </div>
     <div v-if="mobileMenuOpen" class="mobile-menu" ref="mobileMenuContainer" :class="{ 'open': mobileMenuOpen }" >
         <mobile-menu :mobile-nav="{{ website_menu('mobile-navigation') }}" class="navbar-nav" ></mobile-menu>
