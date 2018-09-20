@@ -1,12 +1,25 @@
 <header class="top">
-    <div class="container d-md-flex justify-content-between">
-        <div class="site-branding text-left d-inline-flex" >
-            <div class="seal">
-                <img class="logo" src="/themes/wordplate/assets/images/seal.png" class="img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
+    <div class="top-container">
+        <div class="container d-md-flex justify-content-between">
+            <div class="site-branding text-left d-inline-flex" >
+                <div class="seal">
+                    <img class="logo" src="/themes/wordplate/assets/images/seal.png" class="img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
+                </div>
+                <div class="logo-text">
+                    <p class="clerk-name">Rebecca L. (Becky) Norris</p>
+                    <p>Gulf County, Florida<br>Clerk of Court</p>
+                </div>
             </div>
-            <div class="logo-text">
-                <p class="clerk-name">Rebecca L. (Becky) Norris</p>
-                <p>Gulf County, Florida<br>Clerk of Court</p>
+            <div class="header-right d-none d-md-flex flex-column justify-content-center">
+                <div class="text-sizer d-flex justify-content-end align-items-center py-2">
+                    <label class="m-0 p-0 mx-1">TEXT SIZE:</label> 
+                    <button class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
+                    <button class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
+                    <button class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
+                </div>
+                <div class="search-box py-2">
+                    {{ get_search_form() }}
+                </div>
             </div>
         </div>
     </div>

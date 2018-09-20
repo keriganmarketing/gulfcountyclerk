@@ -20898,7 +20898,9 @@ var staticRenderFns = [
         _c(
           "div",
           {
-            staticClass: "input-group p-2 bg-white border-bottom border-primary"
+            staticClass:
+              "input-group p-2 bg-white border-bottom border-primary",
+            staticStyle: { width: "100%" }
           },
           [
             _c(

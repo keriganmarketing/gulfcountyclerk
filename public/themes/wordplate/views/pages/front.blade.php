@@ -6,6 +6,7 @@
         {{ the_post() }}
                 
         <kma-slider class="slider-container"></kma-slider>
+        @include('partials.buttongallery')
         <main role="main">
             <div class="container">
 
