@@ -26,7 +26,8 @@ const app = new Vue({
         footerStuck: false,
         mobileMenuOpen: false,
         howDoIOpen: false,
-        mobileHowDoIOpen: false
+        mobileHowDoIOpen: false,
+        searchBoxOpen: false
     },
 
     methods: {
@@ -42,6 +43,9 @@ const app = new Vue({
         },
         toggleMobileHowDoI() {
             this.mobileHowDoIOpen = ! this.mobileHowDoIOpen;
+        },
+        toggleSearchBox() {
+            this.searchBoxOpen = ! this.searchBoxOpen;
         }
     },
 
