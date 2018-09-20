@@ -252,23 +252,23 @@ $font-size-sm:                ($font-size-base * .875);
 $font-weight-light:           400;
 $font-weight-normal:          400;
 $font-weight-medium:          600;
-$font-weight-bold:            700;
+$font-weight-bold:            600;
 $font-weight-bolder:          800;
 $font-weight-black:           800;
 
 $font-weight-base:            $font-weight-normal;
 $line-height-base:            1.5;
 
-$h1-font-size:                $font-size-base * 1.8;
-$h2-font-size:                $font-size-base * 1.5;
-$h3-font-size:                $font-size-base * 1.2;
-$h4-font-size:                $font-size-base * 1.1;
-$h5-font-size:                $font-size-base * 1.1;
+$h1-font-size:                $font-size-base * 2.5;
+$h2-font-size:                $font-size-base * 2;
+$h3-font-size:                $font-size-base * 1.75;
+$h4-font-size:                $font-size-base * 1.5;
+$h5-font-size:                $font-size-base * 1.25;
 $h6-font-size:                $font-size-base;
 
 $headings-margin-bottom:      ($spacer / 2);
 $headings-font-family:        inherit;
-$headings-font-weight:        700;
+$headings-font-weight:        500;
 $headings-line-height:        1.2;
 $headings-color:              inherit;
 
@@ -309,7 +309,6 @@ $mark-bg:                     #fcf8e3;
 
 $hr-margin-y:                 $spacer;
 
-
 // Tables
 //
 // Customizes the `.table` component with basic values, each used across all table variations.
@@ -342,8 +341,8 @@ $table-caption-color:         $text-muted;
 //
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
-$input-btn-padding-y:         .75rem;
-$input-btn-padding-x:         1rem;
+$input-btn-padding-y:         .375rem;
+$input-btn-padding-x:         .75rem;
 $input-btn-line-height:       $line-height-base;
 
 $input-btn-focus-width:       .2rem;
@@ -354,9 +353,9 @@ $input-btn-padding-y-sm:      .25rem;
 $input-btn-padding-x-sm:      .5rem;
 $input-btn-line-height-sm:    $line-height-sm;
 
-$input-btn-padding-y-lg:      .75rem;
+$input-btn-padding-y-lg:      .5rem;
 $input-btn-padding-x-lg:      1rem;
-$input-btn-line-height-lg:    $line-height-base;
+$input-btn-line-height-lg:    $line-height-lg;
 
 $input-btn-border-width:      $border-width;
 
