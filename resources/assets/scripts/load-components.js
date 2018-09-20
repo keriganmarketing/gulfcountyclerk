@@ -11,3 +11,4 @@ Vue.component('kma-slider', require('./components/KMASliderModule.vue'));
 Vue.component('portfolio-gallery', require('./components/PortfolioGallery.vue'));
 Vue.component('contact-form', require('./components/ContactForm.vue'));
 Vue.component('fit-text', require('./components/FitText.vue'));
+Vue.component('search-box', require('./components/SearchBox.vue'));
