@@ -5,6 +5,17 @@ html {
     * {
         text-rendering: unset;
     }
+
+    .rounded {
+        border-radius: 2rem !important;
+    }
+    .round {
+        border-radius: 50%;
+    }
+
+    input:focus {
+        box-shadow: none !important;
+    }
 }
 
 body {
@@ -48,6 +59,10 @@ body {
             padding: 16px 0;
         }
 
+        * {
+            transition: all linear .5s;
+        }
+
         .logo {
             height: 65px;
 
@@ -85,6 +100,32 @@ body {
                         margin: 0 0 10px;
                     }
                 }
+            }
+        }
+    }
+
+    .search-form {
+        input {
+            border-color: transparent !important;
+            border: none !important;
+            background-color: transparent !important;
+            border-radius: 2rem 0 0 2rem !important;
+        }
+    }
+
+    .text-sizer {
+        button {
+            padding: 0;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.reset-button {
+                font-family: 'Montserrat';
+                font-weight: 400;
+                font-size: 10px;
             }
         }
     }
@@ -219,19 +260,44 @@ body {
 .mobile-menu-open,
 .scrolling {
     .top {
-        background-color: #FFF;
-        box-shadow: 0 0 .5rem rgba(0,0,0,.2);
-                
-        .topnav {
-            list-style: none;
-            display: flex;
-
-            li {
-                a.nav-link {
-                    color: #555;
-                    padding: .75rem .75rem;
+        .top-container {
+            background-color: #FFF;
+        }
+        .site-branding {    
+            @media (min-width: 768px){
+                padding: 9px 0;
+            }
+    
+            .logo {   
+                @media (min-width: 768px){
+                    height: 65px;
                 }
             }
+        
+            .logo-text {   
+                @media (min-width: 768px){
+                    padding: 0 0 0 10px;
+                }
+        
+                p {    
+                    @media (min-width: 768px){
+                        font-size: 13px;
+                        line-height: 1em;
+                        margin: 0 0 .1rem;
+                    }
+        
+                    &.clerk-name {
+                        @media (min-width: 768px){
+                            font-size: 14px;
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }  
+
+        .search-box {
+            display: none;
         }
     }
 }
@@ -247,6 +313,14 @@ main {
 
         header {
             margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: $primary;
+        }
+
+        h2 {
+            color: $secondary;
         }
 
         p, ul, ol {
@@ -280,50 +354,83 @@ main {
     }
 }
 
-
-// Footer
-footer {
-    color: #FFF;
-
-    a {
-        color: #FFF;
-
-        &:hover {
-            text-decoration: underline;
+.button-gallery {
+    .box-button {
+        a {
             color: #FFF;
-        }
-    }
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: $font-weight-medium;
+            font-size: 18px;
+            line-height: 1em;
+            box-shadow: 0 0 10px rgba(0,0,0, .2);
+            
+            @media (min-width:768px){
+                height: 184px;
+            }
 
-    h4 {
-        margin: 1rem 0 0;
-        padding: 1rem 0;
-        text-transform: uppercase;
-        font-size: 14px;
-    }
+            small {
+                font-weight: $font-weight-normal;
+                font-size: 12px;
+            }
 
-    .footer-menu {
-        margin: 0;
-        padding: 1rem 0;
+            img {
+                width: 68px;
 
-        .nav-item {
-            list-style: none;
-            margin: 1.25rem 0;
-
-            a {
-                font-weight: 600;
-                font-size: 14px;
-                padding: 10px 0;
-                text-transform: uppercase;
-                display: inline-block;
-                border-bottom: 1px solid transparent;
-                transition: border-color .5s linear; 
-
-                &:hover {
-                    color: #FFF;
-                    border-color: rgba(255,255,255,.5);
+                @media (min-width:768px){
+                    width: 87px;
+                    margin-bottom: 10px;
                 }
             }
         }
+
+        &.records-search a {
+            background-color: $purple;
+        }
+
+        &.tax-deeds a {
+            background-color: $primary;
+        }
+
+        &.foreclosures a {
+            background-color: $moss;
+        }
+
+        &.forms a {
+            background-color: $blue;
+        }
+
+        &.e-file a {
+            background-color: $navy;
+        }
+
+        &.pay-online a {
+            background-color: $green;
+        }
+
+        &.marriage a {
+            background-color: $cyan;
+        }
+
+        &.passports a {
+            background-color: $brown;
+        }
+    }
+}
+
+// Footer
+footer {
+    a {
+        color: inherit;
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    p {
+        margin: 0 0 .25rem;
     }
 
     .footer-content {

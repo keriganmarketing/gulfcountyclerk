@@ -216,8 +216,8 @@ $line-height-sm:              1.5;
 $border-width:                1px;
 $border-color:                $gray-300;
 
-$border-radius:               0;
-$border-radius-lg:            0;
+$border-radius:               .5rem;
+$border-radius-lg:            2rem;
 $border-radius-sm:            0;
 
 $box-shadow-sm:               0 .125rem .25rem rgba($black, .075);
@@ -268,7 +268,7 @@ $h6-font-size:                $font-size-base;
 
 $headings-margin-bottom:      ($spacer / 2);
 $headings-font-family:        inherit;
-$headings-font-weight:        500;
+$headings-font-weight:        600;
 $headings-line-height:        1.2;
 $headings-color:              inherit;
 

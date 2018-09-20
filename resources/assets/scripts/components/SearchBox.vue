@@ -1,6 +1,6 @@
 <template>
     <form role="search" method="get" action="/search/" class="form-inline">
-        <div class="input-group p-2 bg-white border-bottom border-primary">
+        <div class="input-group p-2 bg-white border-bottom border-primary"  style="width:100%;">
             <label class="sr-only" for="search-field">Search for:</label> 
             <input id="search-field" type="search" placeholder="" value="" name="search" class="form-control border-0">
             <div class="input-group-btn">

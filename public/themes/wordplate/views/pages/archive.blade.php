@@ -8,7 +8,6 @@
                 <h1>{{ $headline != '' ? $headline : the_title() }}</h1>
             </header>
             {{ the_content() }}
-            {{ get_search_form() }}
             {{ wp_reset_query() }}
         </article>
         @if (count($search->posts) > 0)
