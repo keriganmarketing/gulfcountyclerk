@@ -356,6 +356,35 @@ main {
         }
 
     }
+
+    .sidebar {
+        padding-top: 2rem;
+
+        .sidebar-header {
+            color: $secondary;
+            font-size: $h2-font-size;
+            background-color: #efefef;
+            margin: 0;
+            padding: 1rem 1.25rem;
+        }
+
+        .list-group-item {
+            background-color: #efefef;
+            border-bottom: 1px solid #fff !important;
+
+            &.active {
+                color: $primary;
+                font-weight: $font-weight-bold;
+            }
+        }
+
+        .child-page {
+            background-color: #efefef;
+            padding-left: 1.75rem;
+            font-size: .9em;
+            border-bottom: 1px solid #fff !important;
+        }
+    }
 }
 
 // Main Slider

@@ -12418,6 +12418,35 @@ main article ol {
   line-height: 1.8em;
 }
 
+main .sidebar {
+  padding-top: 2rem;
+}
+
+main .sidebar .sidebar-header {
+  color: #152f4e;
+  font-size: 1.2rem;
+  background-color: #efefef;
+  margin: 0;
+  padding: 1rem 1.25rem;
+}
+
+main .sidebar .list-group-item {
+  background-color: #efefef;
+  border-bottom: 1px solid #fff !important;
+}
+
+main .sidebar .list-group-item.active {
+  color: #008481;
+  font-weight: 600;
+}
+
+main .sidebar .child-page {
+  background-color: #efefef;
+  padding-left: 1.75rem;
+  font-size: .9em;
+  border-bottom: 1px solid #fff !important;
+}
+
 .slider-container {
   position: relative;
   height: 100px;
