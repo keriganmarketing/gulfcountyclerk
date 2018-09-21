@@ -5539,6 +5539,97 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/scripts/components/ExpandableSidebar.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['post'],
+
+    data: function data() {
+        return {
+            pages: []
+        };
+    },
+    created: function created() {
+        this.getSiblingPages();
+    },
+
+
+    methods: {
+        getPages: function getPages() {
+            var _this = this;
+
+            http.get("/wp-json/wp/v2/pages?orderby=menu_order&order=asc").then(function (response) {
+                _this.pages = response.data;
+            });
+        },
+        getChildPages: function getChildPages() {
+            var _this2 = this;
+
+            http.get("/wp-json/wp/v2/pages?parent=" + this.post.ID + "&orderby=menu_order&order=asc").then(function (response) {
+                _this2.pages = response.data;
+            });
+        },
+        getSiblingPages: function getSiblingPages() {
+            var _this3 = this;
+
+            http.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc").then(function (response) {
+                var data = response.data;
+
+                Object.keys(data).map(function (key) {
+
+                    data[key].children = [];
+                    http.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc").then(function (response) {
+                        data[key].children = response.data;
+                    });
+                });
+
+                _this3.pages = data;
+            });
+        },
+        getSubPages: function getSubPages() {
+            var _this4 = this;
+
+            Object.keys(this.pages).map(function (key) {
+
+                _this4.pages[key].children = [];
+                http.get("/wp-json/wp/v2/pages?parent=" + _this4.pages[key].id + "&orderby=menu_order&order=asc").then(function (response) {
+                    console.log(response.data);
+                    _this4.pages[key].children = response.data;
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/scripts/components/FitText.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -20874,6 +20965,71 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-6bc6c19a\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/scripts/components/ExpandableSidebar.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "list-group list-group-flush" },
+      _vm._l(_vm.pages, function(page) {
+        return _c(
+          "div",
+          { key: page.id },
+          [
+            _c("a", {
+              staticClass: "list-group-item list-group-item-action",
+              class: { active: page.id == _vm.post.ID },
+              attrs: { href: page.link },
+              domProps: { innerHTML: _vm._s(page.title.rendered) }
+            }),
+            _vm._v(" "),
+            _vm._l(page.children, function(child) {
+              return page.children.length > 0
+                ? _c("div", { key: child.id }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "list-group-item list-group-item-action child-page",
+                        class: { active: child.id == _vm.post.ID },
+                        attrs: { href: child.link }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-angle-up" }),
+                        _vm._v(
+                          " " +
+                            _vm._s(child.title.rendered) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  ])
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6bc6c19a", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-88395956\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/scripts/components/SearchBox.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33195,6 +33351,54 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/scripts/components/ExpandableSidebar.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/scripts/components/ExpandableSidebar.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-6bc6c19a\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/scripts/components/ExpandableSidebar.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\scripts\\components\\ExpandableSidebar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6bc6c19a", Component.options)
+  } else {
+    hotAPI.reload("data-v-6bc6c19a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/scripts/components/FitText.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -33616,6 +33820,7 @@ Vue.component('portfolio-gallery', __webpack_require__("./resources/assets/scrip
 Vue.component('contact-form', __webpack_require__("./resources/assets/scripts/components/ContactForm.vue"));
 Vue.component('fit-text', __webpack_require__("./resources/assets/scripts/components/FitText.vue"));
 Vue.component('search-box', __webpack_require__("./resources/assets/scripts/components/SearchBox.vue"));
+Vue.component('expandable-sidebar', __webpack_require__("./resources/assets/scripts/components/ExpandableSidebar.vue"));
 
 /***/ }),
 
