@@ -14,7 +14,11 @@
             :class="{
                 'full-height': footerStuck, 
                 'scrolling': isScrolling,
-                'mobile-menu-open': mobileMenuOpen 
+                'mobile-menu-open': mobileMenuOpen,
+                'text-normal': textSize === 0,
+                'text-large': textSize === 1,
+                'text-larger': textSize === 2,
+                'text-largest': textSize === 3,
             }">
             @include('partials.header')
 

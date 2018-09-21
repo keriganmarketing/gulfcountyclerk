@@ -2,7 +2,7 @@
 
 @section('content')
 @include('partials.mast')
-<main role="main">
+<main role="main" class="sizable">
     <div class="container">
         @if (have_posts())
             @while (have_posts())

@@ -13,9 +13,9 @@
             <div class="header-right d-none d-md-flex flex-column justify-content-center">
                 <div class="text-sizer d-flex justify-content-end align-items-center py-2">
                     <label class="m-0 p-0 mx-1">TEXT SIZE:</label> 
-                    <button class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
-                    <button class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
-                    <button class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    <button @click="increaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
+                    <button @click="resetTextSize" class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
+                    <button @click="decreaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
                 </div>
                 <div class="search-box py-2">
                     {{ get_search_form() }}
@@ -23,9 +23,9 @@
             </div>
         </div>
     </div>
-    <div role="navigation" class="topnav navbar navbar-expand-lg bg-primary" >
+    <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
         <div class="container d-flex align-items-center">
-            <span class="todays-date d-block mr-lg-auto text-center text-md-left text-white">{{ date('F j, Y') }}</span>
+            <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break">{{ date('F j, Y') }}</p>
             <button @click="toggleSearchBox" 
                 class="d-lg-none btn btn-sm"
                 :class="{
@@ -80,7 +80,7 @@
             </button>
         </div>
     </div>
-    <div v-if="howDoIOpen" class="mobile-menu" ref="howdoiMenuContainer" :class="{ 'open': howDoIOpen }" >
+    <div v-if="howDoIOpen" class="mobile-menu sizable" ref="howdoiMenuContainer" :class="{ 'open': howDoIOpen }" >
         <div class="container d-none d-lg-block">
             <mega-menu :main-nav="{{ website_menu(5) }}" @mousedout="toggleHowDoI" ></mega-menu>
         </div>

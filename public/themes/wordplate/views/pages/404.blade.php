@@ -1,7 +1,4 @@
-<div class="projects-header header-image support">
-
-</div>
-<main role="main">
+<main role="main" class="sizable">
     <div class="container">
         <article>
             <header class="text-primary">

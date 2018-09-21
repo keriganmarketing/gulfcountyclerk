@@ -7,7 +7,7 @@
                 
         <kma-slider class="slider-container"></kma-slider>
         @include('partials.buttongallery')
-        <main role="main">
+        <main role="main" class="sizable">
             <div class="container">
 
                 <div class="row no-gutters">

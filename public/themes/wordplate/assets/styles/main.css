@@ -2475,12 +2475,12 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
 }
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 abbr[title],
@@ -2765,36 +2765,36 @@ h6,
 .h4,
 .h5,
 .h6 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
   font-family: inherit;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 400;
+  line-height: 2.5;
   color: inherit;
 }
 
 h1,
 .h1 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
 }
 
 h2,
 .h2 {
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 
 h3,
 .h3 {
-  font-size: 1.75rem;
+  font-size: 1rem;
 }
 
 h4,
 .h4 {
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 h5,
 .h5 {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 
 h6,
@@ -2808,27 +2808,27 @@ h6,
 }
 
 .display-1 {
-  font-size: 6rem;
-  font-weight: 300;
-  line-height: 1.2;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 2.5;
 }
 
 .display-2 {
-  font-size: 5.5rem;
-  font-weight: 300;
-  line-height: 1.2;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 2.5;
 }
 
 .display-3 {
-  font-size: 4.5rem;
-  font-weight: 300;
-  line-height: 1.2;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 2.5;
 }
 
 .display-4 {
-  font-size: 3.5rem;
-  font-weight: 300;
-  line-height: 1.2;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 2.5;
 }
 
 hr {
@@ -12043,7 +12043,6 @@ html input:focus {
 
 body {
   height: 100%;
-  font-size: 14px;
 }
 
 body #app {
@@ -12063,6 +12062,60 @@ body #app .site-wrapper main {
 
 body #app .site-wrapper.full-height {
   height: 100vh;
+}
+
+body #app .site-wrapper.text-large .sizable p,
+body #app .site-wrapper.text-large .sizable h3,
+body #app .site-wrapper.text-large .sizable h4,
+body #app .site-wrapper.text-large .sizable h5,
+body #app .site-wrapper.text-large .sizable h6,
+body #app .site-wrapper.text-large .sizable li,
+body #app .site-wrapper.text-large .sizable button {
+  font-size: 1.2rem !important;
+}
+
+body #app .site-wrapper.text-large .sizable h1 {
+  font-size: 2.4rem !important;
+}
+
+body #app .site-wrapper.text-large .sizable h2 {
+  font-size: 1.5rem !important;
+}
+
+body #app .site-wrapper.text-larger .sizable p,
+body #app .site-wrapper.text-larger .sizable h3,
+body #app .site-wrapper.text-larger .sizable h4,
+body #app .site-wrapper.text-larger .sizable h5,
+body #app .site-wrapper.text-larger .sizable h6,
+body #app .site-wrapper.text-larger .sizable li,
+body #app .site-wrapper.text-larger .sizable button {
+  font-size: 1.5rem !important;
+}
+
+body #app .site-wrapper.text-larger .sizable h1 {
+  font-size: 2.6rem !important;
+}
+
+body #app .site-wrapper.text-larger .sizable h2 {
+  font-size: 1.75rem !important;
+}
+
+body #app .site-wrapper.text-largest .sizable p,
+body #app .site-wrapper.text-largest .sizable h3,
+body #app .site-wrapper.text-largest .sizable h4,
+body #app .site-wrapper.text-largest .sizable h5,
+body #app .site-wrapper.text-largest .sizable h6,
+body #app .site-wrapper.text-largest .sizable li,
+body #app .site-wrapper.text-largest .sizable button {
+  font-size: 2rem !important;
+}
+
+body #app .site-wrapper.text-largest .sizable h1 {
+  font-size: 2.8rem !important;
+}
+
+body #app .site-wrapper.text-largest .sizable h2 {
+  font-size: 2.5rem !important;
 }
 
 .top {
@@ -12333,6 +12386,7 @@ body #app .site-wrapper.full-height {
 main {
   position: relative;
   background: transparent;
+  padding-bottom: 2rem;
 }
 
 main article {
@@ -12341,15 +12395,21 @@ main article {
 }
 
 main article header {
-  margin-bottom: 1rem;
+  margin-bottom: .25rem;
 }
 
 main article h1 {
   color: #008481;
+  font-weight: 600;
 }
 
 main article h2 {
   color: #152f4e;
+  font-weight: 600;
+}
+
+main article h3 {
+  font-weight: 600;
 }
 
 main article p,
