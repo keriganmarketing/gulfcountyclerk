@@ -33086,7 +33086,8 @@ var app = new Vue({
         mobileMenuOpen: false,
         howDoIOpen: false,
         mobileHowDoIOpen: false,
-        searchBoxOpen: false
+        searchBoxOpen: false,
+        textSize: 0
     },
 
     methods: {
@@ -33117,6 +33118,15 @@ var app = new Vue({
             if (this.howDoIOpen) this.howDoIOpen = false;
             if (this.mobileMenuOpen) this.mobileMenuOpen = false;
             this.searchBoxOpen = !this.searchBoxOpen;
+        },
+        increaseTextSize: function increaseTextSize() {
+            this.textSize = this.textSize < 3 ? this.textSize + 1 : this.textSize;
+        },
+        decreaseTextSize: function decreaseTextSize() {
+            this.textSize = this.textSize > 0 ? this.textSize - 1 : this.textSize;
+        },
+        resetTextSize: function resetTextSize() {
+            this.textSize = 0;
         }
     },
 

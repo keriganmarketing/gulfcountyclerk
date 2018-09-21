@@ -165,7 +165,7 @@ $link-hover-decoration:     underline;
 //
 // Style p element.
 
-$paragraph-margin-bottom:   1rem;
+$paragraph-margin-bottom:   .6rem;
 
 
 // Grid breakpoints
@@ -259,28 +259,28 @@ $font-weight-black:           800;
 $font-weight-base:            $font-weight-normal;
 $line-height-base:            1.5;
 
-$h1-font-size:                $font-size-base * 2.5;
-$h2-font-size:                $font-size-base * 2;
-$h3-font-size:                $font-size-base * 1.75;
-$h4-font-size:                $font-size-base * 1.5;
-$h5-font-size:                $font-size-base * 1.25;
+$h1-font-size:                $font-size-base * 2.2;
+$h2-font-size:                $font-size-base * 1.2;
+$h3-font-size:                $font-size-base;
+$h4-font-size:                $font-size-base;
+$h5-font-size:                $font-size-base;
 $h6-font-size:                $font-size-base;
 
-$headings-margin-bottom:      ($spacer / 2);
+$headings-margin-bottom:      ($spacer *.1);
 $headings-font-family:        inherit;
-$headings-font-weight:        600;
-$headings-line-height:        1.2;
+$headings-font-weight:        $font-weight-normal;
+$headings-line-height:        2.5;
 $headings-color:              inherit;
 
-$display1-size:               6rem;
-$display2-size:               5.5rem;
-$display3-size:               4.5rem;
-$display4-size:               3.5rem;
+$display1-size:               $h1-font-size;
+$display2-size:               $h2-font-size;
+$display3-size:               $h3-font-size;
+$display4-size:               $h4-font-size;
 
-$display1-weight:             300;
-$display2-weight:             300;
-$display3-weight:             300;
-$display4-weight:             300;
+$display1-weight:             $font-weight-bold;
+$display2-weight:             $font-weight-bold;
+$display3-weight:             $font-weight-bold;
+$display4-weight:             $font-weight-normal;
 $display-line-height:         $headings-line-height;
 
 $lead-font-size:              ($font-size-base * 1.25);
