@@ -329,6 +329,11 @@ main {
     background: transparent;
     padding-bottom: 2rem;
 
+    .breadcrumbs {
+        font-size: .8em;
+        padding: .5rem 0;
+    }
+
     article {
         padding: 2rem 1rem 1rem;
         text-align: left;

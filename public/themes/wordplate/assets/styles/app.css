@@ -12377,6 +12377,11 @@ main {
   padding-bottom: 2rem;
 }
 
+main .breadcrumbs {
+  font-size: .8em;
+  padding: .5rem 0;
+}
+
 main article {
   padding: 2rem 1rem 1rem;
   text-align: left;
