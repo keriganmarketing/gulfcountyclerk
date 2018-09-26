@@ -12058,15 +12058,30 @@ body #app .site-wrapper.text-large .sizable h4,
 body #app .site-wrapper.text-large .sizable h5,
 body #app .site-wrapper.text-large .sizable h6,
 body #app .site-wrapper.text-large .sizable li,
-body #app .site-wrapper.text-large .sizable button {
+body #app .site-wrapper.text-large .sizable button,
+body #app .site-wrapper.text-large .sizable td,
+body #app .site-wrapper.text-large .sizable a.sizeable,
+body #app .site-wrapper.text-large .sizable .sizeable-element,
+body #app .site-wrapper.text-large .button-gallery.sizeable p,
+body #app .site-wrapper.text-large .button-gallery.sizeable h3,
+body #app .site-wrapper.text-large .button-gallery.sizeable h4,
+body #app .site-wrapper.text-large .button-gallery.sizeable h5,
+body #app .site-wrapper.text-large .button-gallery.sizeable h6,
+body #app .site-wrapper.text-large .button-gallery.sizeable li,
+body #app .site-wrapper.text-large .button-gallery.sizeable button,
+body #app .site-wrapper.text-large .button-gallery.sizeable td,
+body #app .site-wrapper.text-large .button-gallery.sizeable a.sizeable,
+body #app .site-wrapper.text-large .button-gallery.sizeable .sizeable-element {
   font-size: 1.2rem !important;
 }
 
-body #app .site-wrapper.text-large .sizable h1 {
+body #app .site-wrapper.text-large .sizable h1,
+body #app .site-wrapper.text-large .button-gallery.sizeable h1 {
   font-size: 2.4rem !important;
 }
 
-body #app .site-wrapper.text-large .sizable h2 {
+body #app .site-wrapper.text-large .sizable h2,
+body #app .site-wrapper.text-large .button-gallery.sizeable h2 {
   font-size: 1.5rem !important;
 }
 
@@ -12076,16 +12091,49 @@ body #app .site-wrapper.text-larger .sizable h4,
 body #app .site-wrapper.text-larger .sizable h5,
 body #app .site-wrapper.text-larger .sizable h6,
 body #app .site-wrapper.text-larger .sizable li,
-body #app .site-wrapper.text-larger .sizable button {
+body #app .site-wrapper.text-larger .sizable button,
+body #app .site-wrapper.text-larger .sizable td,
+body #app .site-wrapper.text-larger .sizable a.sizeable,
+body #app .site-wrapper.text-larger .sizable .sizeable-element,
+body #app .site-wrapper.text-larger .button-gallery.sizeable p,
+body #app .site-wrapper.text-larger .button-gallery.sizeable h3,
+body #app .site-wrapper.text-larger .button-gallery.sizeable h4,
+body #app .site-wrapper.text-larger .button-gallery.sizeable h5,
+body #app .site-wrapper.text-larger .button-gallery.sizeable h6,
+body #app .site-wrapper.text-larger .button-gallery.sizeable li,
+body #app .site-wrapper.text-larger .button-gallery.sizeable button,
+body #app .site-wrapper.text-larger .button-gallery.sizeable td,
+body #app .site-wrapper.text-larger .button-gallery.sizeable a.sizeable,
+body #app .site-wrapper.text-larger .button-gallery.sizeable .sizeable-element {
   font-size: 1.5rem !important;
 }
 
-body #app .site-wrapper.text-larger .sizable h1 {
+body #app .site-wrapper.text-larger .sizable h1,
+body #app .site-wrapper.text-larger .button-gallery.sizeable h1 {
   font-size: 2.6rem !important;
 }
 
-body #app .site-wrapper.text-larger .sizable h2 {
+body #app .site-wrapper.text-larger .sizable h2,
+body #app .site-wrapper.text-larger .button-gallery.sizeable h2 {
   font-size: 1.75rem !important;
+}
+
+@media (min-width: 1200px) {
+  body #app .site-wrapper.text-larger .container {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1400px) {
+  body #app .site-wrapper.text-larger .container {
+    max-width: 1400px;
+  }
+}
+
+@media (min-width: 1900px) {
+  body #app .site-wrapper.text-larger .container {
+    max-width: 1900px;
+  }
 }
 
 body #app .site-wrapper.text-largest .sizable p,
@@ -12094,16 +12142,37 @@ body #app .site-wrapper.text-largest .sizable h4,
 body #app .site-wrapper.text-largest .sizable h5,
 body #app .site-wrapper.text-largest .sizable h6,
 body #app .site-wrapper.text-largest .sizable li,
-body #app .site-wrapper.text-largest .sizable button {
+body #app .site-wrapper.text-largest .sizable button,
+body #app .site-wrapper.text-largest .sizable td,
+body #app .site-wrapper.text-largest .sizable a.sizeable,
+body #app .site-wrapper.text-largest .sizable .sizeable-element,
+body #app .site-wrapper.text-largest .button-gallery.sizeable p,
+body #app .site-wrapper.text-largest .button-gallery.sizeable h3,
+body #app .site-wrapper.text-largest .button-gallery.sizeable h4,
+body #app .site-wrapper.text-largest .button-gallery.sizeable h5,
+body #app .site-wrapper.text-largest .button-gallery.sizeable h6,
+body #app .site-wrapper.text-largest .button-gallery.sizeable li,
+body #app .site-wrapper.text-largest .button-gallery.sizeable button,
+body #app .site-wrapper.text-largest .button-gallery.sizeable td,
+body #app .site-wrapper.text-largest .button-gallery.sizeable a.sizeable,
+body #app .site-wrapper.text-largest .button-gallery.sizeable .sizeable-element {
   font-size: 2rem !important;
 }
 
-body #app .site-wrapper.text-largest .sizable h1 {
+body #app .site-wrapper.text-largest .sizable h1,
+body #app .site-wrapper.text-largest .button-gallery.sizeable h1 {
   font-size: 2.8rem !important;
 }
 
-body #app .site-wrapper.text-largest .sizable h2 {
+body #app .site-wrapper.text-largest .sizable h2,
+body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   font-size: 2.5rem !important;
+}
+
+@media (min-width: 1200px) {
+  body #app .site-wrapper.text-largest .container {
+    max-width: 100%;
+  }
 }
 
 .top {
@@ -12254,8 +12323,8 @@ body #app .site-wrapper.text-largest .sizable h2 {
   border-radius: 0;
   padding: 1.5rem 1.75rem;
   background-color: rgba(255, 255, 255, 0.9);
-  width: 540px;
-  max-height: 330px;
+  width: 595px;
+  max-height: 400px;
 }
 
 .top .topnav .dropdown-menu li {
@@ -12471,14 +12540,18 @@ main .sidebar .child-page {
   }
 }
 
+.button-gallery .box-button {
+  font-size: 18px;
+}
+
 .button-gallery .box-button a {
   color: #FFF;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 18px;
   line-height: 1em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  font-size: inherit;
 }
 
 @media (min-width: 768px) {
@@ -12487,9 +12560,13 @@ main .sidebar .child-page {
   }
 }
 
+.button-gallery .box-button a span {
+  font-size: inherit;
+}
+
 .button-gallery .box-button a small {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 67%;
 }
 
 .button-gallery .box-button a img {
