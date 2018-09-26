@@ -24,7 +24,7 @@
         </div>
     </div>
     <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
-        <div class="container d-flex align-items-center">
+        <div class="container d-flex flex-wrap align-items-center">
             <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break">{{ date('F j, Y') }}</p>
             <button @click="toggleSearchBox" 
                 class="d-lg-none btn btn-sm"
@@ -60,7 +60,7 @@
             <div class="main-navigation collapse navbar-collapse flex-grow-1">
                 <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
                 <a @click="toggleHowDoI" @mouseover="howDoIOpen = true"
-                    class="nav-link bg-white text-primary font-weight-bold" 
+                    class="nav-link bg-white text-primary font-weight-bold sizeable-element" 
                 >How Do I...</a>
             </div>
             <button @click="toggleMobileHowDoI" 

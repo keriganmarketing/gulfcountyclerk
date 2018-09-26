@@ -39,26 +39,44 @@ body {
             }
 
             &.text-large {
-                .sizable {
-                    p, h3, h4, h5, h6, li, button { font-size: 1.2rem !important; }
+                .sizable, .button-gallery.sizeable {
+                    p, h3, h4, h5, h6, li, button, td, a.sizeable, .sizeable-element { font-size: 1.2rem !important; }
                     h1 { font-size: 2.4rem !important; }
                     h2 { font-size: 1.5rem !important; }
                 }
             }
 
             &.text-larger {
-                .sizable {
-                    p, h3, h4, h5, h6, li, button { font-size: 1.5rem !important; }
+                .sizable, .button-gallery.sizeable {
+                    p, h3, h4, h5, h6, li, button, td, a.sizeable, .sizeable-element { font-size: 1.5rem !important; }
                     h1 { font-size: 2.6rem !important; }
                     h2 { font-size: 1.75rem !important; }
+                }
+
+                .container {
+                    @media (min-width: 1200px){
+                        max-width: 1200px;
+                    }
+                    @media (min-width: 1400px){
+                        max-width: 1400px;
+                    }
+                    @media (min-width: 1900px){
+                        max-width: 1900px;
+                    }
                 }
             }
 
             &.text-largest {
-                .sizable {
-                    p, h3, h4, h5, h6, li, button { font-size: 2rem !important; }
+                .sizable, .button-gallery.sizeable {
+                    p, h3, h4, h5, h6, li, button, td, a.sizeable, .sizeable-element { font-size: 2rem !important; }
                     h1 { font-size: 2.8rem !important; }
                     h2 { font-size: 2.5rem !important; }
+                }
+
+                .container {
+                    @media (min-width: 1200px){
+                        max-width: 100%;
+                    }
                 }
             }
         }
@@ -208,8 +226,8 @@ body {
             border-radius: 0;
             padding: 1.5rem 1.75rem;
             background-color: rgba(255,255,255,.9);
-            width: 540px;
-            max-height: 330px;
+            width: 595px;
+            max-height: 400px;
 
             li { 
                 width: 50%; 
@@ -418,22 +436,28 @@ main {
 
 .button-gallery {
     .box-button {
+        font-size: 18px;
+
         a {
             color: #FFF;
             text-decoration: none;
             text-transform: uppercase;
             font-weight: $font-weight-medium;
-            font-size: 18px;
             line-height: 1em;
             box-shadow: 0 0 10px rgba(0,0,0, .2);
+            font-size: inherit;
             
             @media (min-width:768px){
                 height: 184px;
             }
 
+            span {
+                font-size: inherit;
+            }
+
             small {
                 font-weight: $font-weight-normal;
-                font-size: 12px;
+                font-size: 67%;
             }
 
             img {
