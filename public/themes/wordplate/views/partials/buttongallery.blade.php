@@ -9,14 +9,14 @@
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 box-button tax-deeds py-1 py-md-3 sizeable-element">
-                <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="#">
+                <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="/public-records/tax-deeds/">
                     <img src="/themes/wordplate/assets/images/tax-deeds-icon.svg" class="img-fluid py-1 px-2">
                     <span>Tax Deeds<br>
                     <small>Online Search</small></span>
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 box-button foreclosures py-1 py-md-3 sizeable-element">
-                <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="#">
+                <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="/courts/foreclosures/">
                     <img src="/themes/wordplate/assets/images/foreclosures-icon.svg" class="img-fluid py-1 px-2">
                     <span>Foreclosures<br>
                     <small>Online Search</small></span>
