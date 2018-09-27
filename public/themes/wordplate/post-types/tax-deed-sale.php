@@ -84,3 +84,121 @@ function tax_deed_sale_updated_messages( $messages ) {
 	return $messages;
 }
 add_filter( 'post_updated_messages', 'tax_deed_sale_updated_messages' );
+
+function getTaxDeeds() {
+	$targs = [
+		'posts_per_page'   => -1,
+		'orderby'          => 'meta_value',
+		'order'            => 'DESC',
+		'meta_key'         => 'date',
+		'meta_value'       => '',
+		'post_type'        => 'tax-deed-sale',
+		'post_status'      => 'publish' 
+	];
+		
+	$deeds = get_posts( $targs );
+	$i = 1;
+	$j = 0;
+
+	$output = '<div>';
+
+		foreach($deeds as $deed){
+			$id = $deed->ID;
+			$date = get_field('date',$id);
+			$taxcert = get_field('tax_cert',$id);
+			$taxdeed = get_field('tax_deed',$id);
+			$parcel = get_field('parcel',$id);
+			$bid = get_field('opening_bid',$id);
+			$dep = get_field('estimated_minimum_deposit',$id);
+			$high_bid = get_field('high_bid',$id);
+			$surplus_funds = get_field('surplus_funds',$id);
+			$lands_available = get_field('lands_available',$id);
+			$applicant = get_field('applicant',$id);
+			$owner = get_field('owner',$id);
+			$descrip = get_field('legal_description',$id);
+			$oereport = get_field('owner_&_encumbrance_reports',$id);
+			$claim_form = get_field('claim_form',$id);
+			$status = get_field('status',$id);
+			$today = date('Ymd');
+			$match_date = date('Ymd', strtotime($date));
+
+			if((($match_date >= $today) && ($status != 'unpublished')) || $status == 'surplus'){
+				$j++;
+				$output .= '<div class="shadow mb-2">';
+				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
+				$output .= '	<div class="col-md-auto">
+									<p class="text-center m-0">
+									<span class="d-lock d-md-inline-block" >Sale Date </span>
+									'.date('m/d/y', strtotime($date)).'
+									</p>
+								</div>';
+				$output .= '	<div class="col-md-auto">
+									<p class="text-center m-0">
+									<span class="d-lock d-md-inline-block" >Certificate No. </span>
+									<a target="_blank" class="text-white" style="text-decoration: underline; cursor:pointer;" href="http://www.gulfcountytaxcollector.com/Property/TASearchResults?ownername=&streetnumber=&streetname=&propertynumber='.$parcel.'&taxbillnumber=&RollTypes=&Years=">
+										'.$taxcert.'
+									</a></p>
+								</div>';
+				$output .= '	<div class="col-md-auto">
+									<p class="text-center m-0">
+									<span class="d-lock d-md-inline-block" >Case No. </span>';
+				if($oereport['url']!=''){ $output .= '<a target="_blank" href="'.$oereport['url'].'">'; }
+				$output .= $taxdeed;
+				if($oereport['url']!=''){ $output .= '</a>'; }
+				$output .= '		</p>
+								</div>';
+				$output .= '	<div class="col-md-auto">
+									<p class="text-center m-0">
+									<span class="d-lock d-md-inline-block" >Parcel ID </span>
+									<a style="text-decoration: underline; cursor:pointer;" onclick="openProp(\''.$parcel.'\');">'.$parcel.'</a>
+									</p>
+								</div>';
+				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
+				if($status!=''){ $output .= '<p class="m-0"><strong style="text-transform: uppercase;">' . $status . '</strong></p>'; }
+				$output .= '	</div>
+							</div>';
+				$output .= '<div class="d-flex flex-wrap py-2 text-center text-md-left">';
+				$output .= '	<div class="col-md-auto">
+									<p class="m-0">
+									<strong>Applicant</strong><br>
+									'.$applicant.'</p>
+								</div>';
+				$output .= '	<div class="col-md-auto px-4">
+									<p class="m-0">
+									<strong>Owner</strong><br>
+									'.$owner.'</p>
+								</div>';
+				$output .= '	<div class="col-md-auto px-4">
+									<p class="m-0">
+									<strong>Location</strong><br>
+									'.$descrip.'</p>
+								</div>';
+				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
+				$output .= '		<p class="m-0">';
+				if($bid!=''){ 		
+					$output .= '		<strong>$'.$bid.'</strong>';
+					if($dep != ''){
+						$output .=      '<br>Est. Min. Deposit: $' . $dep;
+					} 
+				}elseif($surplus_funds!=''){
+					if($claim_form!=''){ 
+						$output .= '<a target="_blank" href="'.$claim_form['url'].'" >'; 
+					}
+					$output .= '		<strong>$'.$surplus_funds.'</strong>';
+					if($claim_form!=''){ 
+						$output .= '</a>'; 
+					}
+				}
+				$output .= '	</p></div>';
+				$output .= '</div>';
+				$i++;
+			}
+		}
+
+	if($j<1){ $output .= '<p>There are currently no tax deed sales available, please check back soon for future sales.</p>'; }
+
+	$output .= '</div>';
+
+	return $output;
+}
+add_shortcode( 'kma_taxdeeds', 'getTaxDeeds' );
