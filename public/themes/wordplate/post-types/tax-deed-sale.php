@@ -128,30 +128,36 @@ function getTaxDeeds() {
 				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center m-0">
-									<span class="d-lock d-md-inline-block" >Sale Date </span>
+									<span class="d-lock d-md-inline-block mx-1" >Sale Date</span>
 									'.date('m/d/y', strtotime($date)).'
 									</p>
 								</div>';
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center m-0">
-									<span class="d-lock d-md-inline-block" >Certificate No. </span>
+									<span class="d-lock d-md-inline-block mx-1" >Certificate No.</span>
 									<a target="_blank" class="text-white" style="text-decoration: underline; cursor:pointer;" href="http://www.gulfcountytaxcollector.com/Property/TASearchResults?ownername=&streetnumber=&streetname=&propertynumber='.$parcel.'&taxbillnumber=&RollTypes=&Years=">
 										'.$taxcert.'
 									</a></p>
 								</div>';
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center m-0">
-									<span class="d-lock d-md-inline-block" >Case No. </span>';
-				if($oereport['url']!=''){ $output .= '<a target="_blank" href="'.$oereport['url'].'">'; }
-				$output .= $taxdeed;
+									<span class="d-lock d-md-inline-block mx-1" >Case No.</span>';
+				if($oereport['url']!=''){ $output .= '<a target="_blank" style="text-decoration: underline; cursor:pointer;" class="text-white" href="'.$oereport['url'].'">'; }
+				$output .= 				$taxdeed;
 				if($oereport['url']!=''){ $output .= '</a>'; }
 				$output .= '		</p>
 								</div>';
 				$output .= '	<div class="col-md-auto">
-									<p class="text-center m-0">
-									<span class="d-lock d-md-inline-block" >Parcel ID </span>
-									<a style="text-decoration: underline; cursor:pointer;" onclick="openProp(\''.$parcel.'\');">'.$parcel.'</a>
-									</p>
+									<div class="text-center sizeable-element " style="line-height: 1.8em;">
+										<span class="d-lock d-md-inline-block mx-1" >Parcel ID </span>			
+										<form action="http://qpublic6.qpublic.net/fl_alsearch_dw.php" method="post" target="_blank" class="form-inline d-inline m-0 p-0">
+										<input type="HIDDEN" name="BEGIN" value="0" />
+										<input type="HIDDEN" name="INPUT" value="'.$parcel.'" />
+										<input type="HIDDEN" name="searchType" value="parcel_id" />
+										<input type="HIDDEN" name="county" value="fl_gulf" />
+										<button type="submit" class="border-0 m-0 p-0 bg-transparent text-white d-inline" style="text-decoration: underline; cursor:pointer; line-height:1rem;" >'.$parcel.'</button>
+										</form>
+									</div>
 								</div>';
 				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
 				if($status!=''){ $output .= '<p class="m-0"><strong style="text-transform: uppercase;">' . $status . '</strong></p>'; }
@@ -159,22 +165,22 @@ function getTaxDeeds() {
 							</div>';
 				$output .= '<div class="d-flex flex-wrap py-2 text-center text-md-left">';
 				$output .= '	<div class="col-md-auto">
-									<p class="m-0">
+									<p class="m-0 mx-1">
 									<strong>Applicant</strong><br>
 									'.$applicant.'</p>
 								</div>';
 				$output .= '	<div class="col-md-auto px-4">
-									<p class="m-0">
+									<p class="m-0 mx-1">
 									<strong>Owner</strong><br>
 									'.$owner.'</p>
 								</div>';
 				$output .= '	<div class="col-md-auto px-4">
-									<p class="m-0">
+									<p class="m-0 mx-1">
 									<strong>Location</strong><br>
 									'.$descrip.'</p>
 								</div>';
 				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
-				$output .= '		<p class="m-0">';
+				$output .= '		<p class="m-0 mx-1">';
 				if($bid!=''){ 		
 					$output .= '		<strong>$'.$bid.'</strong>';
 					if($dep != ''){
@@ -182,7 +188,7 @@ function getTaxDeeds() {
 					} 
 				}elseif($surplus_funds!=''){
 					if($claim_form!=''){ 
-						$output .= '<a target="_blank" href="'.$claim_form['url'].'" >'; 
+						$output .= '<a target="_blank" class="text-white" href="'.$claim_form['url'].'" >'; 
 					}
 					$output .= '		<strong>$'.$surplus_funds.'</strong>';
 					if($claim_form!=''){ 
