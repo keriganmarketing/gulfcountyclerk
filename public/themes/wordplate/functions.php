@@ -8,6 +8,8 @@ use KeriganSolutions\KMAContactInfo\ContactInfo;
 require template_path('includes/plugins/plate.php');
 require template_path('includes/plugins/theme-setup.php');
 require template_path('includes/plugins/acf-page-fields.php');
+require template_path('post-types/foreclosure.php');
+require template_path('post-types/tax-deed-sale.php');
 
 (new ContactInfo())->addField([
     'key' => 'mailing_address',
