@@ -101,6 +101,8 @@ function getForeclosures(){
 	$foreclosures = get_posts( $args );
 	$i = 1;
 	$j = 0;
+	$output = '';
+	
 	foreach($foreclosures as $foreclosure){
 		$id = $foreclosure->ID;
 		$date = get_field('date',$id);
@@ -108,44 +110,57 @@ function getForeclosures(){
 		$plaintiff = get_field('plaintiff',$id);
 		$defendant = get_field('defendant',$id);
 		$fjamount = get_field('fj_amount',$id);
+		$fname = get_field('party_fname',$id);  
+		$lname = get_field('party_lname',$id);  
 		$book = get_field('book',$id);
 		$page = get_field('page',$id);
 		$status = get_field('status',$id);
 		
 		$checkdate = date('Ymd',strtotime($date));
 		$todayminusone = date('Ymd',strtotime('-1 day'));
-
-		$output = '';
 		
 		if(($checkdate >= $todayminusone) && ($status != 'unpublished')){
 			$j++;
+			$output .= '<div class="shadow mb-2 '.$status.'">';
+			$output .= '	<div class="d-flex flex-wrap bg-dark text-white py-2">';
+			$output .= '		<div class="col-md-auto text-center text-md-left">
+									<p class="m-0 mx-1">'.date('M j, Y', strtotime($date));
+			if($status == 'cancelled' ){ $output .= ' - Canceled'; }
+			$output .= '    		</p>
+								</div>';
+			$output .= '		<div class="col-md-auto ml-md-auto text-center text-md-right">
+									<p class="m-0 mx-1">Case # ' . $casenum . '</p>';
+			$output .= '    	</div>';
+			$output .= '    </div>';
 			$output .= '<div id="foreclosure-'.$i.'" class="table-responsive" >';
-			$output .= '<table class="'.$status.' table" >';
-			$output .= '<tr><td class="header" colspan="2">'.date('M j, Y', strtotime($date));
-			if($status == 'cancelled' ){ echo ' - Canceled'; }
-			$output .= '</td></tr>';
-			$output .= '<tr><td class="label" width="150" >Case #</td><td>'.$casenum.'</td></tr>';
+			$output .= '<table class="table" >';
 			$output .= '<tr><td class="label" >Plaintiff</td><td>'.$plaintiff.'</td></tr>';
 			$output .= '<tr><td class="label" >Defendant</td><td>'.$defendant.'</td></tr>';
-			$output .= '<tr><td class="label" >F/J Amount</td><td>'.$fjamount.'</td></tr>';
+			$output .= '<tr><td class="label" >F/J Amount</td><td>$'.$fjamount.'</td></tr>';
 			if($status == 'active' ){
 				$output .= '<tr><td class="label" >Legal Description</td><td>
-				<form action="https://www3.myfloridacounty.com/ori/search.do" method="post" id="search_official_records" name="searchForm" target="_blank">
-				<input type="hidden" name="locationType" value="COUNTY" >
-				<input type="hidden" name="county" value="23" >
+				<form action="https://www3.myfloridacounty.com/ori/search.do" method="post" id="search_official_records" novalidate="novalidate" name="searchForm" target="_blank">
+					<input type="hidden" name="lastName" value="' .$lname. '" >
+					<input type="hidden" name="firstName" value="' .$fname. '" >
+					<input type="hidden" name="nametype" value="i" checked="checked" id="individual" class="radio_btn">
+					<input type="hidden" name="locationType" value="COUNTY" >
+					<input type="hidden" name="county" value="23" >
 					<input type="hidden" name="startMonth" value="0">
 					<input type="hidden" name="startDay" value="0">
 					<input type="hidden" name="endMonth" value="0">
 					<input type="hidden" name="endDay" value="0">
-				<input type="hidden" name="documentTypes" value="LP" >
-				<input type="hidden" name="percisesearchtype" value="b" >
-				<input type="hidden" name="book" value="' .$book. '" >
-				<input type="hidden" name="page" value="' .$page. '" >
-				<input type="submit" value=" See Lis Pendens " name="submit" />
+					<input type="hidden" name="documentTypes" value="LP" >
+					<input type="hidden" name="percisesearchtype" value="b" >
+					<input type="hidden" name="Book" value="' .$book. '" >
+					<input type="hidden" name="Page" value="' .$page. '" >
+					<button type="submit" class="btn btn-primary" >See Lis Pendens</button>
 				</form></td></tr>';
 			}
 			$output .= '</table>';
 			$output .= '</div>';
+			$output .= '</div>';
+
+			
 			$i++;
 		}			
 		
