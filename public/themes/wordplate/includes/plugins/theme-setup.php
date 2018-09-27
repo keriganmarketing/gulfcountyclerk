@@ -152,30 +152,6 @@ function website_menu( $menuID ){
         }
     }
 
-    // foreach($orderedArray as $key => $item){
-    //     if($item->menu_item_parent != 0){
-    //         if(isset($tempArray[$item->menu_item_parent])){
-    //             $tempArray[$item->menu_item_parent]->children[$item->ID] = $item;
-    //         } else {
-    //             foreach($tempArray as $key => $value){
-    //                 foreach($tempArray[$key]->children as $k => $v){
-    //                     if($k == $item->menu_item_parent){
-    //                         $tempArray[$key]->children[$item->menu_item_parent]->children[$item->ID] = $item;
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // echo '<pre>',print_r($tempArray),'</pre>';
-
-    // foreach($tempArray as $key => $item){
-    //     $item->title = htmlspecialchars_decode($item->title);
-    //     $item->classes = implode(' ', $item->classes);
-    //     $output[$item->menu_order] = $item;
-    // }
-
     $output = $tempArray;
 
     return json_encode($output);
