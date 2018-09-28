@@ -10,7 +10,7 @@
             {{ the_content() }}
             {{ wp_reset_query() }}
         </article>
-        @if (count($search->posts) > 0)
+        @if (isset($search->posts) && count($search->posts) > 0)
             @foreach ($search->posts as $post)
                 
                 @include('partials.result')
