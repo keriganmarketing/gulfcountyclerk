@@ -12383,6 +12383,10 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   text-decoration: underline;
 }
 
+.top .mega-menu li .dropdown-menu {
+  display: block !important;
+}
+
 .top .mega-menu li .submenu-link {
   margin: 0;
   padding-left: 1rem;
