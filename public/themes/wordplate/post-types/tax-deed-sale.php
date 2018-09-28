@@ -196,6 +196,7 @@ function getTaxDeeds() {
 					}
 				}
 				$output .= '	</p></div>';
+				$output .= '	</div>';
 				$output .= '</div>';
 				$i++;
 			}
