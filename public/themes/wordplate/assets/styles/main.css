@@ -12367,6 +12367,7 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 }
 
 .top .mega-menu {
+  display: flex;
   flex-flow: column wrap;
   border: 0;
   margin-top: -1px;
@@ -12379,7 +12380,7 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 }
 
 .top .mega-menu li {
-  width: 250px;
+  min-width: 250px;
 }
 
 .top .mega-menu li a.nav-link {
@@ -12397,6 +12398,15 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 
 .top .mega-menu li .dropdown-menu {
   display: block !important;
+  background-color: transparent;
+  position: relative;
+  padding: 0;
+  padding-bottom: 1rem;
+  border: 0;
+  border-radius: 0;
+  font-size: .9em;
+  float: none;
+  top: auto;
 }
 
 .top .mega-menu li .submenu-link {
