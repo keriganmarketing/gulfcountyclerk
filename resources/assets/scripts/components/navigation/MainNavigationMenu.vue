@@ -19,11 +19,9 @@
 
 <script>
     export default {
-
         props: {
             mainNav: {}
         }
-
     }
 </script>
 <style lang="scss" >
