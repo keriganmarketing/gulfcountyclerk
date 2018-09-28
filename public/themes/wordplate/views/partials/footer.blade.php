@@ -2,7 +2,7 @@
     <div class="container pt-4 text-center text-md-left">
         <div class="row align-items-start">
             <div class="mb-4 col-md-6 col-lg-12 col-xl-auto text-center">
-                <img src="/themes/wordplate/assets/images/seal-footer.png" class="img-fluid" alt="Gulf county Clerk of Courts and Comptroller" >
+                <img src="/themes/wordplate/assets/images/seal-footer.png" class="img-fluid" alt="Gulf county Clerk of Courts and Comptroller" aria-hidden="true" >
             </div>
             <div class="mb-4 col-md-6 col-lg-auto text-secondary">
                 <p class="text-uppercase mb-2"><strong>Custodian of Public Records</strong></p>

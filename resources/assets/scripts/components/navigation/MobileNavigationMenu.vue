@@ -75,6 +75,8 @@
         ul.navbar-nav li a {
             font-size: 18px;
             color: #4184a0;
+            border-radius: 0;
+            background-color: transparent;
         }
     } 
 
@@ -94,6 +96,7 @@
         padding: .5rem 1rem;
         border-top: 1px solid #999;
         border-bottom: 1px solid #999;
+        border-radius: 0;
     }
 }
 </style>
