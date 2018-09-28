@@ -5,7 +5,7 @@
     @while (have_posts())
         {{ the_post() }}
         @include('partials.mast')
-        <main class="sizable">
+        <main id="content" class="sizable">
             <div class="container">
                 {{ yoast_breadcrumb( '<p class="breadcrumbs">','</p>' ) }}
                 <div class="row d-flex align-items-start">

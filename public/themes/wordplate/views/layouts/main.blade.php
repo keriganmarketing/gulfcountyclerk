@@ -9,6 +9,7 @@
 </head>
 <body {{ body_class() }}>
     <div id="app">
+        <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
         <div 
             class="site-wrapper" 
             :class="{

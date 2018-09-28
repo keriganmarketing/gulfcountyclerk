@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<main class="sizable">
+<main id="content" class="sizable">
     <div class="container">
         <article class="support">
             <header class="text-primary">
