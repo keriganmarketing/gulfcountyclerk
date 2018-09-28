@@ -8,8 +8,8 @@
   {{ wp_head() }}
 </head>
 <body {{ body_class() }}>
+    <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
     <div id="app">
-        <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
         <div 
             class="site-wrapper" 
             :class="{
