@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="isLoaded">
         <div class="list-group list-group-flush">
             <div v-for="page in pages" :key="page.id">
                 <a 
@@ -28,6 +28,7 @@ export default {
     data() {
         return {
             pages: [],
+            isLoaded: false
         }
     },
 
@@ -69,6 +70,7 @@ export default {
                     }
 
                     this.pages = data; 
+                    this.isLoaded = true;
                 
                 });
         },

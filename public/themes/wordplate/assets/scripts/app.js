@@ -5573,7 +5573,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            pages: []
+            pages: [],
+            isLoaded: false
         };
     },
     created: function created() {
@@ -5614,6 +5615,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
 
                 _this3.pages = data;
+                _this3.isLoaded = true;
             });
         },
         getSubPages: function getSubPages() {
@@ -20983,52 +20985,54 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "list-group list-group-flush" },
-      _vm._l(_vm.pages, function(page) {
-        return _c(
+  return _vm.isLoaded
+    ? _c("div", [
+        _c(
           "div",
-          { key: page.id },
-          [
-            _c("a", {
-              staticClass:
-                "list-group-item list-group-item-action sizeable-element",
-              class: { active: page.id == _vm.post.ID },
-              attrs: { href: page.link },
-              domProps: { innerHTML: _vm._s(page.title.rendered) }
-            }),
-            _vm._v(" "),
-            _vm._l(page.children, function(child) {
-              return page.children.length > 0
-                ? _c("div", { key: child.id }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "list-group-item list-group-item-action child-page sizeable-element",
-                        class: { active: child.id == _vm.post.ID },
-                        attrs: { href: child.link }
-                      },
-                      [
-                        _c("i", { staticClass: "fa fa-angle-up" }),
-                        _vm._v(
-                          " " +
-                            _vm._s(child.title.rendered) +
-                            "\n                "
+          { staticClass: "list-group list-group-flush" },
+          _vm._l(_vm.pages, function(page) {
+            return _c(
+              "div",
+              { key: page.id },
+              [
+                _c("a", {
+                  staticClass:
+                    "list-group-item list-group-item-action sizeable-element",
+                  class: { active: page.id == _vm.post.ID },
+                  attrs: { href: page.link },
+                  domProps: { innerHTML: _vm._s(page.title.rendered) }
+                }),
+                _vm._v(" "),
+                _vm._l(page.children, function(child) {
+                  return page.children.length > 0
+                    ? _c("div", { key: child.id }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "list-group-item list-group-item-action child-page sizeable-element",
+                            class: { active: child.id == _vm.post.ID },
+                            attrs: { href: child.link }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-angle-up" }),
+                            _vm._v(
+                              " " +
+                                _vm._s(child.title.rendered) +
+                                "\n                "
+                            )
+                          ]
                         )
-                      ]
-                    )
-                  ])
-                : _vm._e()
-            })
-          ],
-          2
+                      ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
+          })
         )
-      })
-    )
-  ])
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
