@@ -12246,7 +12246,12 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   }
 }
 
-.top .search-form input {
+.top .search-box {
+  height: 80px;
+  transition: height linear .5s;
+}
+
+.top .search-box .search-form input {
   border-color: transparent !important;
   border: none !important;
   background-color: transparent !important;
@@ -12414,6 +12419,7 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 }
 
 .top-pad {
+  transition: height .5s linear;
   height: 150px;
 }
 
@@ -12428,6 +12434,11 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   .text-largest .top-pad {
     height: 235px;
   }
+}
+
+.mobile-menu-open .top,
+.scrolling .top {
+  background-color: #FFF;
 }
 
 .mobile-menu-open .top .top-container,
@@ -12475,7 +12486,18 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 
 .mobile-menu-open .top .search-box,
 .scrolling .top .search-box {
+  height: 0;
+  padding: 0 !important;
+}
+
+.mobile-menu-open .top .search-box .search-form,
+.scrolling .top .search-box .search-form {
   display: none;
+}
+
+.mobile-menu-open .top-pad,
+.scrolling .top-pad {
+  height: 90px;
 }
 
 main {
