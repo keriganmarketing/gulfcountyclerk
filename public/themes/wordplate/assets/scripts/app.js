@@ -5602,13 +5602,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             http.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc").then(function (response) {
                 var data = response.data;
 
-                Object.keys(data).map(function (key) {
+                if (_this3.post.post_parent != 0) {
 
-                    data[key].children = [];
-                    http.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc").then(function (response) {
-                        data[key].children = response.data;
+                    Object.keys(data).map(function (key) {
+
+                        data[key].children = [];
+                        http.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc").then(function (response) {
+                            data[key].children = response.data;
+                        });
                     });
-                });
+                }
 
                 _this3.pages = data;
             });
@@ -20982,7 +20985,8 @@ var render = function() {
           { key: page.id },
           [
             _c("a", {
-              staticClass: "list-group-item list-group-item-action",
+              staticClass:
+                "list-group-item list-group-item-action sizeable-element",
               class: { active: page.id == _vm.post.ID },
               attrs: { href: page.link },
               domProps: { innerHTML: _vm._s(page.title.rendered) }
@@ -20995,7 +20999,7 @@ var render = function() {
                       "a",
                       {
                         staticClass:
-                          "list-group-item list-group-item-action child-page",
+                          "list-group-item list-group-item-action child-page sizeable-element",
                         class: { active: child.id == _vm.post.ID },
                         attrs: { href: child.link }
                       },

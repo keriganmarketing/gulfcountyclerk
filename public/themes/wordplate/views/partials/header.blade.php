@@ -59,7 +59,7 @@
             </button>
             <div class="main-navigation collapse navbar-collapse flex-grow-1">
                 <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
-                <a @click="toggleHowDoI" @mouseover="howDoIOpen = true"
+                <a @click="toggleHowDoI"
                     class="nav-link bg-white text-primary font-weight-bold sizeable-element" 
                 >How Do I...</a>
             </div>
@@ -82,7 +82,7 @@
     </div>
     <div v-if="howDoIOpen" class="mobile-menu sizable" ref="howdoiMenuContainer" :class="{ 'open': howDoIOpen }" >
         <div class="container d-none d-lg-block">
-            <mega-menu :main-nav="{{ website_menu(5) }}" @mousedout="toggleHowDoI" ></mega-menu>
+            <mega-menu :main-nav="{{ website_menu(5) }}" ></mega-menu>
         </div>
     </div>
     <div v-if="mobileHowDoIOpen" class="mobile-menu" ref="howdoiMenuContainer" :class="{ 'open': mobileHowDoIOpen }" >

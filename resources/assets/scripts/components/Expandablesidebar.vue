@@ -4,14 +4,14 @@
             <div v-for="page in pages" :key="page.id">
                 <a 
                     :href="page.link" 
-                    class="list-group-item list-group-item-action"
+                    class="list-group-item list-group-item-action sizeable-element"
                     :class="{'active':page.id == post.ID}"
                     v-html="page.title.rendered"
                 ></a>
                 <div v-if="page.children.length > 0" v-for="child in page.children" :key="child.id" >
                     <a 
                         :href="child.link" 
-                        class="list-group-item list-group-item-action child-page"
+                        class="list-group-item list-group-item-action child-page sizeable-element"
                         :class="{'active':child.id == post.ID}"
                     >
                     <i class="fa fa-angle-up"></i> {{child.title.rendered}}
@@ -47,8 +47,6 @@ export default {
             http.get("/wp-json/wp/v2/pages?parent=" + this.post.ID + "&orderby=menu_order&order=asc")
                 .then(response => {
                     this.pages = response.data; 
-
-
                 });
         },
 
@@ -56,6 +54,8 @@ export default {
             http.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc")
                 .then(response => {
                     let data = response.data;
+
+                    if(this.post.post_parent != 0){
 
                     Object.keys(data).map((key) => {
                         
@@ -65,6 +65,8 @@ export default {
                                 data[key].children = response.data; 
                             });
                     })
+
+                    }
 
                     this.pages = data; 
                 

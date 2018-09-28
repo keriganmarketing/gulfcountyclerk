@@ -12300,15 +12300,15 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   border-right: none;
 }
 
+.top .topnav .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
 .top .topnav a.nav-link {
   color: #FFF;
   padding: 1.1rem 1rem;
   text-transform: uppercase;
-}
-
-.top .topnav a.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.45);
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .top .topnav a.nav-link.how-do-i {
@@ -12322,13 +12322,14 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   margin-top: -1px;
   border-radius: 0;
   padding: 1.5rem 1.75rem;
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 595px;
+  background-color: #FFF;
+  min-width: 595px;
   max-height: 400px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .top .topnav .dropdown-menu li {
-  width: 50%;
+  width: auto;
 }
 
 .top .topnav .dropdown-menu li a.dropdown-item {
@@ -12338,6 +12339,10 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   background-color: transparent;
   display: block;
   font-size: .9em;
+}
+
+.top .topnav .dropdown-menu li a.dropdown-item:hover {
+  text-decoration: underline;
 }
 
 .top .topnav .dropdown-menu li .submenu-link {
@@ -12355,22 +12360,27 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
   margin-top: -1px;
   border-radius: 0;
   padding: 1.5rem 1.75rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #FFF;
   max-height: 330px;
   list-style: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .top .mega-menu li {
   width: 250px;
 }
 
-.top .mega-menu li a.dropdown-item {
+.top .mega-menu li a.nav-link {
   padding: .25rem 0;
   color: #23789b;
   font-weight: 600;
   background-color: transparent;
   display: block;
   font-size: .9em;
+}
+
+.top .mega-menu li a.nav-link:hover {
+  text-decoration: underline;
 }
 
 .top .mega-menu li .submenu-link {
@@ -12389,6 +12399,13 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 @media (min-width: 768px) {
   .top-pad {
     height: 214px;
+  }
+}
+
+@media (min-width: 768px) {
+  .text-larger .top-pad,
+  .text-largest .top-pad {
+    height: 235px;
   }
 }
 
@@ -12443,7 +12460,6 @@ body #app .site-wrapper.text-largest .button-gallery.sizeable h2 {
 main {
   position: relative;
   background: transparent;
-  padding-bottom: 2rem;
 }
 
 main .breadcrumbs {
@@ -12463,6 +12479,8 @@ main article header {
 main article h1 {
   color: #008481;
   font-weight: 600;
+  line-height: 1.6rem;
+  padding-bottom: 2rem;
 }
 
 main article h2 {
@@ -12472,12 +12490,6 @@ main article h2 {
 
 main article h3 {
   font-weight: 600;
-}
-
-main article p,
-main article ul,
-main article ol {
-  line-height: 1.8em;
 }
 
 main .sidebar {
