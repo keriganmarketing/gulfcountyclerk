@@ -271,19 +271,25 @@ body {
         list-style: none;
         box-shadow: 0 0 5px rgba(0,0,0,.5);
 
+        @media (min-width: 992px){
+            max-height: 420px;
+        }
+    
+        @media (min-width: 1200px){
+            max-height: 540px;
+        }
+
         li { 
             min-width: 250px;
 
-            a.nav-link {
+            .nav-link {
                 padding: .25rem 0;
                 color: $cyan;
-                font-weight: $font-weight-medium;
+                font-weight: $font-weight-bold;
+                text-transform: uppercase;
                 background-color: transparent;
                 display: block;
                 font-size: .9em;
-                &:hover {
-                    text-decoration: underline;
-                }
             }
 
             .dropdown-menu {
@@ -297,14 +303,12 @@ body {
                 font-size: .9em;
                 float: none;
                 top: auto;
-            }
-
-            .submenu-link {
-                margin: 0;
-                padding-left: 1rem;
+                z-index: 1;
 
                 a.dropdown-item {
-                    font-style: italic;
+                    background-color: transparent;
+                    padding: 0;
+                    font-size: .9em;
                 }
             }
         } 
