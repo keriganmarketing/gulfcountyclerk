@@ -6051,6 +6051,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -20613,7 +20614,7 @@ var render = function() {
               class: { dropdown: navitem.children.length > 0 }
             },
             [
-              (navitem.url == "") | (navitem.url == "#")
+              navitem.url == "" || navitem.url == "#"
                 ? _c("span", { class: "nav-link " + navitem.classes }, [
                     _vm._v(_vm._s(navitem.title))
                   ])
@@ -20903,14 +20904,18 @@ var render = function() {
           class: { dropdown: navitem.children.length > 0 }
         },
         [
-          _c(
-            "a",
-            {
-              class: "nav-link " + navitem.classes,
-              attrs: { href: navitem.url, target: navitem.target }
-            },
-            [_vm._v(_vm._s(navitem.title))]
-          ),
+          navitem.url == "" || navitem.url == "#"
+            ? _c("span", { class: "nav-link " + navitem.classes }, [
+                _vm._v(_vm._s(navitem.title))
+              ])
+            : _c(
+                "a",
+                {
+                  class: "nav-link " + navitem.classes,
+                  attrs: { href: navitem.url, target: navitem.target }
+                },
+                [_vm._v(_vm._s(navitem.title))]
+              ),
           _vm._v(" "),
           navitem.children.length > 0
             ? _c(
