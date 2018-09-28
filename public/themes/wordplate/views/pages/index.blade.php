@@ -17,7 +17,7 @@
                             {{ the_content() }}
                         </article>
                     </div>
-                    <div class="col-md-3 order-md-1">
+                    <div class="col-md-3 order-md-1 pb-4">
                         <div class="sidebar">
                             <p class="sidebar-header">In this section:</p>
                             <expandable-sidebar :post='{{ json_encode($post) }}' ></expandable-sidebar>
