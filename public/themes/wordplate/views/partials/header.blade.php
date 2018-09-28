@@ -57,10 +57,10 @@
             </button>
             <div class="main-navigation collapse navbar-collapse flex-grow-1">
                 <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
-                <a @click="toggleHowDoI"
-                    class="nav-link bg-white text-primary font-weight-bold sizeable-element"
+                <button @click="toggleHowDoI"
+                    class="nav-link bg-white text-primary font-weight-bold sizeable-element border-0"
                     style="cursor:pointer"
-                >How Do I...</a>
+                >How Do I...</button>
             </div>
             <button @click="toggleMobileHowDoI" 
                 :class="{
