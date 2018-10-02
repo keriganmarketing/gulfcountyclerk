@@ -170,17 +170,17 @@ function getTaxDeeds() {
 									'.$applicant.'</p>
 								</div>';
 				$output .= '	<div class="col-md-3 px-4">
-									<p class="m-0 mx-1">
+									<p class="m-0">
 									<strong>Owner</strong><br>
 									'.$owner.'</p>
 								</div>';
 				$output .= '	<div class="col-md-3 px-4">
-									<p class="m-0 mx-1">
-									<strong>Location</strong><br>
-									'.$descrip.'</p>
+									<p class="m-0">
+									<strong>Location</strong></p>
+									'.$descrip.'
 								</div>';
 				$output .= '	<div class="col-md-3 ml-md-auto text-center text-md-right" >';
-				$output .= '		<p class="m-0 mx-1">';
+				$output .= '		<p class="m-0">';
 				if($bid!=''){ 		
 					$output .= '		<strong>$'.$bid.'</strong>';
 					if($dep != ''){
@@ -188,7 +188,7 @@ function getTaxDeeds() {
 					} 
 				}elseif($surplus_funds!=''){
 					if($claim_form!=''){ 
-						$output .= '<a target="_blank" class="text-white" href="'.$claim_form['url'].'" >'; 
+						$output .= '<a target="_blank" href="'.$claim_form['url'].'" >'; 
 					}
 					$output .= '		<strong>$'.$surplus_funds.'</strong>';
 					if($claim_form!=''){ 
