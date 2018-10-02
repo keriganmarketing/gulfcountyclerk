@@ -426,6 +426,12 @@ main {
             font-weight: $display3-weight;
         }
 
+        table {
+            .column-one {
+                width: 180px;
+            }
+        }
+
     }
 
     .sidebar {

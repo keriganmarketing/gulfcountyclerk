@@ -12547,6 +12547,10 @@ main article h3 {
   font-weight: 600;
 }
 
+main article table .column-one {
+  width: 180px;
+}
+
 main .sidebar {
   padding-top: 2rem;
 }
