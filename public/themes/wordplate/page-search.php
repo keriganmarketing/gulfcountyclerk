@@ -4,7 +4,7 @@ $searchString = (isset($_GET['search']) ? $_GET['search'] : null);
 $search = new WP_Query( ['s' => $searchString] );
 $results = [];
 
-if(count($search->posts) > 0){
+if($search && count($search->posts) > 0){
     foreach($search->posts as $result){
         if($result->post_content != ''){
             $results[] = $result;
