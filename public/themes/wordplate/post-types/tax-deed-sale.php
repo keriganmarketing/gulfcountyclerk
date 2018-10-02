@@ -164,22 +164,22 @@ function getTaxDeeds() {
 				$output .= '	</div>
 							</div>';
 				$output .= '<div class="d-flex flex-wrap py-2 text-center text-md-left">';
-				$output .= '	<div class="col-md-auto">
+				$output .= '	<div class="col-md-3">
 									<p class="m-0 mx-1">
 									<strong>Applicant</strong><br>
 									'.$applicant.'</p>
 								</div>';
-				$output .= '	<div class="col-md-auto px-4">
+				$output .= '	<div class="col-md-3 px-4">
 									<p class="m-0 mx-1">
 									<strong>Owner</strong><br>
 									'.$owner.'</p>
 								</div>';
-				$output .= '	<div class="col-md-auto px-4">
+				$output .= '	<div class="col-md-3 px-4">
 									<p class="m-0 mx-1">
 									<strong>Location</strong><br>
 									'.$descrip.'</p>
 								</div>';
-				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
+				$output .= '	<div class="col-md-3 ml-md-auto text-center text-md-right" >';
 				$output .= '		<p class="m-0 mx-1">';
 				if($bid!=''){ 		
 					$output .= '		<strong>$'.$bid.'</strong>';

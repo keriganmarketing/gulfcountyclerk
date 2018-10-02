@@ -134,7 +134,7 @@ function getForeclosures(){
 			$output .= '    </div>';
 			$output .= '<div id="foreclosure-'.$i.'" class="table-responsive" >';
 			$output .= '<table class="table" >';
-			$output .= '<tr><td class="label" >Plaintiff</td><td>'.$plaintiff.'</td></tr>';
+			$output .= '<tr><td class="label column-one" >Plaintiff</td><td>'.$plaintiff.'</td></tr>';
 			$output .= '<tr><td class="label" >Defendant</td><td>'.$defendant.'</td></tr>';
 			$output .= '<tr><td class="label" >F/J Amount</td><td>$'.$fjamount.'</td></tr>';
 			if($status == 'active' ){
