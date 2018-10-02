@@ -6,7 +6,7 @@ $results = [];
 
 if(count($search->posts) > 0){
     foreach($search->posts as $result){
-        if(get_the_excerpt($result) != '' || get_the_content($result) != ''){
+        if($result->post_content != ''){
             $results[] = $result;
         }
     }
