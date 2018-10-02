@@ -9,6 +9,9 @@
             </header>
             {{ the_content() }}
             {{ wp_reset_query() }}
+            <pre>@php
+                print_r($results)
+            @endphp</pre>
         </article>
         @if (count($results) > 0)
             @foreach ($results as $post)
