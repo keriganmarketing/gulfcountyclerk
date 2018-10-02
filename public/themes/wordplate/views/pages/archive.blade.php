@@ -10,12 +10,11 @@
             {{ the_content() }}
             {{ wp_reset_query() }}
         </article>
-        @if (isset($search->posts) && count($search->posts) > 0)
-            @foreach ($search->posts as $post)
+        @if (count($results) > 0)
+            @foreach ($results as $post)
                 
-                @if($post->post_excerpt != '' || $post->post_content != '')
                     @include('partials.result')
-                @endif
+
             @endforeach
         @else
             <article>
