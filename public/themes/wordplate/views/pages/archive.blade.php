@@ -11,7 +11,7 @@
             {{ wp_reset_query() }}
             
         </article>
-        @if ($results && count($results) > 0)
+        @if ($results && count($results->posts) > 0)
             @foreach ($results as $post)
                 
                     @include('partials.result')
