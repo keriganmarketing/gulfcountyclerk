@@ -2,9 +2,9 @@
     <div class="top-container">
         <div class="container d-md-flex justify-content-between">
             <div class="site-branding text-left d-inline-flex" >
-                <div class="seal">
-                    <img src="/themes/wordplate/assets/images/seal.png" class="logo img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
-                </div>
+                <a class="logo" href="/">
+                    <img class="logo" src="/themes/wordplate/assets/images/seal.png" class="img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
+                </a>
                 <div class="logo-text">
                     <p class="clerk-name">Rebecca L. (Becky) Norris</p>
                     <p>Gulf County, Florida<br>Clerk of Court</p>
