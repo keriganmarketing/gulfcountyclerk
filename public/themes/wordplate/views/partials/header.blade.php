@@ -1,81 +1,83 @@
 <header class="top">
-    <div class="top-container">
-        <div class="container d-md-flex justify-content-between">
-            <div class="site-branding text-left d-inline-flex" >
-                <a class="logo" href="/">
-                    <img class="logo" src="/themes/wordplate/assets/images/seal.png" class="img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
-                </a>
-                <div class="logo-text">
-                    <p class="clerk-name">Rebecca L. (Becky) Norris</p>
-                    <p>Gulf County, Florida<br>Clerk of Court</p>
+    <div class="bg-white">
+        <div class="top-container">
+            <div class="container d-md-flex justify-content-between">
+                <div class="site-branding text-left d-inline-flex" >
+                    <a class="logo" href="/">
+                        <img class="logo" src="/themes/wordplate/assets/images/seal.png" class="img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
+                    </a>
+                    <div class="logo-text">
+                        <p class="clerk-name">Rebecca L. (Becky) Norris</p>
+                        <p>Gulf County, Florida<br>Clerk of Court</p>
+                    </div>
                 </div>
-            </div>
-            <div class="header-right d-none d-md-flex flex-column justify-content-center">
-                <div class="text-sizer d-flex justify-content-end align-items-center py-2">
-                    <span class="m-0 p-0 mx-1">TEXT SIZE:</span> 
-                    <button @click="increaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
-                    <button @click="resetTextSize" class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
-                    <button @click="decreaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
-                </div>
-                <div class="search-box py-2">
-                    {{ get_search_form() }}
+                <div class="header-right d-none d-md-flex flex-column justify-content-center">
+                    <div class="text-sizer d-flex justify-content-end align-items-center py-2">
+                        <span class="m-0 p-0 mx-1">TEXT SIZE:</span> 
+                        <button @click="increaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
+                        <button @click="resetTextSize" class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
+                        <button @click="decreaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="search-box py-2">
+                        {{ get_search_form() }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
-        <div class="container d-flex flex-wrap align-items-center">
-            <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break">{{ date('F j, Y') }}</p>
-            <button @click="toggleSearchBox" 
-                :class="{
-                    'd-lg-none btn btn-sm': true,
-                    'btn-primary': !searchBoxOpen,
-                    'btn-white': searchBoxOpen
-                }" >
-                SEARCH <i 
-                        :class="{ 
-                            'fa fa-search': !searchBoxOpen, 
-                            'fa fa-times': searchBoxOpen 
-                        }" 
-                        aria-hidden="true"
+        <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
+            <div class="container d-flex flex-wrap align-items-center">
+                <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break">{{ date('F j, Y') }}</p>
+                <button @click="toggleSearchBox" 
+                    :class="{
+                        'd-lg-none btn btn-sm': true,
+                        'btn-primary': !searchBoxOpen,
+                        'btn-white': searchBoxOpen
+                    }" >
+                    SEARCH <i 
+                            :class="{ 
+                                'fa fa-search': !searchBoxOpen, 
+                                'fa fa-times': searchBoxOpen 
+                            }" 
+                            aria-hidden="true"
+                            ></i>
+                </button>
+                <button @click="toggleMenu" 
+                    :class="{
+                        'd-lg-none btn btn-sm': true,
+                        'btn-primary': !mobileMenuOpen,
+                        'btn-white': mobileMenuOpen
+                    }"
+                    type="button" data-toggle="collapse" data-target="#mobilemenu" aria-controls="mobilemenu" aria-expanded="false" aria-label="Toggle navigation">
+                    MENU <i
+                            :class="{
+                                'fa fa-bars': !mobileMenuOpen,
+                                'fa fa-times': mobileMenuOpen
+                            }"
+                            aria-hidden="true"
                         ></i>
-            </button>
-            <button @click="toggleMenu" 
-                :class="{
-                    'd-lg-none btn btn-sm': true,
-                    'btn-primary': !mobileMenuOpen,
-                    'btn-white': mobileMenuOpen
-                }"
-                type="button" data-toggle="collapse" data-target="#mobilemenu" aria-controls="mobilemenu" aria-expanded="false" aria-label="Toggle navigation">
-                MENU <i
+                </button>
+                <div class="main-navigation collapse navbar-collapse flex-grow-1">
+                    <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
+                    <button @click="toggleHowDoI"
+                        class="nav-link bg-white text-primary font-weight-bold sizeable-element border-0"
+                        style="cursor:pointer"
+                    >How Do I...</button>
+                </div>
+                <button @click="toggleMobileHowDoI" 
+                    :class="{
+                        'd-lg-none btn btn-sm': true,
+                        'btn-primary': !mobileHowDoIOpen,
+                        'btn-white': mobileHowDoIOpen
+                    }"
+                    >HOW Do I... <i
                         :class="{
-                            'fa fa-bars': !mobileMenuOpen,
-                            'fa fa-times': mobileMenuOpen
+                            'fa fa-chevron-down': !mobileHowDoIOpen,
+                            'fa fa-chevron-up': mobileHowDoIOpen
                         }"
                         aria-hidden="true"
                     ></i>
-            </button>
-            <div class="main-navigation collapse navbar-collapse flex-grow-1">
-                <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
-                <button @click="toggleHowDoI"
-                    class="nav-link bg-white text-primary font-weight-bold sizeable-element border-0"
-                    style="cursor:pointer"
-                >How Do I...</button>
+                </button>
             </div>
-            <button @click="toggleMobileHowDoI" 
-                :class="{
-                    'd-lg-none btn btn-sm': true,
-                    'btn-primary': !mobileHowDoIOpen,
-                    'btn-white': mobileHowDoIOpen
-                }"
-                >HOW Do I... <i
-                    :class="{
-                        'fa fa-chevron-down': !mobileHowDoIOpen,
-                        'fa fa-chevron-up': mobileHowDoIOpen
-                    }"
-                    aria-hidden="true"
-                ></i>
-            </button>
         </div>
     </div>
     <div v-if="howDoIOpen" class="mobile-menu sizable" ref="howdoiMenuContainer" :class="{ 'open': howDoIOpen }" >
