@@ -7,7 +7,7 @@
                 
         <kma-slider class="slider-container"></kma-slider>
         @include('partials.buttongallery')
-        <main role="main" class="sizable">
+        <main id="content" class="sizable">
             <div class="container">
 
                 <div class="row align-items-center justify-content-center py-5">
