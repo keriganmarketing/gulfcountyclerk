@@ -10,6 +10,7 @@
     <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
     <div id="app">
         <div 
+            ref="wrapper"
             class="site-wrapper" 
             :class="{
                 'full-height': footerStuck, 

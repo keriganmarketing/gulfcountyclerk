@@ -28,13 +28,21 @@ const app = new Vue({
         howDoIOpen: false,
         mobileHowDoIOpen: false,
         searchBoxOpen: false,
-        textSize: 0
+        textSize: 0,
+        wrapper: {}
     },
 
     methods: {
         handleScroll () {
             this.scrollPosition = window.scrollY;
             this.isScrolling = this.scrollPosition > 40;
+        },
+        handleResize() {
+            this.windowWidth = window.innerWidth;
+            this.windowHeight = window.innerHeight;
+        },
+        handleStickyFooter() {
+            this.footerStuck = this.windowHeight > this.clientHeight;
         },
         toggleMenu() {
             if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
@@ -72,19 +80,26 @@ const app = new Vue({
     },
 
     mounted () {
-        this.footerStuck = window.innerHeight > this.$root.$el.children[0].clientHeight;
-        this.clientHeight = this.$root.$el.children[0].clientHeight;
-        this.windowHeight = window.innerHeight;
-        this.windowWidth = window.innerWidth;
-        this.handleScroll();
+        this.wrapper = this.$refs.wrapper;        
+    },
+
+    watch: {
+        wrapper: function(newElement){
+            this.clientHeight = this.$refs.wrapper.clientHeight;
+            this.footerStuck = this.windowHeight > this.clientHeight;
+        }
     },
 
     created () {
-        window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        this.handleScroll();
+        this.handleResize();
     },
 
     destroyed () {
-        window.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
     }
 
 })

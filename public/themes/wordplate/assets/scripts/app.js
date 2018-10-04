@@ -33259,13 +33259,21 @@ var app = new Vue({
         howDoIOpen: false,
         mobileHowDoIOpen: false,
         searchBoxOpen: false,
-        textSize: 0
+        textSize: 0,
+        wrapper: {}
     },
 
     methods: {
         handleScroll: function handleScroll() {
             this.scrollPosition = window.scrollY;
             this.isScrolling = this.scrollPosition > 40;
+        },
+        handleResize: function handleResize() {
+            this.windowWidth = window.innerWidth;
+            this.windowHeight = window.innerHeight;
+        },
+        handleStickyFooter: function handleStickyFooter() {
+            this.footerStuck = this.windowHeight > this.clientHeight;
         },
         toggleMenu: function toggleMenu() {
             if (this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
@@ -33303,17 +33311,26 @@ var app = new Vue({
     },
 
     mounted: function mounted() {
-        this.footerStuck = window.innerHeight > this.$root.$el.children[0].clientHeight;
-        this.clientHeight = this.$root.$el.children[0].clientHeight;
-        this.windowHeight = window.innerHeight;
-        this.windowWidth = window.innerWidth;
-        this.handleScroll();
+        this.wrapper = this.$refs.wrapper;
     },
+
+
+    watch: {
+        wrapper: function wrapper(newElement) {
+            this.clientHeight = this.$refs.wrapper.clientHeight;
+            this.footerStuck = this.windowHeight > this.clientHeight;
+        }
+    },
+
     created: function created() {
         window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+        this.handleScroll();
+        this.handleResize();
     },
     destroyed: function destroyed() {
         window.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
     }
 });
 
