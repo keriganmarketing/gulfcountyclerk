@@ -5586,21 +5586,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getPages: function getPages() {
             var _this = this;
 
-            http.get("/wp-json/wp/v2/pages?orderby=menu_order&order=asc").then(function (response) {
+            axios.get("/wp-json/wp/v2/pages?orderby=menu_order&order=asc").then(function (response) {
                 _this.pages = response.data;
             });
         },
         getChildPages: function getChildPages() {
             var _this2 = this;
 
-            http.get("/wp-json/wp/v2/pages?parent=" + this.post.ID + "&orderby=menu_order&order=asc").then(function (response) {
+            axios.get("/wp-json/wp/v2/pages?parent=" + this.post.ID + "&orderby=menu_order&order=asc").then(function (response) {
                 _this2.pages = response.data;
             });
         },
         getSiblingPages: function getSiblingPages() {
             var _this3 = this;
 
-            http.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc").then(function (response) {
+            axios.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc").then(function (response) {
                 var data = response.data;
 
                 if (_this3.post.post_parent != 0) {
@@ -5608,7 +5608,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     Object.keys(data).map(function (key) {
 
                         data[key].children = [];
-                        http.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc").then(function (response) {
+                        axios.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc").then(function (response) {
                             data[key].children = response.data;
                         });
                     });
@@ -20637,7 +20637,7 @@ var render = function() {
                           "a",
                           {
                             class: "dropdown-item " + child.classes,
-                            attrs: { href: child.url }
+                            attrs: { href: child.url, target: child.target }
                           },
                           [_vm._v(_vm._s(child.title))]
                         ),
@@ -20655,7 +20655,7 @@ var render = function() {
                                       "a",
                                       {
                                         class: "dropdown-item " + c.classes,
-                                        attrs: { href: c.url }
+                                        attrs: { href: c.url, target: c.target }
                                       },
                                       [_vm._v(_vm._s(c.title))]
                                     )

@@ -38,21 +38,21 @@ export default {
 
     methods: {
         getPages() {
-            http.get("/wp-json/wp/v2/pages?orderby=menu_order&order=asc")
+            axios.get("/wp-json/wp/v2/pages?orderby=menu_order&order=asc")
                 .then(response => {
                     this.pages = response.data; 
                 });
         },
 
         getChildPages() {
-            http.get("/wp-json/wp/v2/pages?parent=" + this.post.ID + "&orderby=menu_order&order=asc")
+            axios.get("/wp-json/wp/v2/pages?parent=" + this.post.ID + "&orderby=menu_order&order=asc")
                 .then(response => {
                     this.pages = response.data; 
                 });
         },
 
         getSiblingPages() {
-            http.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc")
+            axios.get("/wp-json/wp/v2/pages?parent=" + this.post.post_parent + "&orderby=menu_order&order=asc")
                 .then(response => {
                     let data = response.data;
 
@@ -61,7 +61,7 @@ export default {
                     Object.keys(data).map((key) => {
                         
                         data[key].children = [];
-                        http.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc")
+                        axios.get("/wp-json/wp/v2/pages?parent=" + data[key].id + "&orderby=menu_order&order=asc")
                             .then(response => {
                                 data[key].children = response.data; 
                             });
