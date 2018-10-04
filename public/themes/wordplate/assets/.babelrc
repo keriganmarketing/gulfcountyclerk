@@ -1,0 +1,22 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "loose": true,
+      "debug": true,
+      "targets": {
+        "chrome": "58",
+        "ie": "10"
+      }
+    }]
+  ],
+  "plugins": [
+    ["transform-runtime", {
+      "helpers": false,
+      "polyfill": true,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }],
+    ["external-helpers"]
+  ]
+}
