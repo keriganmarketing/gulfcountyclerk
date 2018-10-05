@@ -33312,13 +33312,14 @@ var app = new Vue({
 
     mounted: function mounted() {
         this.wrapper = this.$refs.wrapper;
+        this.handleStickyFooter();
     },
 
 
     watch: {
         wrapper: function wrapper(newElement) {
             this.clientHeight = this.$refs.wrapper.clientHeight;
-            this.footerStuck = this.windowHeight > this.clientHeight;
+            this.handleStickyFooter();
         }
     },
 

@@ -116,6 +116,10 @@ body {
                         }
                     }
                 }
+
+                .navbar-nav {
+                    flex-wrap: wrap;
+                }
             }
 
             &.text-largest {
@@ -166,6 +170,10 @@ body {
                             white-space: normal;
                         }
                     }
+                }
+
+                .navbar-nav {
+                    flex-wrap: wrap;
                 }
             }
         }
@@ -503,6 +511,7 @@ main {
         h2 {
             color: $secondary;
             font-weight: $display2-weight;
+            margin-top: .75rem;
         }
 
         h3 {

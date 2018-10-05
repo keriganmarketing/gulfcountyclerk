@@ -80,13 +80,14 @@ const app = new Vue({
     },
 
     mounted () {
-        this.wrapper = this.$refs.wrapper;        
+        this.wrapper = this.$refs.wrapper;     
+        this.handleStickyFooter();   
     },
 
     watch: {
         wrapper: function(newElement){
             this.clientHeight = this.$refs.wrapper.clientHeight;
-            this.footerStuck = this.windowHeight > this.clientHeight;
+            this.handleStickyFooter();
         }
     },
 
