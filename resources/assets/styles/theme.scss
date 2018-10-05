@@ -36,6 +36,10 @@ body {
             
             &.full-height {
                 height: 100vh;
+
+                @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {  
+                    height: auto;
+                }
             }
 
             &.text-large {
@@ -43,6 +47,21 @@ body {
                     p, h3, h4, h5, h6, li, button, td, a.sizeable, .sizeable-element { font-size: 1.2rem !important; }
                     h1 { font-size: 2.4rem !important; }
                     h2 { font-size: 1.5rem !important; }
+                }
+
+                .mega-menu {
+                    position: relative;
+                    height: 500px;
+                    box-shadow: none;
+                    background-color: transparent;
+                }
+
+                .top {
+                    position: relative;
+                }
+
+                .top-pad {
+                    height: 0;
                 }
             }
 
@@ -64,6 +83,39 @@ body {
                         max-width: 1900px;
                     }
                 }
+
+                .mega-menu {
+                    position: relative;
+                    height: 600px;
+                    box-shadow: none;
+                    padding: 1.5rem 0;
+                    background-color: transparent;
+                }
+
+                .top {
+                    position: relative;
+                }
+
+                .top-pad {
+                    height: 0;
+                }
+
+                .topnav {
+                    .dropdown-menu {
+                        padding: 1.5rem 1.75rem;
+                        width: auto;
+                        height: 600px;
+
+                        li {
+                            width: 50%;
+                            white-space: normal;
+                        }
+
+                        .dropdown-item {
+                            white-space: normal;
+                        }
+                    }
+                }
             }
 
             &.text-largest {
@@ -76,6 +128,43 @@ body {
                 .container {
                     @media (min-width: 1200px){
                         max-width: 100%;
+                    }
+                }
+
+                .mega-menu {
+                    position: relative;
+                    height: 770px;
+                    box-shadow: none;
+                    padding: 1.5rem 0;
+                    background-color: transparent;
+
+                    .dropdown-menu {
+                        width:33%;
+                    }
+                }
+
+                .top {
+                    position: relative;
+                }
+
+                .top-pad {
+                    height: 0;
+                }
+
+                .topnav {
+                    .dropdown-menu {
+                        padding: 1.5rem 1.75rem;
+                        width: 100vh;
+                        height: 700px;
+
+                        li {
+                            width: 50%;
+                            white-space: normal;
+                        }
+
+                        .dropdown-item {
+                            white-space: normal;
+                        }
                     }
                 }
             }
@@ -227,12 +316,12 @@ body {
             display: none;
             flex-flow: column wrap;
             border: 0;
-            margin-top: -1px;
+            margin-top: 0;
             border-radius: 0;
             padding: 1.5rem 1.75rem;
             background-color: #FFF;
             min-width: 595px;
-            max-height: 400px;
+            height: 400px;
             box-shadow: 0 0 5px rgba(0,0,0,.5);
 
             li { 
@@ -272,20 +361,19 @@ body {
         border-radius: 0;
         padding: 1.5rem 1.75rem;
         background-color: #FFF;
-        max-height: 330px;
+        height: 330px;
         list-style: none;
         box-shadow: 0 0 5px rgba(0,0,0,.5);
 
         @media (min-width: 992px){
-            max-height: 420px;
+            height: 420px;
         }
     
-        @media (min-width: 1200px){
-            max-height: 540px;
-        }
+
 
         li { 
             min-width: 250px;
+            padding-right: 20px;
 
             .nav-link {
                 padding: .25rem 0;
@@ -339,11 +427,6 @@ body {
 .mobile-menu-open,
 .scrolling {
     .top {
-        background-color: #FFF;
-
-        .top-container {
-            background-color: #FFF;
-        }
         .site-branding {    
             @media (min-width: 768px){
                 padding: 9px 0;
