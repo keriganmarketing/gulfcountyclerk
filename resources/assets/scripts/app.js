@@ -23,7 +23,6 @@ const app = new Vue({
         windowWidth: 0,
         isScrolling: false,
         scrollPosition: 0,
-        footerStuck: false,
         mobileMenuOpen: false,
         howDoIOpen: false,
         mobileHowDoIOpen: false,
@@ -40,9 +39,6 @@ const app = new Vue({
         handleResize() {
             this.windowWidth = window.innerWidth;
             this.windowHeight = window.innerHeight;
-        },
-        handleStickyFooter() {
-            this.footerStuck = this.windowHeight > this.clientHeight;
         },
         toggleMenu() {
             if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
@@ -76,18 +72,6 @@ const app = new Vue({
         },
         resetTextSize() {
             this.textSize = 0;
-        }
-    },
-
-    mounted () {
-        this.wrapper = this.$refs.wrapper;     
-        this.handleStickyFooter();   
-    },
-
-    watch: {
-        wrapper: function(newElement){
-            this.clientHeight = this.$refs.wrapper.clientHeight;
-            this.handleStickyFooter();
         }
     },
 

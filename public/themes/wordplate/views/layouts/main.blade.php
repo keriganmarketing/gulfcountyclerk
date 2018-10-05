@@ -13,7 +13,6 @@
             ref="wrapper"
             class="site-wrapper" 
             :class="{
-                'full-height': footerStuck, 
                 'scrolling': isScrolling,
                 'mobile-menu-open': mobileMenuOpen,
                 'text-normal': textSize === 0,

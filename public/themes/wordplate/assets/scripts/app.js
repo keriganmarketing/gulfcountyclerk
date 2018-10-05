@@ -33254,7 +33254,6 @@ var app = new Vue({
         windowWidth: 0,
         isScrolling: false,
         scrollPosition: 0,
-        footerStuck: false,
         mobileMenuOpen: false,
         howDoIOpen: false,
         mobileHowDoIOpen: false,
@@ -33271,9 +33270,6 @@ var app = new Vue({
         handleResize: function handleResize() {
             this.windowWidth = window.innerWidth;
             this.windowHeight = window.innerHeight;
-        },
-        handleStickyFooter: function handleStickyFooter() {
-            this.footerStuck = this.windowHeight > this.clientHeight;
         },
         toggleMenu: function toggleMenu() {
             if (this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
@@ -33307,19 +33303,6 @@ var app = new Vue({
         },
         resetTextSize: function resetTextSize() {
             this.textSize = 0;
-        }
-    },
-
-    mounted: function mounted() {
-        this.wrapper = this.$refs.wrapper;
-        this.handleStickyFooter();
-    },
-
-
-    watch: {
-        wrapper: function wrapper(newElement) {
-            this.clientHeight = this.$refs.wrapper.clientHeight;
-            this.handleStickyFooter();
         }
     },
 

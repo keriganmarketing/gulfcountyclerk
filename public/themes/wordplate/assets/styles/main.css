@@ -12043,6 +12043,7 @@ html input:focus {
 
 body {
   height: 100%;
+  background-color: #7ac2c1;
 }
 
 body #app {
@@ -12058,6 +12059,7 @@ body #app .site-wrapper {
 
 body #app .site-wrapper main {
   flex-grow: 1;
+  background-color: #fff;
 }
 
 body #app .site-wrapper.full-height {
