@@ -44,19 +44,25 @@ const app = new Vue({
             if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
             if(this.howDoIOpen) this.howDoIOpen = false;
             if(this.searchBoxOpen) this.searchBoxOpen = false;
-            this.mobileMenuOpen = ! this.mobileMenuOpen;
+            this.$nextTick(() => {
+                this.mobileMenuOpen = ! this.mobileMenuOpen;
+            });
         },
         toggleHowDoI() {
             if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
             if(this.searchBoxOpen) this.searchBoxOpen = false;
             if(this.mobileMenuOpen) this.mobileMenuOpen = false;
-            this.howDoIOpen = ! this.howDoIOpen;
+            this.$nextTick(() => {
+                this.howDoIOpen = ! this.howDoIOpen;
+            });
         },
         toggleMobileHowDoI() {
             if(this.searchBoxOpen) this.searchBoxOpen = false;
             if(this.howDoIOpen) this.howDoIOpen = false;
             if(this.mobileMenuOpen) this.mobileMenuOpen = false;
-            this.mobileHowDoIOpen = ! this.mobileHowDoIOpen;
+            this.$nextTick(() => {
+                this.mobileHowDoIOpen = ! this.mobileHowDoIOpen;
+            });
         },
         toggleSearchBox() {
             if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
