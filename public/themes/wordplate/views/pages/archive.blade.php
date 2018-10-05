@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<main role="main" class="sizable">
+<main id="content" class="sizable">
     <div class="container">
         <article class="support">
             <header class="text-primary">
@@ -9,12 +9,11 @@
             </header>
             {{ the_content() }}
             {{ wp_reset_query() }}
+            
         </article>
-        @if (count($search->posts) > 0)
-            @foreach ($search->posts as $post)
-                
+        @if (!empty($results))
+            @foreach ($results as $post)
                 @include('partials.result')
-
             @endforeach
         @else
             <article>

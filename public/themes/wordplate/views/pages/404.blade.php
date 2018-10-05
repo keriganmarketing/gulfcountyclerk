@@ -1,4 +1,4 @@
-<main role="main" class="sizable">
+<main id="content" class="sizable">
     <div class="container">
         <article>
             <header class="text-primary">
