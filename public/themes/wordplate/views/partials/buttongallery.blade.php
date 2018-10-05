@@ -10,11 +10,7 @@
             </div>
             <div class="col-md-4 col-lg-3 box-button tax-deeds py-1 py-md-3 sizeable-element">
                 <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="/public-records/tax-deeds/">
-<<<<<<< HEAD
-                    <img src="/themes/wordplate/assets/images/tax-deeds-icon.svg" class="img-fluid py-1 px-2" alt="tax deeds icon">
-=======
                     <img src="/themes/wordplate/assets/images/tax-deeds-icon.png" class="img-fluid py-1 px-2" alt="tax deeds icon" aria-hidden="true">
->>>>>>> a1a3714e8016bfce365123221539ca94c1629cdb
                     <span>Tax Deeds<br>
                     <small>Online Search</small></span>
                 </a>
