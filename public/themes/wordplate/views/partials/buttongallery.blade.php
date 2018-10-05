@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-4 col-lg-3 box-button tax-deeds py-1 py-md-3 sizeable-element">
                 <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="/public-records/tax-deeds/">
-                    <img src="/themes/wordplate/assets/images/tax-deeds-icon.svg" class="img-fluid py-1 px-2" alt="tac deeds icon">
+                    <img src="/themes/wordplate/assets/images/tax-deeds-icon.svg" class="img-fluid py-1 px-2" alt="tax deeds icon">
                     <span>Tax Deeds<br>
                     <small>Online Search</small></span>
                 </a>
@@ -30,7 +30,7 @@
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 box-button e-file py-1 py-md-3 sizeable-element">
-                <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="https://www.myflcourtaccess.com/">
+                <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="https://www.myflcourtaccess.com/" target="_blank">
                     <img src="/themes/wordplate/assets/images/e-file-icon.svg" class="img-fluid py-1 px-2" alt="e-file icon">
                     <span>E-File<br>
                     <small>Forms & Documents</small></span>

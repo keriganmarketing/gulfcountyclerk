@@ -5,10 +5,12 @@
                 <a class="logo" href="/">
                     <img class="logo" src="/themes/wordplate/assets/images/seal.png" class="img-fluid" alt="Gulf County, Florida Circuit Court Seal" >
                 </a>
-                <div class="logo-text">
-                    <p class="clerk-name">Rebecca L. (Becky) Norris</p>
-                    <p>Gulf County, Florida<br>Clerk of Court</p>
-                </div>
+                <a href="/">
+                    <div class="logo-text">
+                        <p class="clerk-name">Rebecca L. (Becky) Norris</p>
+                        <p>Gulf County, Florida<br>Clerk of Court</p>
+                    </div>
+                </a>
             </div>
             <div class="header-right d-none d-md-flex flex-column justify-content-center">
                 <div class="text-sizer d-flex justify-content-end align-items-center py-2">
