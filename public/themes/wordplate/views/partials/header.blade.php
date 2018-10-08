@@ -14,9 +14,9 @@
                 <div class="header-right d-none d-md-flex flex-column justify-content-center">
                     <div class="text-sizer d-flex justify-content-end align-items-center py-2">
                         <span class="m-0 p-0 mx-1">TEXT SIZE:</span> 
-                        <button @click="increaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
-                        <button @click="resetTextSize" class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
-                        <button @click="decreaseTextSize" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        <button @click="decreaseTextSize" title="Make text smaller" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text smaller</span><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        <button @click="resetTextSize" title="Reset text size" class="btn btn-outline-secondary round mx-1 reset-button"><span class="sr-only">Reset text size</span><i class="fa" aria-hidden="true">100%</i></button> 
+                        <button @click="increaseTextSize" title="Make text bigger" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
                     </div>
                     <div class="search-box py-2">
                         {{ get_search_form() }}

@@ -608,14 +608,18 @@ main {
 
             small {
                 font-weight: $font-weight-normal;
-                font-size: 67%;
+                @media (min-width:768px){
+                    font-size: 67%;
+                }
             }
 
             img {
                 width: 68px;
+                height: 58px;
 
                 @media (min-width:768px){
                     width: 87px;
+                    height: auto;
                     margin-bottom: 10px;
                 }
             }

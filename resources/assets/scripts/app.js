@@ -68,7 +68,9 @@ const app = new Vue({
             if(this.mobileHowDoIOpen) this.mobileHowDoIOpen = false;
             if(this.howDoIOpen) this.howDoIOpen = false;
             if(this.mobileMenuOpen) this.mobileMenuOpen = false;
-            this.searchBoxOpen = ! this.searchBoxOpen;
+            this.$nextTick(() => {
+                this.searchBoxOpen = ! this.searchBoxOpen;
+            });
         },
         increaseTextSize() {
             this.textSize = (this.textSize < 3 ? this.textSize + 1 : this.textSize);

@@ -20,12 +20,12 @@
     </div>
     <hr class="border-white">
     <p class="copyright text-center text-secondary text-uppercase">&copy;{{ date('Y') }} {{ get_bloginfo() }}. &nbsp; 
-        <a class="text-underline d-block d-md-inline text-secondary text-uppercase" href="/privacy-policy/" >Privacy&nbsp;Policy</a> 
+        <a class="text-underline d-block d-md-inline p-1 py-md-0 text-secondary text-uppercase" href="/privacy-policy/" >Privacy&nbsp;Policy</a> 
         <span class="d-none d-md-inline ">|</span>
-        <a class="text-underline d-block d-md-inline text-secondary text-uppercase" href="/accessibility-policy/" >Accessibility&nbsp;Policy</a> 
+        <a class="text-underline d-block d-md-inline p-1 py-md-0 text-secondary text-uppercase" href="/accessibility-policy/" >Accessibility&nbsp;Policy</a> 
         <span class="d-none d-md-inline">|</span>
-        <a class="text-underline d-block d-md-inline text-secondary text-uppercase" href="/contact/" >Contact</a> 
+        <a class="text-underline d-block d-md-inline p-1 py-md-0 text-secondary text-uppercase" href="/contact/" >Contact</a> 
         <span class="d-none d-md-inline">|</span>
-        <a class="text-underline d-block d-md-inline text-secondary text-uppercase" href="/sitemap_index.xml" >Site Map</a> 
+        <a class="text-underline d-block d-md-inline p-1 py-md-0 text-secondary text-uppercase" href="/sitemap_index.xml" >Site Map</a> 
     </p>
 </footer>
