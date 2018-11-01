@@ -150,7 +150,7 @@ function getTaxDeeds() {
 				$output .= '	<div class="col-md-auto">
 									<div class="text-center sizeable-element " style="line-height: 1.8em;">
 										<span class="d-lock d-md-inline-block mx-1" >Parcel ID </span>	
-										<a href="https://qpublic.schneidercorp.com/Application.aspx?AppID=819&LayerID=15077&PageTypeID=4&PageID=6971&Q=2110812508&KeyValue='.$parcel.'">'.$parcel.'</a>		
+										<a target="_blank" style="text-decoration: underline; cursor:pointer;" class="text-white" href="https://qpublic.schneidercorp.com/Application.aspx?AppID=819&LayerID=15077&PageTypeID=4&PageID=6971&Q=2110812508&KeyValue='.$parcel.'">'.$parcel.'</a>		
 									</div>
 								</div>';
 				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
