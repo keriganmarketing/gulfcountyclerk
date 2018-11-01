@@ -149,14 +149,8 @@ function getTaxDeeds() {
 								</div>';
 				$output .= '	<div class="col-md-auto">
 									<div class="text-center sizeable-element " style="line-height: 1.8em;">
-										<span class="d-lock d-md-inline-block mx-1" >Parcel ID </span>			
-										<form action="http://qpublic6.qpublic.net/fl_alsearch_dw.php" method="post" target="_blank" class="form-inline d-inline m-0 p-0">
-										<input type="HIDDEN" name="BEGIN" value="0" />
-										<input type="HIDDEN" name="INPUT" value="'.$parcel.'" />
-										<input type="HIDDEN" name="searchType" value="parcel_id" />
-										<input type="HIDDEN" name="county" value="fl_gulf" />
-										<button type="submit" class="border-0 m-0 p-0 bg-transparent text-white d-inline" style="text-decoration: underline; cursor:pointer; line-height:1rem;" >'.$parcel.'</button>
-										</form>
+										<span class="d-lock d-md-inline-block mx-1" >Parcel ID </span>	
+										<a href="https://qpublic.schneidercorp.com/Application.aspx?AppID=819&LayerID=15077&PageTypeID=4&PageID=6971&Q=2110812508&KeyValue='.$parcel.'">'.$parcel.'</a>		
 									</div>
 								</div>';
 				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';
