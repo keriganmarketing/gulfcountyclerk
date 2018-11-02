@@ -88,10 +88,8 @@ add_filter( 'post_updated_messages', 'tax_deed_sale_updated_messages' );
 function getTaxDeeds() {
 	$targs = [
 		'posts_per_page'   => -1,
-		'orderby'          => 'meta_value',
-		'order'            => 'DESC',
-		'meta_key'         => 'date',
-		'meta_value'       => '',
+		'orderby'          => 'menu_order',
+		'order'            => 'ASC',
 		'post_type'        => 'tax-deed-sale',
 		'post_status'      => 'publish' 
 	];
