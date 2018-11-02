@@ -118,9 +118,8 @@ function getTaxDeeds() {
 			$claim_form = get_field('claim_form',$id);
 			$status = get_field('status',$id);
 			$today = date('Ymd');
-			$match_date = date('Ymd', strtotime($date));
 
-			if((($match_date >= $today) && ($status != 'unpublished')) || $status == 'surplus'){
+			if((($date >= $today) && ($status == 'active')) || ($status != 'active' && $status != 'unpublished')){
 				$j++;
 				$output .= '<div class="shadow mb-2">';
 				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
