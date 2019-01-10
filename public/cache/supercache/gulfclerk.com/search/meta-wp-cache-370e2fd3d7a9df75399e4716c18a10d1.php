@@ -1,0 +1,1 @@
+<?php die(); ?>{"headers":{"Vary":"Vary: Accept-Encoding, Cookie","Content-Type":"Content-Type: text\/html; charset=UTF-8","Link":"Link: <https:\/\/gulfclerk.com\/?p=89>; rel=shortlink","Last-Modified":"Last-Modified: Thu, 10 Jan 2019 21:04:08 GMT"},"uri":"gulfclerk.com\/search\/?search=Wood","blog_id":1,"post":89,"key":"gulfclerk.com443\/search\/?search=Wood-mobile"}
