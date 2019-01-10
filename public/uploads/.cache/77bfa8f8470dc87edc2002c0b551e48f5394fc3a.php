@@ -19,14 +19,15 @@
                         <button @click="increaseTextSize" title="Make text bigger" class="btn btn-outline-secondary round mx-1"><span class="sr-only">Make text bigger</span><i class="fa fa-plus" aria-hidden="true"></i></button> 
                     </div>
                     <div class="search-box py-2">
-                        {{ get_search_form() }}
+                        <?php echo e(get_search_form()); ?>
+
                     </div>
                 </div>
             </div>
         </div>
         <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
             <div class="container d-flex flex-wrap align-items-center">
-                <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break">{{ date('F j, Y') }}</p>
+                <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break"><?php echo e(date('F j, Y')); ?></p>
                 <button @click="toggleSearchBox" 
                     :class="{
                         'd-lg-none btn btn-sm': true,
@@ -57,7 +58,7 @@
                         ></i>
                 </button>
                 <div class="main-navigation collapse navbar-collapse flex-grow-1">
-                    <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
+                    <main-menu :main-nav="<?php echo e(website_menu('main-navigation')); ?>" class="navbar-nav ml-auto"></main-menu>
                     <button @click="toggleHowDoI"
                         class="nav-link bg-white text-primary font-weight-bold sizeable-element border-0"
                         style="cursor:pointer"
@@ -82,14 +83,14 @@
     </div>
     <div v-if="howDoIOpen" class="mobile-menu sizable" ref="howdoiMenuContainer" :class="{ 'open': howDoIOpen }" >
         <div class="container d-none d-lg-block">
-            <mega-menu :main-nav="{{ website_menu(5) }}" ></mega-menu>
+            <mega-menu :main-nav="<?php echo e(website_menu(5)); ?>" ></mega-menu>
         </div>
     </div>
     <div v-if="mobileHowDoIOpen" class="mobile-menu" ref="howdoiMenuContainer" :class="{ 'open': mobileHowDoIOpen }" >
-        <mobile-menu :mobile-nav="{{ website_menu(5) }}" class="navbar-nav" ></mobile-menu>
+        <mobile-menu :mobile-nav="<?php echo e(website_menu(5)); ?>" class="navbar-nav" ></mobile-menu>
     </div>
     <div id="mobilemenu" v-if="mobileMenuOpen" class="mobile-menu" ref="mobileMenuContainer" :class="{ 'open': mobileMenuOpen }" >
-        <mobile-menu :mobile-nav="{{ website_menu('mobile-navigation') }}" class="navbar-nav" ></mobile-menu>
+        <mobile-menu :mobile-nav="<?php echo e(website_menu('mobile-navigation')); ?>" class="navbar-nav" ></mobile-menu>
     </div>
     <div v-if="searchBoxOpen" class="mobile-search-box" ref="mobileSearchBoxContainer" :class="{ 'open': searchBoxOpen }" >
         <search-box></search-box>
