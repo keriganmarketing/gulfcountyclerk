@@ -134,12 +134,12 @@ function getForeclosures(){
 			$output .= '    </div>';
 			$output .= '<div id="foreclosure-'.$i.'" class="table-responsive" >';
 			$output .= '<table class="table" >';
-			$output .= '<tr><td class="label column-one" >Plaintiff</td><td>'.$plaintiff.'</td></tr>';
-			$output .= '<tr><td class="label" >Defendant</td><td>'.$defendant.'</td></tr>';
-			$output .= '<tr><td class="label" >F/J Amount</td><td>$'.$fjamount.'</td></tr>';
+			$output .= '<tr><td scope="row" class="label column-one" >Plaintiff</td><td>'.$plaintiff.'</td></tr>';
+			$output .= '<tr><td scope="row" class="label" >Defendant</td><td>'.$defendant.'</td></tr>';
+			$output .= '<tr><td scope="row" class="label" >F/J Amount</td><td>$'.$fjamount.'</td></tr>';
 			if($status == 'active' ){
-				$output .= '<tr><td class="label" >Legal Description</td><td>
-				<form action="https://www3.myfloridacounty.com/ori/search.do" method="post" id="search_official_records" novalidate="novalidate" name="searchForm" target="_blank">
+				$output .= '<tr><td scope="row" class="label" >Legal Description</td><td>
+				<form action="https://www3.myfloridacounty.com/ori/search.do" method="post" novalidate="novalidate" name="searchForm" target="_blank">
 					<input type="hidden" name="lastName" value="' .$lname. '" >
 					<input type="hidden" name="firstName" value="' .$fname. '" >
 					<input type="hidden" name="nametype" value="i" checked="checked" id="individual" class="radio_btn">
