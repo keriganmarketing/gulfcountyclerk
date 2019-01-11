@@ -57,14 +57,20 @@ add_action('after_setup_theme', function () {
 
 // Enqueue and register scripts the right way.
 add_action('wp_enqueue_scripts', function () {
-    wp_deregister_script('jquery');
-
     wp_enqueue_style('wordplate', mix('styles/main.css'));
-
+    wp_deregister_script('jquery');
     wp_register_script('wordplate', mix('scripts/app.js'), '', '', true);
     wp_enqueue_script('wordplate', mix('scripts/app.js'), '', '', true);
 });
 
+// Remove Plugin stylesheets
+function removePluginStyles() {
+    wp_dequeue_style('tablepress-default');
+    wp_dequeue_style('dlm-frontend');
+}
+// if(!is_user_logged_in()){
+    add_action( 'wp_print_styles', 'removePluginStyles', 9999 );
+// }
 
 // Remove JPEG compression.
 add_filter('jpeg_quality', function () {
