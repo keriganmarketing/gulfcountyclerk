@@ -71,16 +71,8 @@ const app = new Vue({
             this.$nextTick(() => {
                 this.searchBoxOpen = ! this.searchBoxOpen;
             });
-        },
-        increaseTextSize() {
-            this.textSize = (this.textSize < 3 ? this.textSize + 1 : this.textSize);
-        },
-        decreaseTextSize() {
-            this.textSize = (this.textSize > 0 ? this.textSize - 1 : this.textSize);
-        },
-        resetTextSize() {
-            this.textSize = 0;
         }
+        
     },
 
     created () {
