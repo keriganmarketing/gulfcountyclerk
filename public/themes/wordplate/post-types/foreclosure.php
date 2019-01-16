@@ -121,24 +121,28 @@ function getForeclosures(){
 		
 		if(($checkdate >= $todayminusone) && ($status != 'unpublished')){
 			$j++;
-			$output .= '<div class="shadow mb-2 '.$status.'">';
+			$output .= '<div class="shadow my-3 '.$status.'">';
 			$output .= '	<div class="d-flex flex-wrap bg-dark text-white py-2">';
 			$output .= '		<div class="col-md-auto text-center text-md-left">
+									<p class="m-0 mx-1">Case # ' . $casenum . '</p>';
+			$output .= '    	</div>';
+			$output .= '		<div class="col-md-auto ml-md-auto text-center text-md-right">
 									<p class="m-0 mx-1">'.date('M j, Y', strtotime($date));
 			if($status == 'cancelled' ){ $output .= ' - Canceled'; }
 			$output .= '    		</p>
 								</div>';
-			$output .= '		<div class="col-md-auto ml-md-auto text-center text-md-right">
-									<p class="m-0 mx-1">Case # ' . $casenum . '</p>';
-			$output .= '    	</div>';
 			$output .= '    </div>';
-			$output .= '<div id="foreclosure-'.$i.'" class="table-responsive" >';
-			$output .= '<table class="table" >';
-			$output .= '<tr><td scope="row" class="label column-one" >Plaintiff</td><td>'.$plaintiff.'</td></tr>';
-			$output .= '<tr><td scope="row" class="label" >Defendant</td><td>'.$defendant.'</td></tr>';
-			$output .= '<tr><td scope="row" class="label" >F/J Amount</td><td>$'.$fjamount.'</td></tr>';
+			$output .= '<div id="foreclosure-'.$i.'" >';
+			$output .= '<div class="row" >';
+			$output .= '<div class="col-md-3" ><p class="m-0 pt-2 px-3"><strong>Plaintiff</strong></p></div>
+							<div class="col-md-9" ><p class="m-0 p-2 px-3">'.$plaintiff.'</p></div>';
+			$output .= '<div class="col-md-3" ><p class="m-0 pt-2 px-3"><strong>Defendant</strong></p></div>
+							<div class="col-md-9" ><p class="m-0 p-2 px-3">'.$defendant.'</p></div>';
+			$output .= '<div class="col-md-3" ><p class="m-0 pt-2 px-3"><strong>F/J Amount</strong></p></div>
+							<div class="col-md-9" ><p class="m-0 p-2 px-3">$'.$fjamount.'</p></div>';
 			if($status == 'active' ){
-				$output .= '<tr><td scope="row" class="label" >Legal Description</td><td>
+				$output .= '<div class="col-md-3" ><p class="m-0 p-2 px-3"><strong>Legal Description</strong></p></div>
+				<div class="col-md-9 px-3" >
 				<form action="https://www3.myfloridacounty.com/ori/search.do" method="post" novalidate="novalidate" name="searchForm" target="_blank">
 					<input type="hidden" name="lastName" value="' .$lname. '" >
 					<input type="hidden" name="firstName" value="' .$fname. '" >
@@ -153,10 +157,10 @@ function getForeclosures(){
 					<input type="hidden" name="percisesearchtype" value="b" >
 					<input type="hidden" name="Book" value="' .$book. '" >
 					<input type="hidden" name="Page" value="' .$page. '" >
-					<button type="submit" class="btn btn-primary" >See Lis Pendens</button>
-				</form></td></tr>';
+					<button type="submit" class="btn btn-primary m-2" >See Lis Pendens</button>
+				</form></div>';
 			}
-			$output .= '</table>';
+			$output .= '</div>';
 			$output .= '</div>';
 			$output .= '</div>';
 
