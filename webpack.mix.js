@@ -3,7 +3,7 @@ const mix = require('laravel-mix');
 require('dotenv').config();
 
 mix.setResourceRoot('../');
-mix.setPublicPath(`public/themes/wordplate/assets`);
+mix.setPublicPath('public/themes/wordplate/assets');
 
 mix.js('resources/assets/scripts/app.js', 'scripts');
 mix.sass('resources/assets/styles/app.scss', 'styles');
