@@ -88,10 +88,8 @@ add_filter( 'post_updated_messages', 'tax_deed_sale_updated_messages' );
 function getTaxDeeds() {
 	$targs = [
 		'posts_per_page'   => -1,
-		'orderby'          => 'meta_value',
-		'order'            => 'DESC',
-		'meta_key'         => 'date',
-		'meta_value'       => '',
+		'orderby'          => 'menu_order',
+		'order'            => 'ASC',
 		'post_type'        => 'tax-deed-sale',
 		'post_status'      => 'publish' 
 	];
@@ -120,9 +118,8 @@ function getTaxDeeds() {
 			$claim_form = get_field('claim_form',$id);
 			$status = get_field('status',$id);
 			$today = date('Ymd');
-			$match_date = date('Ymd', strtotime($date));
 
-			if((($match_date >= $today) && ($status != 'unpublished')) || $status == 'surplus'){
+			if((($date >= $today) && ($status == 'active')) || ($status != 'active' && $status != 'unpublished')){
 				$j++;
 				$output .= '<div class="shadow mb-2">';
 				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
@@ -149,14 +146,8 @@ function getTaxDeeds() {
 								</div>';
 				$output .= '	<div class="col-md-auto">
 									<div class="text-center sizeable-element " style="line-height: 1.8em;">
-										<span class="d-lock d-md-inline-block mx-1" >Parcel ID </span>			
-										<form action="http://qpublic6.qpublic.net/fl_alsearch_dw.php" method="post" target="_blank" class="form-inline d-inline m-0 p-0">
-										<input type="HIDDEN" name="BEGIN" value="0" />
-										<input type="HIDDEN" name="INPUT" value="'.$parcel.'" />
-										<input type="HIDDEN" name="searchType" value="parcel_id" />
-										<input type="HIDDEN" name="county" value="fl_gulf" />
-										<button type="submit" class="border-0 m-0 p-0 bg-transparent text-white d-inline" style="text-decoration: underline; cursor:pointer; line-height:1rem;" >'.$parcel.'</button>
-										</form>
+										<span class="d-lock d-md-inline-block mx-1" >Parcel ID </span>	
+										<a target="_blank" style="text-decoration: underline; cursor:pointer;" class="text-white" href="https://qpublic.schneidercorp.com/Application.aspx?AppID=819&LayerID=15077&PageTypeID=4&PageID=6971&Q=2110812508&KeyValue='.$parcel.'">'.$parcel.'</a>		
 									</div>
 								</div>';
 				$output .= '	<div class="col-md-auto ml-md-auto text-center text-md-right" >';

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html {{ language_attributes() }}>
+<html <?php echo e(language_attributes()); ?>>
 <head>
-  <meta charset="{{ bloginfo('charset') }}">
+  <meta charset="<?php echo e(bloginfo('charset')); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#008481">
-  {{ wp_head() }}
+  <?php echo e(wp_head()); ?>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-15421411-27"></script>
   <script>
@@ -16,7 +17,7 @@
   </script>
 
 </head>
-<body {{ body_class() }}>
+<body <?php echo e(body_class()); ?>>
     <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
     <div id="app">
         <div
@@ -30,15 +31,16 @@
                 'text-larger': textSize === 2,
                 'text-largest': textSize === 3,
             }">
-            @include('partials.header')
+            <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-            @yield('content')
+            <?php echo $__env->yieldContent('content'); ?>
 
-            @include('partials.footer')
+            <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
     </div>
 
-    {{ wp_footer() }}
-    @yield('footer-scripts')
+    <?php echo e(wp_footer()); ?>
+
+    <?php echo $__env->yieldContent('footer-scripts'); ?>
 </body>
 </html>

@@ -18,7 +18,7 @@ const app = new Vue({
     el: '#app',
 
     data: {
-        clientHeight: 0,
+        clientHeight: 0, 
         windowHeight: 0,
         windowWidth: 0,
         isScrolling: false,
@@ -71,16 +71,8 @@ const app = new Vue({
             this.$nextTick(() => {
                 this.searchBoxOpen = ! this.searchBoxOpen;
             });
-        },
-        increaseTextSize() {
-            this.textSize = (this.textSize < 3 ? this.textSize + 1 : this.textSize);
-        },
-        decreaseTextSize() {
-            this.textSize = (this.textSize > 0 ? this.textSize - 1 : this.textSize);
-        },
-        resetTextSize() {
-            this.textSize = 0;
         }
+        
     },
 
     created () {
