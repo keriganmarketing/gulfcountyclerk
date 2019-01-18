@@ -6,11 +6,7 @@ Vue.component('mobile-menu', require('./components/navigation/MobileNavigationMe
 Vue.component('mega-menu', require('./components/navigation/MegaMenu.vue'));
 
 //plugins
-Vue.component('social-icons', require('./components/SocialMediaIcons.vue'));
 Vue.component('kma-slider', require('./components/KMASliderModule.vue'));
-Vue.component('portfolio-gallery', require('./components/PortfolioGallery.vue'));
-Vue.component('contact-form', require('./components/ContactForm.vue'));
-Vue.component('fit-text', require('./components/FitText.vue'));
 Vue.component('search-box', require('./components/SearchBox.vue'));
 Vue.component('expandable-sidebar', require('./components/ExpandableSidebar.vue'));
 Vue.component('text-sizer', require('./components/TextSizer.vue'));

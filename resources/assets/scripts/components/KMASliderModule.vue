@@ -2,7 +2,7 @@
     <div>
         <div class="slider">
             <div class="slider-left icon" @click="clickPrev" >
-                <i class="fa fa-angle-left fa-3" aria-hidden="true"></i>
+                <i class="fa fa-angle-left fa-3" aria-hidden="true" aria-label="previous"></i>
             </div>
 
             <div class="slides" @mouseover="pauseSlide" @mouseleave="unpauseSlide">
@@ -21,7 +21,7 @@
             </div>
 
             <div class="slider-right icon" @click="clickNext" >
-                <i class="fa fa-angle-right fa-3" aria-hidden="true"></i>
+                <i class="fa fa-angle-right fa-3" aria-hidden="true" aria-label="next"></i>
             </div>
         </div>
     </div>

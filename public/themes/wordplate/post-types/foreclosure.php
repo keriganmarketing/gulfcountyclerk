@@ -146,7 +146,7 @@ function getForeclosures(){
 				<form action="https://www3.myfloridacounty.com/ori/search.do" method="post" novalidate="novalidate" name="searchForm" target="_blank">
 					<input type="hidden" name="lastName" value="' .$lname. '" >
 					<input type="hidden" name="firstName" value="' .$fname. '" >
-					<input type="hidden" name="nametype" value="i" checked="checked" id="individual" class="radio_btn">
+					<input type="hidden" name="nametype" value="i" checked="checked" class="radio_btn">
 					<input type="hidden" name="locationType" value="COUNTY" >
 					<input type="hidden" name="county" value="23" >
 					<input type="hidden" name="startMonth" value="0">
