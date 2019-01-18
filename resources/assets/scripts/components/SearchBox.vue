@@ -6,7 +6,7 @@
             <div class="input-group-btn">
                 <button type="submit" class="btn bg-white border-0">
                     <span class="sr-only">Search</span>
-                    <i class="fa fa-search text-primary" aria-hidden="true"></i>
+                    <span class="fa fa-search text-primary" aria-hidden="true" aria-label="Search"></span>
                 </button>
             </div>
         </div>
