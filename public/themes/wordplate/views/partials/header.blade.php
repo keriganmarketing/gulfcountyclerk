@@ -20,59 +20,11 @@
             </div>
         </div>
         <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
-            <div class="container d-flex flex-wrap align-items-center">
-                <p class="todays-date d-block mr-lg-auto text-center text-md-left text-white m-0 px-1 no-break">{{ date('F j, Y') }}</p>
-                <button @click="toggleSearchBox" 
-                    :class="{
-                        'd-lg-none btn btn-sm': true,
-                        'btn-primary': !searchBoxOpen,
-                        'btn-white': searchBoxOpen
-                    }" >
-                    SEARCH <i 
-                            :class="{ 
-                                'fa fa-search': !searchBoxOpen, 
-                                'fa fa-times': searchBoxOpen 
-                            }" 
-                            aria-hidden="true"
-                            ></i>
-                </button>
-                <button @click="toggleMenu" 
-                    :class="{
-                        'd-lg-none btn btn-sm': true,
-                        'btn-primary': !mobileMenuOpen,
-                        'btn-white': mobileMenuOpen
-                    }"
-                    type="button" data-toggle="collapse" data-target="#mobilemenu"  aria-expanded="false" aria-label="Toggle navigation">
-                    MENU <i
-                            :class="{
-                                'fa fa-bars': !mobileMenuOpen,
-                                'fa fa-times': mobileMenuOpen
-                            }"
-                            aria-hidden="true"
-                        ></i>
-                </button>
-                <div class="main-navigation collapse navbar-collapse flex-grow-1">
-                    <main-menu :main-nav="{{ website_menu('main-navigation') }}" class="navbar-nav ml-auto"></main-menu>
-                    <button @click="toggleHowDoI"
-                        class="nav-link bg-white text-primary font-weight-bold sizeable-element border-0"
-                        style="cursor:pointer"
-                    >How Do I...</button>
-                </div>
-                <button @click="toggleMobileHowDoI" 
-                    :class="{
-                        'd-lg-none btn btn-sm': true,
-                        'btn-primary': !mobileHowDoIOpen,
-                        'btn-white': mobileHowDoIOpen
-                    }"
-                    >HOW Do I... <i
-                        :class="{
-                            'fa fa-chevron-down': !mobileHowDoIOpen,
-                            'fa fa-chevron-up': mobileHowDoIOpen
-                        }"
-                        aria-hidden="true"
-                    ></i>
-                </button>
-            </div>
+            <action-bar  
+                class="container d-flex flex-wrap align-items-center"
+                date="{{ date('F j, Y')  }}"
+                :main-nav="{{ website_menu('main-navigation') }}" 
+            ></action-bar>
         </div>
     </div>
     <div v-if="howDoIOpen" class="mobile-menu sizable" ref="howdoiMenuContainer" :class="{ 'open': howDoIOpen }" >

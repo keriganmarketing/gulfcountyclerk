@@ -19,25 +19,12 @@
 <body {{ body_class() }}>
     <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
     <div id="app">
-        <div
-            id="wrapper"
-            class="site-wrapper"
-            :class="{
-                'scrolling': isScrolling,
-                'mobile-menu-open': mobileMenuOpen,
-                'text-normal': textSize === 0,
-                'text-large': textSize === 1,
-                'text-larger': textSize === 2,
-                'text-largest': textSize === 3,
-            }">
+        <wrapper>
             @include('partials.header')
-
             @yield('content')
-
             @include('partials.footer')
-        </div>
+        </wrapper>
     </div>
-
     {{ wp_footer() }}
     @yield('footer-scripts')
 </body>
