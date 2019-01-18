@@ -43,7 +43,7 @@
                         'btn-primary': !mobileMenuOpen,
                         'btn-white': mobileMenuOpen
                     }"
-                    type="button" data-toggle="collapse" data-target="#mobilemenu" aria-controls="mobilemenu" aria-expanded="false" aria-label="Toggle navigation">
+                    type="button" data-toggle="collapse" data-target="#mobilemenu"  aria-expanded="false" aria-label="Toggle navigation">
                     MENU <i
                             :class="{
                                 'fa fa-bars': !mobileMenuOpen,

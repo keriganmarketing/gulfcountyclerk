@@ -20,7 +20,7 @@
     <a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'gulfclerk' ); ?></a>
     <div id="app">
         <div
-            ref="wrapper"
+            id="wrapper"
             class="site-wrapper"
             :class="{
                 'scrolling': isScrolling,
