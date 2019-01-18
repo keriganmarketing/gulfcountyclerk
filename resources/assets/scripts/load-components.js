@@ -10,3 +10,5 @@ Vue.component('kma-slider', require('./components/KMASliderModule.vue'));
 Vue.component('search-box', require('./components/SearchBox.vue'));
 Vue.component('expandable-sidebar', require('./components/ExpandableSidebar.vue'));
 Vue.component('text-sizer', require('./components/TextSizer.vue'));
+Vue.component('wrapper', require('./components/Wrapper.vue'));
+Vue.component('action-bar', require('./components/ActionBar.vue'));
