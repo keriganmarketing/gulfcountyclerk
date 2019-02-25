@@ -88,10 +88,11 @@ add_filter( 'post_updated_messages', 'tax_deed_sale_updated_messages' );
 function getTaxDeeds() {
 	$targs = [
 		'posts_per_page'   => -1,
-		'orderby'          => 'menu_order',
-		'order'            => 'ASC',
 		'post_type'        => 'tax-deed-sale',
-		'post_status'      => 'publish' 
+		'post_status'      => 'publish',
+		'orderby'          => 'meta_value', 
+        'order'            => 'DESC',
+	    'meta_key'         => 'date',
 	];
 		
 	$deeds = get_posts( $targs );
@@ -117,11 +118,13 @@ function getTaxDeeds() {
 			$oereport = get_field('owner_&_encumbrance_reports',$id);
 			$claim_form = get_field('claim_form',$id);
 			$status = get_field('status',$id);
-			$today = date('Y-m-d');
+			$today = date('Ymd');
+
 
 			if((($date >= $today) && ($status == 'active')) || ($status != 'active' && $status != 'unpublished')){
 				$j++;
 				$output .= '<div class="shadow mb-2">';
+				//$output .= $date . ' <> ' . $today;
 				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center m-0">
