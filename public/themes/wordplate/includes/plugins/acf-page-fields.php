@@ -242,7 +242,7 @@ function registerFields(){
 				'type' => 'date_picker',
 				'required' => 1,
 				'display_format'	=> 'm/d/Y',
-			    'return_format'		=> 'm/d/Y',
+			    'return_format'		=> 'Ymd',
 				'first_day' => 0,
 			),
 			array (

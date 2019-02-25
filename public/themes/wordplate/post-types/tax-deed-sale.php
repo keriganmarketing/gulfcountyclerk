@@ -124,7 +124,7 @@ function getTaxDeeds() {
 			if((($date >= $today) && ($status == 'active')) || ($status != 'active' && $status != 'unpublished')){
 				$j++;
 				$output .= '<div class="shadow mb-2">';
-				//$output .= $date . ' <> ' . $today;
+				// $output .= $date . ' <> ' . $today;
 				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center m-0">
