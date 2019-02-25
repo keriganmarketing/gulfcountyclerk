@@ -91,7 +91,7 @@ function getTaxDeeds() {
 		'post_type'        => 'tax-deed-sale',
 		'post_status'      => 'publish',
 		'orderby'          => 'meta_value', 
-        'order'            => 'DESC',
+        'order'            => 'ASC',
 	    'meta_key'         => 'date',
 	];
 		
