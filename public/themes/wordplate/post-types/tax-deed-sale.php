@@ -117,7 +117,7 @@ function getTaxDeeds() {
 			$oereport = get_field('owner_&_encumbrance_reports',$id);
 			$claim_form = get_field('claim_form',$id);
 			$status = get_field('status',$id);
-			$today = date('Ymd');
+			$today = date('Y-m-d');
 
 			if((($date >= $today) && ($status == 'active')) || ($status != 'active' && $status != 'unpublished')){
 				$j++;
