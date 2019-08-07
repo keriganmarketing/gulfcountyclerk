@@ -58,18 +58,25 @@
 .mobile-menu {
     transition: display ease-in .5s;
     display: none;
-    background-color: #FFF;
 
+    @media screen and (max-width: 768px){
+        background-color: #FFF;
+    }
     
     &.open {
         display: block;
         width: 100%;
-        height: calc(100vh - 150px);
+        
         z-index: 5;
         padding: 1.5rem;
         color: #4184a0;
         position: fixed;
-        overflow-y: scroll;
+        
+
+        @media screen and (max-width: 768px){
+            height: calc(100vh - 150px);
+            overflow-y: scroll;
+        }
 
         ul.navbar-nav li button,
         ul.navbar-nav li a {

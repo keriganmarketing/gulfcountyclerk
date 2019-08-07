@@ -55,7 +55,6 @@ body {
                     position: relative;
                     height: 500px;
                     box-shadow: none;
-                    background-color: transparent;
                 }
 
                 .top {
@@ -87,12 +86,15 @@ body {
                     }
                 }
 
+                .mobile-menu {
+                    background-color: #FFF;
+                }
+
                 .mega-menu {
                     position: relative;
                     height: 600px;
                     box-shadow: none;
                     padding: 1.5rem 0;
-                    background-color: transparent;
                 }
 
                 .top {
@@ -139,12 +141,15 @@ body {
                     }
                 }
 
+                .mobile-menu {
+                    background-color: #FFF;
+                }
+
                 .mega-menu {
                     position: relative;
                     height: 770px;
                     box-shadow: none;
                     padding: 1.5rem 0;
-                    background-color: transparent;
 
                     .dropdown-menu {
                         width:33%;
