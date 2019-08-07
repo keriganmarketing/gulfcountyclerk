@@ -93,7 +93,6 @@ function getTaxDeeds() {
 		'meta_key'         => 'date',
 		'orderby'          => 'meta_value', 
         'order'            => 'DESC',
-	    
 	];
 		
 	$deeds = get_posts( $targs );
@@ -121,8 +120,15 @@ function getTaxDeeds() {
 			$status = get_field('status',$id);
 			$today = date('Ymd');
 
+			$eternal = $status == 'surplus';
+			$expires = 
+				$status == 'active' || 
+				$status == 'cancelled' || 
+				$status == 'redeemed' || 
+				$status == 'closed' || 
+				$status == 'rescheduled';
 
-			if((($date >= $today) && ($status == 'active')) || ($status != 'active' && $status != 'unpublished')){
+			if((($date >= $today) && $expires) || $eternal){
 				$j++;
 				$output .= '<div class="shadow mb-2">';
 				// $output .= $date . ' <> ' . $today;

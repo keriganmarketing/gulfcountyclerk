@@ -9,8 +9,7 @@ mix.setPublicPath('public/themes/wordplate/assets');
 mix.options({
     postCss: [
         require('autoprefixer')({
-            grid: true,
-            browsers: ['last 2 versions', 'IE 7', 'Safari 9']
+            grid: true
         })
     ]
 });
