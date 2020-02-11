@@ -2415,8 +2415,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://downloads.wordpress.org/plugin/wp-api-menus.zip?timestamp=1475510483",
-            "reference": "trunk"
+            "url": "https://downloads.wordpress.org/plugin/wp-api-menus.zip?timestamp=1475510483"
         },
         "require": {
             "composer/installers": "~1.0"
