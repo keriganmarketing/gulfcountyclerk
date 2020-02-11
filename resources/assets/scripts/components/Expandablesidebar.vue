@@ -14,7 +14,7 @@
                         class="list-group-item list-group-item-action child-page sizeable-element"
                         :class="{'active':child.id == post.ID}"
                     >
-                    <i class="fa fa-angle-up"></i> {{child.title.rendered}}
+                    <i class="fa fa-angle-up"></i> <span v-html="child.title.rendered" ></span>
                     </a>
                 </div>
             </div>
