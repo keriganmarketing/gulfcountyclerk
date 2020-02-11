@@ -12,3 +12,5 @@ public/wordpress
 public/plugins
 public/uploads/.cache
 node_modules
+public/wflogs
+public/upgrade
