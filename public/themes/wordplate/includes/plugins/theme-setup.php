@@ -156,3 +156,29 @@ function website_menu( $menuID ){
 
     return json_encode($output);
 }
+
+
+function getPageList( $id ){
+    $args = array(
+        'post_parent' => $id,
+        'post_type'   => 'any', 
+        'numberposts' => -1,
+        'post_status' => 'publish',
+        'orderby'     => 'menu_order',
+        'order'       => 'ASC'
+    );
+    $children = get_children( $args );
+
+    $output = [];
+
+    foreach($children as $child){
+        $output[] = [
+            'link'   => get_permalink($child->ID),
+            'title'  => $child->post_title,
+            'target' => '_self',
+            'ID'     => $child->ID
+        ];
+    }
+
+    return $output;
+}
