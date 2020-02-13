@@ -161,7 +161,7 @@ function website_menu( $menuID ){
 function getPageList( $id ){
     $args = array(
         'post_parent' => $id,
-        'post_type'   => 'any', 
+        'post_type'   => 'page', 
         'numberposts' => -1,
         'post_status' => 'publish',
         'orderby'     => 'menu_order',
