@@ -26,7 +26,7 @@
                 <a class="d-flex flex-md-column justify-content-md-center align-items-center text-md-center p-2 py-md-4" href="/courts/turbo-court-diy-forms/">
                     <img src="/themes/wordplate/assets/images/form-icon.png" class="img-fluid py-1 px-2" alt="form icon" aria-hidden="true">
                     <span>Turbo Court<br>
-                    <small>Do It Yourself Court Forms</small></span>
+                    <small>Do It Yourself Forms</small></span>
                 </a>
             </div>
             <div class="col-md-4 col-lg-3 box-button e-file py-1 py-md-3 sizeable-element">
