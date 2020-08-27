@@ -64,7 +64,7 @@
 
             http.get("/wp-json/kerigansolutions/v1/slider" + request)
                 .then(response => {
-                    this.sliderData = response.data; 
+                    this.sliderData = response.data
                 });
         },
 
