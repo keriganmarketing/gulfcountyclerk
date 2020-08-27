@@ -8,18 +8,22 @@ class ScreenController implements Registrable {
 	private $list_screen;
 
 	/** @var array */
-	private $headings = array();
+	private $headings = [];
+
+	/** @var DefaultColumnsRepository */
+	private $default_columns;
 
 	/**
 	 * @param ListScreen $list_screen
 	 */
 	public function __construct( ListScreen $list_screen ) {
 		$this->list_screen = $list_screen;
+		$this->default_columns = new DefaultColumnsRepository();
 	}
 
 	public function register() {
 		// Headings
-		add_filter( $this->list_screen->get_heading_hookname(), array( $this, 'add_headings' ), 200 );
+		add_filter( $this->list_screen->get_heading_hookname(), [ $this, 'add_headings' ], 200 );
 
 		// Values
 		$this->list_screen->set_manage_value_callback();
@@ -38,14 +42,8 @@ class ScreenController implements Registrable {
 			return $columns;
 		}
 
-		if ( 'store_default_columns' === filter_input( INPUT_GET, 'acp_action' ) ) {
-			$this->list_screen->save_default_headings( $columns );
-			exit;
-		}
-
-		// Store default headings
-		if ( ! AC()->is_doing_ajax() ) {
-			$this->list_screen->save_default_headings( $columns );
+		if ( ! wp_doing_ajax() ) {
+			$this->default_columns->update( $this->list_screen->get_key(), $columns );
 		}
 
 		// Run once
@@ -61,13 +59,6 @@ class ScreenController implements Registrable {
 		// Add mandatory checkbox
 		if ( isset( $columns['cb'] ) ) {
 			$this->headings['cb'] = $columns['cb'];
-		}
-
-		// On first visit 'columns' can be empty, because they were put in memory before 'default headings'
-		// were stored. We force get_columns() to be re-populated.
-		if ( ! $this->list_screen->get_columns() ) {
-			$this->list_screen->reset();
-			$this->list_screen->reset_original_columns();
 		}
 
 		foreach ( $this->list_screen->get_columns() as $column ) {

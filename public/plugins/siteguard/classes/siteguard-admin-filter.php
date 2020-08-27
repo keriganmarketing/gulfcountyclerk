@@ -135,6 +135,12 @@ class SiteGuard_AdminFilter extends SiteGuard_Base {
 				$htaccess_str .= $this->get_rewrite_cond( $ip, $ip_mode );
 			}
 		}
+		$server_ip = $this->get_server_ip( );
+		if ( false !== $server_ip ) {
+			$htaccess_str .= $this->get_rewrite_cond( $server_ip, 0 );
+		}
+		$htaccess_str .= $this->get_rewrite_cond( '127.0.0.1', 0 );
+		$htaccess_str .= $this->get_rewrite_cond( '::1', 0 );
 		$htaccess_str .= "    RewriteRule ^wp-admin 404-siteguard [L]\n";
 		$htaccess_str .= "</IfModule>\n";
 

@@ -59,13 +59,6 @@ class Request {
 	}
 
 	/**
-	 * @return bool
-	 */
-	public function is_query() {
-		return $this->request->count() > 0;
-	}
-
-	/**
 	 * @return Parameters
 	 */
 	public function get_request() {
@@ -81,7 +74,6 @@ class Request {
 
 	/**
 	 * Return the parameters based on the current method
-	 *
 	 * @return Parameters
 	 */
 	public function get_parameters() {

@@ -3,8 +3,8 @@ Contributors: jp-secure
 Donate link: -
 Tags: security, waf, brute force, password list, login lock, login alert, captcha, pingback, fail once
 Requires at least: 3.9
-Tested up to: 5.3
-Stable tag: 1.5.0
+Tested up to: 5.5
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,9 +102,14 @@ If you have created your own language pack, or have an update of an existing one
 [Japanese Page](https://www.jp-secure.com/siteguard_wp_plugin/faq/)
 
 == Changelog ==
+= 1.5.2 =
+* Fix a syntax error before php5.4
+= 1.5.1 =
+* Fix a server error when mod_access_compat is not loaded in apache2.4
+* In the Admin Page IP Filter function, fix an issue where site health loopback requests fail
 = 1.5.0 =
-* Do not redirect from admin page to login page.
-* Add site-health.php to the initial value of the exclusion path.
+* Add the function not to redirect from admin page to login page
+* Add site-health.php to the initial value of the exclusion path
 = 1.4.3 =
 * Fix bug in 1.4.2  "Notice：Use of undefined constant HTTPS"
 = 1.4.2 =
