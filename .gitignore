@@ -9,7 +9,13 @@ npm-debug.log
 Vagrantfile
 vendor
 public/wordpress
-public/plugins
+<<<<<<< HEAD
+#public/plugins
+=======
+# public/mu-plugins
+public/plugins/*
+!public/plugins/index.php
+>>>>>>> fca68431a4357c49e7903c87145fe71b433dbb99
 public/uploads/.cache
 node_modules
 public/wflogs

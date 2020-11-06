@@ -13,7 +13,7 @@ if($search && !empty($search->posts)){
 }
 
 bladerunner('views.pages.archive',[
-    'headerImage'   => $headerImageData['url'],
+    'headerImage'   => (isset($headerImageData['url']) ? $headerImageData['url'] : ''),
     'headline'      => get_field('headline'),
     'searchString'  => $searchString,
     'results'       => $results
