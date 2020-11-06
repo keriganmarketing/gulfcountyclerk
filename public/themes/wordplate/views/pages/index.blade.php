@@ -7,7 +7,10 @@
         @include('partials.mast')
         <main id="content" class="sizable">
             <div class="container">
+                @if(function_exists('yoast_breadcrumb'))
                 {{ yoast_breadcrumb( '<p class="breadcrumbs">','</p>' ) }}
+                @endif
+                
                 <div class="row d-flex align-items-start">
                     <div class="col-md-9 order-md-2">
                         <article class="support pb-5">

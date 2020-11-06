@@ -2,7 +2,7 @@
 $headerImageData = get_field('header_image');
 
 bladerunner('views.pages.full',[
-    'headerImage' => $headerImageData['url'],
+    'headerImage' => (isset($headerImageData['url']) ? $headerImageData['url'] : ''),
     'headline'    => get_field('headline'),
     'post'        => $post
 ]);
