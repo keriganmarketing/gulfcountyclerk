@@ -3,363 +3,140 @@
 namespace AC\Admin\Page;
 
 use AC\Admin;
-use AC\Ajax;
-use AC\Capabilities;
+use AC\Admin\Banner;
+use AC\Admin\Helpable;
+use AC\Admin\HelpTab;
+use AC\Admin\Page;
+use AC\Admin\ScreenOption;
+use AC\Admin\Section\Partial\Menu;
+use AC\Asset\Assets;
+use AC\Asset\Enqueueables;
+use AC\Asset\Location;
+use AC\Asset\Script;
+use AC\Asset\Style;
 use AC\Column;
-use AC\DefaultColumns;
-use AC\Helper\Select;
+use AC\Controller\ListScreenRequest;
+use AC\DefaultColumnsRepository;
 use AC\ListScreen;
-use AC\ListScreenFactory;
-use AC\ListScreenGroups;
-use AC\Message\Notice;
-use AC\Preferences;
-use AC\Registrable;
-use AC\Request;
-use AC\Response;
+use AC\Message;
 use AC\View;
 
-class Columns extends Admin\Page
-	implements Admin\Helpable, Registrable {
+class Columns extends Page implements Enqueueables, Helpable, Admin\ScreenOptions {
 
 	const NAME = 'columns';
 
 	/**
-	 * @var array
+	 * @var ListScreenRequest
 	 */
-	private $notices = array();
+	private $controller;
 
-	/** @var DefaultColumns */
+	/**
+	 * @var Location\Absolute
+	 */
+	private $location;
+
+	/**
+	 * @var DefaultColumnsRepository
+	 */
 	private $default_columns;
 
-	public function __construct() {
-		$this->default_columns = new DefaultColumns();
+	/**
+	 * @var Menu
+	 */
+	private $menu;
 
+	public function __construct(
+		ListScreenRequest $controller,
+		Location\Absolute $location,
+		DefaultColumnsRepository $default_columns,
+		Menu $menu
+	) {
 		parent::__construct( self::NAME, __( 'Admin Columns', 'codepress-admin-columns' ) );
+
+		$this->controller = $controller;
+		$this->location = $location;
+		$this->default_columns = $default_columns;
+		$this->menu = $menu;
 	}
 
-	public function register_ajax() {
-		$this->get_ajax_custom_field_handler()->register();
-		$this->get_ajax_column_handler()->register();
-	}
-
-	public function register() {
-		$this->maybe_show_notice();
-		$this->handle_request();
-
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
-	}
-
-	private function maybe_show_notice() {
-		$list_screen = $this->get_list_screen();
-
-		if ( ! $list_screen->get_stored_default_headings() && ! $list_screen->is_read_only() ) {
-
-			$first_visit_link = add_query_arg( array( 'ac_action' => 'first-visit' ), $list_screen->get_screen_link() );
-
-			$notice = new Notice( sprintf( __( 'Please visit the %s screen once to load all available columns', 'codepress-admin-columns' ), ac_helper()->html->link( $first_visit_link, $list_screen->get_label() ) ) );
-			$notice
-				->set_type( Notice::WARNING )
-				->register();
-		}
-
+	public function show_read_only_notice( ListScreen $list_screen ) {
 		if ( $list_screen->is_read_only() ) {
-			$notice = new Notice( $this->get_read_only_message( $list_screen ) );
-			$notice
-				->set_type( Notice::INFO )
-				->register();
+			$message = sprintf( __( 'The columns for %s are read only and can therefore not be edited.', 'codepress-admin-columns' ), '<strong>' . esc_html( $list_screen->get_title() ? $list_screen->get_title() : $list_screen->get_label() ) . '</strong>' );
+			$message = sprintf( '<p>%s</p>', apply_filters( 'ac/read_only_message', $message, $list_screen ) );
+
+			$notice = new Message\InlineMessage( $message );
+
+			echo $notice->set_type( Message::INFO )
+			            ->render();
 		}
 	}
 
-	/**
-	 * @param string $action
-	 *
-	 * @return bool
-	 */
-	private function verify_nonce( $action ) {
-		return wp_verify_nonce( filter_input( INPUT_POST, '_ac_nonce' ), $action );
-	}
+	public function get_assets() {
 
-	private function handle_request() {
-		if ( ! current_user_can( Capabilities::MANAGE ) ) {
-			return;
-		}
-
-		switch ( filter_input( INPUT_POST, 'action' ) ) {
-
-			case 'restore_by_type' :
-				if ( $this->verify_nonce( 'restore-type' ) ) {
-
-					$list_screen = ListScreenFactory::create( filter_input( INPUT_POST, 'list_screen' ), filter_input( INPUT_POST, 'layout' ) );
-					$list_screen->delete();
-
-					$notice = new Notice( sprintf( __( 'Settings for %s restored successfully.', 'codepress-admin-columns' ), "<strong>" . esc_html( $this->get_list_screen_message_label( $list_screen ) ) . "</strong>" ) );
-					$notice->register();
-				}
-				break;
-		}
-
-		do_action( 'ac/settings/handle_request', $this );
-	}
-
-	private function preferences() {
-		return new Preferences\Site( 'settings' );
-	}
-
-	/**
-	 * Admin scripts
-	 */
-	public function admin_scripts() {
-		$list_screen = $this->get_list_screen();
-
-		wp_enqueue_style( 'jquery-ui-lightness', AC()->get_url() . 'assets/ui-theme/jquery-ui-1.8.18.custom.css', array(), AC()->get_version() );
-		wp_enqueue_script( 'jquery-ui-slider' );
-
-		wp_enqueue_script( 'ac-admin-page-columns', AC()->get_url() . "assets/js/admin-page-columns.js", array(
-			'jquery',
-			'dashboard',
-			'jquery-ui-slider',
-			'jquery-ui-sortable',
-			'wp-pointer',
-		), AC()->get_version() );
-
-		wp_enqueue_style( 'ac-admin-page-columns-css', AC()->get_url() . 'assets/css/admin-page-columns.css', array(), AC()->get_version() );
-
-		$ajax_handler = $this->get_ajax_column_handler();
-
-		$ajax_handler->set_param( 'list_screen', $list_screen->get_key() )
-		             ->set_param( 'layout', $list_screen->get_layout_id() )
-		             ->set_param( 'original_columns', $list_screen->get_original_columns() );
-
-		$params = $ajax_handler->get_params();
-
-		$params['i18n'] = array(
-			'clone'  => __( '%s column is already present and can not be duplicated.', 'codepress-admin-columns' ),
-			'error'  => __( 'Invalid response.', 'codepress-admin-columns' ),
-			'errors' => array(
-				'save_settings'  => __( 'There was an error during saving the column settings.', 'codepress-admin-columns' ),
-				'loading_column' => __( 'The column could not be loaded because of an unknown error', 'codepress-admin-columns' ),
+		return new Assets( [
+			new Style( 'jquery-ui-lightness', $this->location->with_suffix( 'assets/ui-theme/jquery-ui-1.8.18.custom.css' ) ),
+			new Script( 'jquery-ui-slider' ),
+			new Admin\Asset\Columns(
+				'ac-admin-page-columns',
+				$this->location->with_suffix( 'assets/js/admin-page-columns.js' ),
+				$this->default_columns,
+				$this->controller->get_list_screen()
 			),
-		);
-
-		wp_enqueue_style( 'ac-select2' );
-		wp_enqueue_script( 'ac-select2' );
-
-		wp_localize_script( 'ac-admin-page-columns', 'AC', $params );
-
-		do_action( 'ac/settings/scripts' );
+			new Style( 'ac-admin-page-columns-css', $this->location->with_suffix( 'assets/css/admin-page-columns.css' ) ),
+			new Style( 'ac-select2' ),
+			new Script( 'ac-select2' ),
+		] );
 	}
 
-	private function get_ajax_custom_field_handler() {
-		$handler = new Ajax\Handler();
-		$handler
-			->set_action( 'ac_custom_field_options' )
-			->set_callback( array( $this, 'ajax_get_custom_fields' ) );
-
-		return $handler;
+	public function get_help_tabs() {
+		return [
+			new HelpTab\Introduction(),
+			new HelpTab\Basics(),
+			new HelpTab\CustomField(),
+		];
 	}
 
-	/**
-	 * @return Ajax\Handler
-	 */
-	private function get_ajax_column_handler() {
-		$handler = new Ajax\Handler();
-		$handler
-			->set_action( 'ac-columns' )
-			->set_callback( array( $this, 'handle_ajax_request' ) );
-
-		return $handler;
+	private function get_column_id() {
+		return new ScreenOption\ColumnId( new Admin\Preference\ScreenOptions() );
 	}
 
-	public function handle_ajax_request() {
-		$this->get_ajax_column_handler()->verify_request();
-
-		$request = new Request();
-
-		$requests = array(
-			new Admin\Request\Column\Save(),
-			new Admin\Request\Column\Refresh(),
-			new Admin\Request\Column\Select(),
-		);
-
-		foreach ( $requests as $handler ) {
-			if ( $handler->get_id() === $request->get( 'id' ) ) {
-				$handler->request( $request );
-			}
-		}
+	private function get_column_type() {
+		return new ScreenOption\ColumnType( new Admin\Preference\ScreenOptions() );
 	}
 
-	public function ajax_get_custom_fields() {
-		$this->get_ajax_custom_field_handler()->verify_request();
-		$request = new Request();
-		$response = new Response\Json();
-
-		$args = array(
-			'meta_type' => $request->get( 'meta_type' ),
-		);
-
-		if ( $request->get( 'post_type' ) ) {
-			$args['post_type'] = $request->get( 'post_type' );
-		}
-
-		$entities = new Select\Entities\CustomFields( $args );
-
-		if ( is_multisite() ) {
-			$formatter = new Select\Group\CustomField\MultiSite(
-				new Select\Formatter\NullFormatter( $entities )
-			);
-		} else {
-			$formatter = new Select\Group\CustomField(
-				new Select\Formatter\NullFormatter( $entities )
-			);
-		}
-
-		$options = new Select\Options\Paginated( $entities, $formatter );
-		$select = new Select\Response( $options );
-
-		$response
-			->set_parameters( $select() )
-			->success();
+	public function get_screen_options() {
+		return [
+			$this->get_column_id(),
+			$this->get_column_type(),
+		];
 	}
 
-	public function get_list_screen() {
-		// User selected
-		$list_screen = ListScreenFactory::create( filter_input( INPUT_GET, 'list_screen' ) );
-
-		// Preference
-		$preference = ListScreenFactory::create( $this->preferences()->get( 'list_screen' ) );
-
-		if ( ! $list_screen ) {
-			$list_screen = $preference;
-		}
-
-		// First one
-		if ( ! $list_screen ) {
-			$list_screen = ListScreenFactory::create( key( AC()->get_list_screens() ) );
-		}
-
-		// Load table headers
-		if ( ! $list_screen->get_original_columns() ) {
-			$list_screen->set_original_columns( $list_screen->get_default_column_headers() );
-		}
-
-		if ( $preference !== $list_screen->get_key() ) {
-			$this->preferences()->set( 'list_screen', $list_screen->get_key() );
-		}
-
-		do_action( 'ac/settings/list_screen', $list_screen );
-
-		return $list_screen;
-	}
-
-	/**
-	 * @param ListScreen $list_screen
-	 *
-	 * @return string $label
-	 */
-	private function get_list_screen_message_label( ListScreen $list_screen ) {
-		return apply_filters( 'ac/settings/list_screen_message_label', $list_screen->get_label(), $list_screen );
-	}
-
-	/**
-	 * @param string $message Message body
-	 * @param string $type    Updated or error
-	 */
-	public function notice( $message, $type = 'updated' ) {
-		$this->notices[] = '<div class="ac-message inline ' . esc_attr( $type ) . '"><p>' . $message . '</p></div>';
-	}
-
-	public function sort_by_label( $a, $b ) {
-		return strcmp( $a->label, $b->label );
-	}
-
-	/**
-	 * @return array
-	 */
-	private function get_grouped_list_screens() {
-		$list_screens = array();
-
-		foreach ( AC()->get_list_screens() as $list_screen ) {
-			$list_screens[ $list_screen->get_group() ][ $list_screen->get_key() ] = $list_screen->get_label();
-		}
-
-		$grouped = array();
-
-		foreach ( ListScreenGroups::get_groups()->get_groups_sorted() as $group ) {
-			$slug = $group['slug'];
-
-			if ( empty( $list_screens[ $slug ] ) ) {
-				continue;
-			}
-
-			if ( ! isset( $grouped[ $slug ] ) ) {
-				$grouped[ $slug ]['title'] = $group['label'];
-			}
-
-			natcasesort( $list_screens[ $slug ] );
-
-			$grouped[ $slug ]['options'] = $list_screens[ $slug ];
-
-			unset( $list_screens[ $slug ] );
-		}
-
-		return $grouped;
-	}
-
-	/**
-	 * @param        $label
-	 * @param string $mainlabel
-	 *
-	 * @return string
-	 */
-	private function get_truncated_side_label( $label, $mainlabel = '' ) {
-		if ( 34 < ( strlen( $label ) + ( strlen( $mainlabel ) * 1.1 ) ) ) {
-			$label = substr( $label, 0, 34 - ( strlen( $mainlabel ) * 1.1 ) ) . '...';
-		}
-
-		return $label;
-	}
-
-	/**
-	 * @param ListScreen $list_screen
-	 *
-	 * @return string
-	 */
-	private function get_read_only_message( ListScreen $list_screen ) {
-		$message = sprintf( __( 'The columns for %s are set up via PHP and can therefore not be edited.', 'codepress-admin-columns' ), '<strong>' . esc_html( $list_screen->get_label() ) . '</strong>' );
-
-		return apply_filters( 'ac/read_only_message', $message, $list_screen );
-	}
-
-	/**
-	 * Display
-	 */
 	public function render() {
+		$list_screen = $this->controller->get_list_screen();
 
-		$list_screen = $this->get_list_screen();
+		if ( ! $this->default_columns->exists( $list_screen->get_key() ) ) {
+			$modal = new View( [
+				'message' => 'Loading columns',
+			] );
+			$modal->set_template( 'admin/loading-message' );
 
+			return $this->menu->render( true ) . $modal->render();
+		}
+
+		ob_start();
 		?>
 
-		<div class="ac-admin<?php echo $list_screen->get_settings() ? ' stored' : ''; ?>" data-type="<?php echo esc_attr( $list_screen->get_key() ); ?>">
-			<div class="main">
+		<div class="ac-admin<?= $list_screen->get_settings() ? ' stored' : ''; ?>" data-type="<?= esc_attr( $list_screen->get_key() ); ?>">
+			<div class="ac-admin__header">
 
-				<?php
-				$menu = new View( array(
-					'items'       => $this->get_grouped_list_screens(),
-					'current'     => $list_screen->get_key(),
-					'screen_link' => $list_screen->get_screen_link(),
-				) );
-
-				echo $menu->set_template( 'admin/edit-menu' );
-
-				?>
+				<?= $this->menu->render(); ?>
 
 				<?php do_action( 'ac/settings/after_title', $list_screen ); ?>
 
 			</div>
+			<div class="ac-admin__wrap">
 
-			<div class="ac-right">
-				<div class="ac-right-inner">
-
+				<div class="ac-admin__sidebar">
 					<?php if ( ! $list_screen->is_read_only() ) : ?>
 
 						<?php
@@ -372,17 +149,17 @@ class Columns extends Admin\Page
 
 						$delete_confirmation_message = false;
 
-						if ( AC()->use_delete_confirmation() ) {
-							$delete_confirmation_message = sprintf( __( "Warning! The %s columns data will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'codepress-admin-columns' ), "'" . $this->get_list_screen_message_label( $list_screen ) . "'" );
+						if ( (bool) apply_filters( 'ac/delete_confirmation', true ) ) {
+							$delete_confirmation_message = sprintf( __( "Warning! The %s columns data will be deleted. This cannot be undone. 'OK' to delete, 'Cancel' to stop", 'codepress-admin-columns' ), "'" . $list_screen->get_title() . "'" );
 						}
 
-						$actions = new View( array(
+						$actions = new View( [
 							'label_main'                  => $label_main,
 							'label_second'                => $label_second,
 							'list_screen_key'             => $list_screen->get_key(),
 							'list_screen_id'              => $list_screen->get_layout_id(),
 							'delete_confirmation_message' => $delete_confirmation_message,
-						) );
+						] );
 
 						echo $actions->set_template( 'admin/edit-actions' );
 
@@ -392,64 +169,75 @@ class Columns extends Admin\Page
 
 					<?php if ( apply_filters( 'ac/show_banner', true ) ) : ?>
 
+						<?= new Banner(); ?>
+
+						<?= ( new View() )->set_template( 'admin/side-feedback' ); ?>
+
+					<?php endif; ?>
+
+					<?= ( new View() )->set_template( 'admin/side-support' ); ?>
+
+				</div>
+
+				<div class="ac-admin__main">
+
+					<?= $this->show_read_only_notice( $list_screen ); ?>
+
+					<form method="post" id="listscreen_settings" class="<?= $list_screen->is_read_only() ? '-disabled' : ''; ?>">
 						<?php
 
-						echo new Admin\Parts\Banner();
+						$classes = [];
 
-						$feedback = new View();
+						if ( $list_screen->is_read_only() ) {
+							$classes[] = 'disabled';
+						}
 
-						echo $feedback->set_template( 'admin/side-feedback' );
+						if ( $this->get_column_id()->is_active() ) {
+							$classes[] = 'show-column-id';
+						}
 
-					endif; ?>
+						if ( $this->get_column_type()->is_active() ) {
+							$classes[] = 'show-column-type';
+						}
 
-					<?php
+						$columns = new View( [
+							'class'          => implode( ' ', $classes ),
+							'list_screen'    => $list_screen->get_key(),
+							'list_screen_id' => $list_screen->get_layout_id(),
+							'title'          => $list_screen->get_title(),
+							'columns'        => $list_screen->get_columns(),
+							'show_actions'   => ! $list_screen->is_read_only(),
+							'show_clear_all' => apply_filters( 'ac/enable_clear_columns_button', false ),
+						] );
 
-					$support = new View();
+						do_action( 'ac/settings/before_columns', $list_screen );
 
-					echo $support->set_template( 'admin/side-support' );
+						echo $columns->set_template( 'admin/edit-columns' );
 
-					?>
+						do_action( 'ac/settings/after_columns', $list_screen );
 
-				</div><!--.ac-right-inner-->
-			</div><!--.ac-right-->
+						?>
+					</form>
 
-			<div class="ac-left">
-				<?php
+				</div>
 
-				$columns = new View( array(
-					'notices'        => $this->notices,
-					'class'          => $list_screen->is_read_only() ? ' disabled' : '',
-					'list_screen'    => $list_screen->get_key(),
-					'columns'        => $list_screen->get_columns(),
-					'show_actions'   => ! $list_screen->is_read_only(),
-					'show_clear_all' => apply_filters( 'ac/enable_clear_columns_button', false ),
-				) );
-
-				echo $columns->set_template( 'admin/edit-columns' );
-
-				do_action( 'ac/settings/after_columns', $list_screen );
-
-				?>
-
-			</div><!--.ac-left-->
-			<div class="clear"></div>
-
-			<div id="add-new-column-template">
-				<?php $this->display_column_template( $list_screen ); ?>
 			</div>
 
+			<div id="add-new-column-template">
+				<?= $this->render_column_template( $list_screen ); ?>
+			</div>
 
-		</div><!--.ac-admin-->
+		</div>
 
 		<div class="clear"></div>
 
 		<?php
 
-		$modal = new View( array(
-			'price' => ac_get_lowest_price(),
-		) );
+		$modal = new View();
 
 		echo $modal->set_template( 'admin/modal-pro' );
+
+		return ob_get_clean();
 	}
 
 	/**
@@ -463,7 +251,7 @@ class Columns extends Admin\Page
 			return array_shift( $column_types );
 		}
 
-		$columns = array();
+		$columns = [];
 
 		foreach ( $column_types as $column_type ) {
 			if ( $group === $column_type->get_group() ) {
@@ -471,7 +259,8 @@ class Columns extends Admin\Page
 			}
 		}
 
-		array_multisort( array_keys( $columns ), SORT_NATURAL, $columns );
+		$column_keys = array_keys( $columns );
+		array_multisort( $column_keys, SORT_NATURAL, $columns );
 
 		$column = array_shift( $columns );
 
@@ -484,30 +273,35 @@ class Columns extends Admin\Page
 
 	/**
 	 * @param ListScreen $list_screen
+	 *
+	 * @return string
 	 */
-	private function display_column_template( ListScreen $list_screen ) {
+	private function render_column_template( ListScreen $list_screen ) {
 		$column = $this->get_column_template_by_group( $list_screen->get_column_types(), 'custom' );
 
 		if ( ! $column ) {
 			$column = $this->get_column_template_by_group( $list_screen->get_column_types() );
 		}
 
-		$view = new View( array(
+		$view = new View( [
 			'column' => $column,
-		) );
+		] );
 
-		echo $view->set_template( 'admin/edit-column' );
+		return $view->set_template( 'admin/edit-column' )->render();
 	}
 
 	/**
-	 * @return Admin\HelpTab[]
+	 * @param string $label
+	 * @param string $main_label
+	 *
+	 * @return string
 	 */
-	public function get_help_tabs() {
-		return array(
-			new Admin\HelpTab\Introduction(),
-			new Admin\HelpTab\Basics(),
-			new Admin\HelpTab\CustomField(),
-		);
+	private function get_truncated_side_label( $label, $main_label = '' ) {
+		if ( 34 < ( strlen( $label ) + ( strlen( $main_label ) * 1.1 ) ) ) {
+			$label = substr( $label, 0, 34 - ( strlen( $main_label ) * 1.1 ) ) . '...';
+		}
+
+		return $label;
 	}
 
 }

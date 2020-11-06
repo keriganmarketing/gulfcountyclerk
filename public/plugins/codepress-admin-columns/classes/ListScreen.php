@@ -3,8 +3,11 @@
 namespace AC;
 
 use AC\Column\Placeholder;
+use AC\Type\ListScreenId;
+use DateTime;
+use LogicException;
 use ReflectionClass;
-use WP_Error;
+use ReflectionException;
 
 /**
  * List Screen
@@ -12,6 +15,9 @@ use WP_Error;
  */
 abstract class ListScreen {
 
+	/**
+	 * @deprecated 4.0
+	 */
 	const OPTIONS_KEY = 'cpac_options_';
 
 	/**
@@ -99,7 +105,12 @@ abstract class ListScreen {
 	/**
 	 * @var array Column settings data
 	 */
-	private $settings;
+	private $settings = [];
+
+	/**
+	 * @var array ListScreen settings data
+	 */
+	private $preferences = [];
 
 	/**
 	 * @var bool True when column settings can not be overwritten
@@ -110,6 +121,32 @@ abstract class ListScreen {
 	 * @var bool
 	 */
 	private $network_only = false;
+
+	/** @var string */
+	private $title;
+
+	/**
+	 * @var DateTime
+	 */
+	private $updated;
+
+	/**
+	 * @return bool
+	 */
+	public function has_id() {
+		return ListScreenId::is_valid_id( $this->layout_id );
+	}
+
+	/**
+	 * @return ListScreenId
+	 */
+	public function get_id() {
+		if ( ! $this->has_id() ) {
+			throw new LogicException( 'ListScreen has no identity.' );
+		}
+
+		return new ListScreenId( $this->layout_id );
+	}
 
 	/**
 	 * Contains the hook that contains the manage_value callback
@@ -281,6 +318,24 @@ abstract class ListScreen {
 	/**
 	 * @return string
 	 */
+	public function get_title() {
+		return $this->title;
+	}
+
+	/**
+	 * @param string $title
+	 *
+	 * @return $this
+	 */
+	public function set_title( $title ) {
+		$this->title = $title;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function get_storage_key() {
 		if ( null === $this->storage_key ) {
 			$this->set_storage_key( $this->get_key() );
@@ -294,8 +349,6 @@ abstract class ListScreen {
 	 */
 	private function set_storage_key( $key ) {
 		$this->storage_key = $key;
-
-		$this->reset();
 	}
 
 	/**
@@ -346,9 +399,13 @@ abstract class ListScreen {
 
 	/**
 	 * @param bool $read_only
+	 *
+	 * @return $this
 	 */
 	public function set_read_only( $read_only ) {
 		$this->read_only = (bool) $read_only;
+
+		return $this;
 	}
 
 	/**
@@ -366,6 +423,26 @@ abstract class ListScreen {
 	}
 
 	/**
+	 * @param DateTime $updated
+	 *
+	 * @return $this
+	 */
+	public function set_updated( DateTime $updated ) {
+		$this->updated = $updated;
+
+		return $this;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function get_updated() {
+		return $this->updated
+			? $this->updated
+			: new DateTime();
+	}
+
+	/**
 	 * @return string
 	 */
 	protected function get_admin_url() {
@@ -377,20 +454,20 @@ abstract class ListScreen {
 	 * @since 2.0
 	 */
 	public function get_screen_link() {
-		return add_query_arg( array(
+		return add_query_arg( [
 			'page'   => $this->get_page(),
 			'layout' => $this->get_layout_id(),
-		), $this->get_admin_url() );
+		], $this->get_admin_url() );
 	}
 
 	/**
 	 * @since 2.0
 	 */
 	public function get_edit_link() {
-		return add_query_arg( array(
+		return add_query_arg( [
 			'list_screen' => $this->key,
 			'layout_id'   => $this->get_layout_id(),
-		), ac_get_admin_url() );
+		], ac_get_admin_url( 'columns' ) );
 	}
 
 	/**
@@ -417,16 +494,6 @@ abstract class ListScreen {
 	}
 
 	/**
-	 * Clears columns variable, which allow it to be repopulated by get_columns().
-	 * @since 2.5
-	 */
-	public function reset() {
-		$this->columns = null;
-		$this->column_types = null;
-		$this->settings = null;
-	}
-
-	/**
 	 * @param $name
 	 *
 	 * @return false|Column
@@ -436,9 +503,7 @@ abstract class ListScreen {
 		$columns = $this->get_columns();
 
 		foreach ( $columns as $column ) {
-
-			// Do not do a var type check. All column names
-			// are stored as strings, even integers.
+			// Do not do a strict comparision. All column names are stored as strings, even integers.
 			if ( $column->get_name() == $name ) {
 				return $column;
 			}
@@ -501,7 +566,7 @@ abstract class ListScreen {
 		}
 
 		// Skip the custom registered columns which are marked 'original' but are not available for this list screen
-		if ( $column->is_original() && ! in_array( $column->get_type(), array_keys( $this->get_original_columns() ) ) ) {
+		if ( $column->is_original() && ! array_key_exists( $column->get_type(), $this->get_original_columns() ) ) {
 			return;
 		}
 
@@ -527,11 +592,7 @@ abstract class ListScreen {
 	 * @return array
 	 */
 	public function get_original_columns() {
-		if ( null === $this->original_columns ) {
-			$this->set_original_columns( $this->get_stored_default_headings() );
-		}
-
-		return (array) $this->original_columns;
+		return ( new DefaultColumnsRepository() )->get( $this->get_key() );
 	}
 
 	/**
@@ -542,17 +603,10 @@ abstract class ListScreen {
 	}
 
 	/**
-	 * Reset original columns
-	 */
-	public function reset_original_columns() {
-		$this->original_columns = null;
-	}
-
-	/**
 	 * Available column types
 	 */
 	private function set_column_types() {
-		$this->column_types = array();
+		$this->column_types = [];
 
 		// Register default columns
 		foreach ( $this->get_original_columns() as $type => $label ) {
@@ -601,7 +655,7 @@ abstract class ListScreen {
 	/**
 	 * @param string $namespace Namespace from the current path
 	 *
-	 * @throws \ReflectionException
+	 * @throws ReflectionException
 	 */
 	public function register_column_types_from_dir( $namespace ) {
 		$classes = Autoloader::instance()->get_class_names_from_dir( $namespace );
@@ -628,6 +682,15 @@ abstract class ListScreen {
 		}
 
 		return $column->is_original();
+	}
+
+	/**
+	 * @param string $column_name Column name
+	 *
+	 * @since 3.0
+	 */
+	public function deregister_column( $column_name ) {
+		unset( $this->columns[ $column_name ] );
 	}
 
 	/**
@@ -663,16 +726,9 @@ abstract class ListScreen {
 
 		$column->set_options( $settings );
 
-		return $column;
-	}
+		do_action( 'ac/list_screen/column_created', $column, $this );
 
-	/**
-	 * @param string $column_name Column name
-	 *
-	 * @since 3.0
-	 */
-	public function deregister_column( $column_name ) {
-		unset( $this->columns[ $column_name ] );
+		return $column;
 	}
 
 	/**
@@ -694,13 +750,25 @@ abstract class ListScreen {
 	}
 
 	/**
+	 * @param array $settings
+	 *
+	 * @return self
+	 */
+	public function set_settings( array $settings ) {
+		$this->settings = $settings;
+
+		return $this;
+	}
+
+	/**
 	 * @since 3.0
 	 */
 	private function set_columns() {
-
 		foreach ( $this->get_settings() as $name => $data ) {
 			$data['name'] = $name;
-			if ( $column = $this->create_column( $data ) ) {
+			$column = $this->create_column( $data );
+
+			if ( $column ) {
 				$this->register_column( $column );
 			}
 		}
@@ -708,115 +776,26 @@ abstract class ListScreen {
 		// Nothing stored. Use WP default columns.
 		if ( null === $this->columns ) {
 			foreach ( $this->get_original_columns() as $type => $label ) {
-				if ( $column = $this->create_column( array( 'type' => $type, 'original' => true ) ) ) {
+				if ( $column = $this->create_column( [ 'type' => $type, 'original' => true ] ) ) {
 					$this->register_column( $column );
 				}
 			}
 		}
 
 		if ( null === $this->columns ) {
-			$this->columns = array();
+			$this->columns = [];
 		}
 	}
 
 	/**
-	 * Store column data
-	 *
-	 * @param array $column_data
-	 *
-	 * @return WP_Error|true
+	 * @return array
 	 */
-	public function store( $column_data ) {
-		if ( ! $column_data ) {
-			return new WP_Error( 'no-settings', __( 'No columns settings available.', 'codepress-admin-columns' ) );
-		}
-
-		$settings = array();
-
-		foreach ( $column_data as $column_name => $options ) {
-			if ( empty( $options['type'] ) ) {
-				continue;
-			}
-
-			// New column, new key
-			if ( 0 === strpos( $column_name, '_new_column_' ) ) {
-				$column_name = uniqid();
-			}
-
-			$options['name'] = $column_name;
-
-			$column = $this->create_column( $options );
-
-			if ( ! $column ) {
-				continue;
-			}
-
-			// Skip duplicate original columns
-			if ( $column->is_original() ) {
-				if ( in_array( $column->get_type(), wp_list_pluck( $settings, 'type' ), true ) ) {
-					continue;
-				}
-			}
-
-			$sanitized = array();
-
-			// Sanitize data
-			foreach ( $column->get_settings() as $setting ) {
-				$sanitized += $setting->get_values();
-			}
-
-			// Encode site url
-			$setting = $column->get_setting( 'label' );
-
-			if ( $setting ) {
-				$sanitized[ $setting->get_name() ] = $setting->get_encoded_label();
-			}
-
-			$settings[ $column_name ] = array_merge( $options, $sanitized );
-		}
-
-		$result = update_option( self::OPTIONS_KEY . $this->get_storage_key(), $settings, false );
-
-		if ( ! $result ) {
-			return new WP_Error( 'same-settings' );
-		}
-
-		/**
-		 * Fires after a new column setup is stored in the database
-		 * Primarily used when columns are saved through the Admin Columns settings screen
-		 *
-		 * @param ListScreen $list_screen
-		 *
-		 * @since 3.0
-		 */
-		do_action( 'ac/columns_stored', $this );
-
-		return true;
+	public function get_settings() {
+		return $this->settings;
 	}
 
-	/**
-	 * Populate settings from the database
-	 */
-	public function populate_settings() {
-
-		// Load from DB
-		$this->set_settings( get_option( self::OPTIONS_KEY . $this->get_storage_key() ) );
-
-		// Load from API
-		AC()->api()->set_column_settings( $this );
-	}
-
-	/**
-	 * @param array $settings Column settings
-	 *
-	 * @return ListScreen
-	 */
-	public function set_settings( $settings ) {
-		if ( ! is_array( $settings ) ) {
-			$settings = array();
-		}
-
-		$this->settings = $settings;
+	public function set_preferences( array $preferences ) {
+		$this->preferences = $preferences;
 
 		return $this;
 	}
@@ -824,55 +803,21 @@ abstract class ListScreen {
 	/**
 	 * @return array
 	 */
-	public function get_settings() {
-		if ( null === $this->settings ) {
-			$this->populate_settings();
+	public function get_preferences() {
+		return $this->preferences;
+	}
+
+	/**
+	 * @param string $key
+	 *
+	 * @return mixed|null
+	 */
+	public function get_preference( $key ) {
+		if ( ! isset( $this->preferences[ $key ] ) ) {
+			return null;
 		}
 
-		return $this->settings;
-	}
-
-	private function get_default_columns_object() {
-		return new DefaultColumns();
-	}
-
-	/**
-	 * @param array $column_headings
-	 */
-	public function save_default_headings( $column_headings ) {
-		$this->get_default_columns_object()->update( $this->get_key(), $column_headings );
-	}
-
-	/**
-	 * @return array [ Column Name => Label ]
-	 */
-	public function get_stored_default_headings() {
-		return $this->get_default_columns_object()->get( $this->get_key() );
-	}
-
-	/**
-	 * @return void
-	 */
-	public function delete_default_headings() {
-		$this->get_default_columns_object()->delete( $this->get_key() );
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function delete() {
-
-		/**
-		 * Fires before a column setup is removed from the database
-		 * Primarily used when columns are deleted through the Admin Columns settings screen
-		 *
-		 * @param ListScreen $list_screen
-		 *
-		 * @since 3.0.8
-		 */
-		do_action( 'ac/columns_delete', $this );
-
-		return delete_option( self::OPTIONS_KEY . $this->get_storage_key() );
+		return $this->preferences[ $key ];
 	}
 
 	/**
@@ -911,11 +856,91 @@ abstract class ListScreen {
 	}
 
 	/**
+	 * @param array $columns
+	 *
+	 * @deprecated 4.0
+	 */
+	public function save_default_headings( $columns ) {
+		_deprecated_function( __METHOD__, '4.0', 'AC\DefaultColumns::update( $key, $columns )' );
+
+		( new DefaultColumnsRepository() )->update( $this->get_key(), $columns && is_array( $columns ) ? $columns : [] );
+	}
+
+	/**
+	 * @return array
+	 * @deprecated 4.0
+	 */
+	public function get_stored_default_headings() {
+		_deprecated_function( __METHOD__, '4.0', 'AC\DefaultColumnsRepository()::get( $key )' );
+
+		return ( new DefaultColumnsRepository() )->get( $this->get_key() );
+	}
+
+	/**
+	 * @return void
+	 */
+	public function delete_default_headings() {
+		_deprecated_function( __METHOD__, '4.0', 'AC\DefaultColumnsRepository()::delete( $key )' );
+
+		( new DefaultColumnsRepository() )->delete( $this->get_key() );
+	}
+
+	/**
+	 * @return bool
+	 * @deprecated 4.0
+	 */
+	public function delete() {
+		_deprecated_function( __METHOD__, '4.0' );
+
+		return false;
+	}
+
+	/**
 	 * Get default column headers
 	 * @return array
+	 * @deprecated 4.0
 	 */
 	public function get_default_column_headers() {
-		return array();
+		_deprecated_function( __METHOD__, '4.0' );
+
+		return [];
+	}
+
+	/**
+	 * Clears columns variable, which allow it to be repopulated by get_columns().
+	 * @deprecated 4.0
+	 * @since      2.5
+	 */
+	public function reset() {
+		_deprecated_function( __METHOD__, '4.0' );
+	}
+
+	/**
+	 * @deprecated 4.0
+	 */
+	public function populate_settings() {
+		_deprecated_function( __METHOD__, '4.0' );
+	}
+
+	/**
+	 * Reset original columns
+	 * @deprecated 4.0
+	 */
+	public function reset_original_columns() {
+		_deprecated_function( __METHOD__, '4.0' );
+
+		$this->original_columns = null;
+	}
+
+	/**
+	 * Store column data
+	 *
+	 * @param array $column_data
+	 *
+	 * @deprecated 4.0
+	 */
+	public function store( $column_data ) {
+		_deprecated_function( __METHOD__, '4.0' );
 	}
 
 }
