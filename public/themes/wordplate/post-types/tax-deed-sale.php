@@ -104,6 +104,7 @@ function getTaxDeeds() {
 		foreach($deeds as $deed){
 			$id = $deed->ID;
 			$date = get_field('date',$id);
+			$time = get_field('time_of_auction',$id);
 			$taxcert = get_field('tax_cert',$id);
 			$taxdeed = get_field('tax_deed',$id);
 			$parcel = get_field('parcel',$id);
@@ -132,11 +133,11 @@ function getTaxDeeds() {
 				$j++;
 				$output .= '<div class="shadow mb-2">';
 				// $output .= $date . ' <> ' . $today;
-				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2">';
+				$output .= '<div class="d-flex flex-wrap bg-dark text-white py-2 align-items-center">';
 				$output .= '	<div class="col-md-auto">
-									<p class="text-center m-0">
-									<span class="d-lock d-md-inline-block mx-1" >Sale Date</span>
-									'.date('m/d/y', strtotime($date)).'
+									<p class="text-center text-md-left m-0 px-1">
+									<span class="d-lock d-md-inline-block" >Sale Date</span>
+									 '.date('m/d/y', strtotime($date)).' '.($time != '' ? 'at ' .$time : '').'
 									</p>
 								</div>';
 				$output .= '	<div class="col-md-auto">
@@ -149,9 +150,9 @@ function getTaxDeeds() {
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center m-0">
 									<span class="d-lock d-md-inline-block mx-1" >Case No.</span>';
-				if($oereport['url']!=''){ $output .= '<a target="_blank" style="text-decoration: underline; cursor:pointer;" class="text-white" href="'.$oereport['url'].'">'; }
+				if(isset($oereport['url']) && $oereport['url']!=''){ $output .= '<a target="_blank" style="text-decoration: underline; cursor:pointer;" class="text-white" href="'.$oereport['url'].'">'; }
 				$output .= 				$taxdeed;
-				if($oereport['url']!=''){ $output .= '</a>'; }
+				if(isset($oereport['url']) && $oereport['url']!=''){ $output .= '</a>'; }
 				$output .= '		</p>
 								</div>';
 				$output .= '	<div class="col-md-auto">

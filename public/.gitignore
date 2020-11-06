@@ -1,3 +1,7 @@
 languages
 upgrade
 *.cache/*
+wordpress
+wflogs
+plugins
+.user.ini
