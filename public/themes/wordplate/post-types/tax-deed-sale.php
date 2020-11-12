@@ -137,7 +137,7 @@ function getTaxDeeds() {
 				$output .= '	<div class="col-md-auto">
 									<p class="text-center text-md-left m-0 px-1">
 									<span class="d-lock d-md-inline-block" >Sale Date</span>
-									 '.date('m/d/y', strtotime($date)).' '.($time != '' ? 'at ' .$time : '').'
+									 '.date('m/d/y', strtotime($date)).' '.($time != '' ? 'at ' .$time : ' AM EST').'
 									</p>
 								</div>';
 				$output .= '	<div class="col-md-auto">
