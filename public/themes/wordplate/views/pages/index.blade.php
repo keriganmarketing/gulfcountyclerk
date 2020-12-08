@@ -13,7 +13,7 @@
                 
                 <div class="row d-flex align-items-start">
                     <div class="col-md-9 order-md-2">
-                        <article class="support pb-5">
+                        <article class="support pb-5" tabindex="0">
                             <header class="text-primary">
                                 <h1>{{ $headline != '' ? $headline : the_title() }}</h1>
                             </header>
