@@ -10,22 +10,9 @@
         <main id="content" class="sizable">
             <div class="container">
 
-                <article class="front py-5 px-lg-5">
+                <article class="front py-5 px-lg-5" tabindex="0">
                 {{ the_content() }}
                 </article>
-
-                {{-- <div class="row align-items-center justify-content-center py-5">
-                    <div class="col-md-3 col-lg-2 text-center">
-                        <img src="{{ $clerkPhoto['url'] }}" alt="{{ $clerkPhoto['alt'] }}" >
-                    </div>
-                    <div class="col-md-9">
-                        <article class="front">
-                            <div class="content-area pl-md-4">
-                                {{ the_content() }}
-                            </div>
-                        </article>
-                    </div>
-                </div> --}}
 
             </div>
         </main>
