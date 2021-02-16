@@ -6,7 +6,7 @@
                     <a class="logo" href="/">
                         <img class="logo img-fluid" src="/themes/wordplate/assets/images/seal.png" alt="Gulf County, Florida Circuit Court Seal" >
                     </a>
-                    <div class="logo-text">
+                    <div class="logo-text" tabindex="0">
                         <p class="clerk-name">Rebecca L. (Becky) Norris</p>
                         <p>Gulf County, Florida<br>Clerk of Court</p>
                     </div>
@@ -21,7 +21,7 @@
         </div>
         <div role="navigation" class="topnav flex-wrap navbar navbar-expand-lg bg-primary sizable" >
             <action-bar  
-                class="container d-flex flex-wrap align-items-center"
+                class="container d-flex flex-wrap align-items-center" tabindex="0"
                 date="{{ date('F j, Y')  }}"
                 :main-nav="{{ website_menu('main-navigation') }}" 
             ></action-bar>
