@@ -1,7 +1,7 @@
 <footer class="sticky-footer bg-light py-3 sizable">
     <div class="container pt-4 text-center text-md-left">
         <div class="row align-items-start">
-            <div class="mb-4 col-md-6 col-lg-12 col-xl-auto text-center">
+            <div class="mb-4 col-md-6 col-lg-12 col-xl-auto text-center" tabindex="0">
                 <img src="/themes/wordplate/assets/images/seal-footer.png" class="img-fluid" alt="Gulf county Clerk of Courts and Comptroller" aria-hidden="true" >
             </div>
             <div class="mb-4 col-md-6 col-lg-auto text-secondary" tabindex="0">
