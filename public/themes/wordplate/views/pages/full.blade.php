@@ -11,7 +11,7 @@
                 {{ yoast_breadcrumb( '<p class="breadcrumbs">','</p>' ) }}
                 @endif
 
-                <article class="support">
+                <article class="support" tabindex="0">
                     <header class="text-primary">
                         <h1>{{ $headline != '' ? $headline : the_title() }}</h1>
                     </header>
