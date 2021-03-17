@@ -90,9 +90,15 @@ function getTaxDeeds() {
 		'posts_per_page'   => -1,
 		'post_type'        => 'tax-deed-sale',
 		'post_status'      => 'publish',
-		'meta_key'         => 'date',
-		'orderby'          => 'meta_value', 
-        'order'            => 'DESC',
+		// 'meta_key'         => 'date',
+		// 'orderby'          => 'meta_value', 
+        // 'order'            => 'ASC',
+		'orderby' => array(
+			'status' => 'ASC',
+			'date' => 'ASC',
+			'time_of_auction' => 'ASC',
+			'tax_deed' => 'ASC',
+		),
 	];
 		
 	$deeds = get_posts( $targs );
