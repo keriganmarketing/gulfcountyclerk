@@ -93,15 +93,36 @@ function getTaxDeeds() {
 		// 'meta_key'         => 'date',
 		// 'orderby'          => 'meta_value', 
         // 'order'            => 'ASC',
+		// 'meta_key'		   => ['date','status','time_of_auction','tax_deed'],
+		'meta_query'       => array(
+			'relation' => 'AND',
+			'status' => array(
+				'key' => 'status',
+				'compare' => 'EXISTS',
+			),
+			'date' => array(
+				'key' => 'date',
+				'compare' => 'EXISTS',
+			), 
+			// 'time_of_auction' => array(
+			// 	'key' => 'time_of_auction',
+			// 	'compare' => 'EXISTS',
+			// ), 
+			'tax_deed' => array(
+				'key' => 'tax_deed',
+				'compare' => 'EXISTS',
+			), 
+		),
 		'orderby' => array(
-			'status' => 'ASC',
-			'date' => 'ASC',
+			'status'          => 'ASC',
+			'date'            => 'ASC',
 			'time_of_auction' => 'ASC',
-			'tax_deed' => 'ASC',
+			'tax_deed'        => 'ASC',
 		),
 	];
 		
 	$deeds = get_posts( $targs );
+
 	$i = 1;
 	$j = 0;
 
