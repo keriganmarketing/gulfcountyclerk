@@ -6,6 +6,14 @@
         {{ the_post() }}
                 
         <kma-slider class="slider-container"></kma-slider>
+        <div class="notices" >
+            <div class="container">
+                <div class="bg-white p-4" >
+                    <p>Gulf County Clerk of the Circuit Court and Comptroller is accepting Applications for two(2) Full-Time positions.</p>
+                    <a class="font-weight-bold" style="text-decoration: underline" href="/about/employment-opportunities/" >View open positions.</a>
+                </div>
+            </div>
+        </div>
         @include('partials.buttongallery')
         <main id="content" class="sizable">
             <div class="container">

@@ -594,6 +594,22 @@ main {
     }
 }
 
+.notices {
+    background-color: $white;
+    position: relative;
+
+    @media (min-width: 992px){
+        background-color: transparent;
+        margin-top: -9rem;
+        margin-bottom: 1.75rem;
+
+        .notice {
+            box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+        }
+    }
+
+}
+
 .button-gallery {
     .box-button {
         font-size: 1.125rem;
